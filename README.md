@@ -1,2 +1,24 @@
-# flutter-easy-starter
-Flutter 简易开箱即用框架 | 已完成基础配置，支持快速二次开发 | Flutter Easy Starter Template
+# Flutter Easy Starter
+Flutter 简易开箱即用框架 | 快速二次开发
+
+## ✨ 特性
+- ✅ 极简结构，无冗余代码
+- ✅ 已完成基础配置（路由、主题、网络、状态管理）
+- ✅ 适合新手学习 & 项目快速启动
+- ✅ 支持直接二次开发
+- ✅ 多端兼容（Android / iOS）
+
+## 🚀 快速开始
+1. Clone 项目
+2. flutter pub get
+3. 直接运行 & 开始二开
+
+## 📦 内置配置
+- 路由管理
+- 主题样式
+- 网络请求封装
+- 公共工具类
+- 页面模板
+
+## 📄 许可证
+MIT
