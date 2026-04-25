@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 实名认证步骤
@@ -39,7 +40,7 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
         title: const Text('实名认证'),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
         ),
       ),
@@ -62,53 +63,53 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
 
   Widget _buildInputStep() {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       child: Column(
         children: [
           // 说明卡片
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             child: Column(
               children: [
                 Container(
-                  width: 64,
-                  height: 64,
+                  width: 64.w,
+                  height: 64.w,
                   decoration: BoxDecoration(
                     color: AppColors.primary.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.verified_user,
                     color: AppColors.primary,
                     size: 32,
                   ),
                 ),
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: 16.w),
+                Text(
                   '实名认证',
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.w),
                 Text(
                   '为保障社区安全，请完成实名认证',
                   style: TextStyle(
                     color: AppColors.lightGrey,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
               ],
             ),
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24.w),
 
           // 表单
           _buildTextField(
@@ -118,7 +119,7 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
             icon: Icons.person,
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
 
           _buildTextField(
             controller: _idController,
@@ -127,7 +128,7 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
             icon: Icons.badge,
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
 
           _buildTextField(
             controller: _phoneController,
@@ -137,14 +138,14 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
             keyboardType: TextInputType.phone,
           ),
 
-          const SizedBox(height: 32),
+          SizedBox(height: 32.w),
 
           // 提示文字
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,8 +157,8 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
                       color: AppColors.primary,
                       size: 18,
                     ),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8.w),
+                    Text(
                       '温馨提示',
                       style: TextStyle(
                         color: AppColors.white,
@@ -166,14 +167,14 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.w),
                 Text(
                   '• 实名信息仅用于身份验证，不会对外展示\n'
                   '• 请确保信息真实准确，认证后无法修改\n'
                   '• 认证通过后将获得认证标识',
                   style: TextStyle(
                     color: AppColors.lightGrey,
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     height: 1.8,
                   ),
                 ),
@@ -181,24 +182,24 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
             ),
           ),
 
-          const SizedBox(height: 32),
+          SizedBox(height: 32.w),
 
           // 下一步按钮
           SizedBox(
             width: double.infinity,
-            height: 56,
+            height: 56.w,
             child: ElevatedButton(
               onPressed: _validateAndNext,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 '下一步',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -217,40 +218,40 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
     TextInputType? keyboardType,
   }) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               color: AppColors.white,
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           TextField(
             controller: controller,
             keyboardType: keyboardType,
-            style: const TextStyle(color: AppColors.white),
+            style: TextStyle(color: AppColors.white),
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: TextStyle(color: AppColors.tertiaryGrey),
               prefixIcon: Icon(icon, color: AppColors.lightGrey),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
                 borderSide: BorderSide(color: AppColors.tertiaryGrey),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
                 borderSide: BorderSide(color: AppColors.tertiaryGrey),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
                 borderSide: BorderSide(color: AppColors.primary),
               ),
               filled: true,
@@ -264,26 +265,26 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
 
   Widget _buildIdCardStep() {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       child: Column(
         children: [
-          const Text(
+          Text(
             '上传身份证照片',
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             '请确保照片清晰、完整、无遮挡',
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32.w),
           Row(
             children: [
               Expanded(
@@ -292,7 +293,7 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
                   icon: Icons.badge,
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16.w),
               Expanded(
                 child: _buildIdCardUpload(
                   title: '身份证反面',
@@ -301,10 +302,10 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
               ),
             ],
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32.w),
           SizedBox(
             width: double.infinity,
-            height: 56,
+            height: 56.w,
             child: ElevatedButton(
               onPressed: () {
                 setState(() => _currentStep = AuthStep.face);
@@ -312,13 +313,13 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 '下一步',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -335,10 +336,10 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
         DialogUtils.showInfo(context, message: '相机功能开发中...');
       },
       child: Container(
-        height: 180,
+        height: 180.w,
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           border: Border.all(color: AppColors.tertiaryGrey),
         ),
         child: Column(
@@ -349,29 +350,29 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
               size: 48,
               color: AppColors.lightGrey,
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12.w),
             Text(
               title,
               style: TextStyle(
                 color: AppColors.lightGrey,
-                fontSize: 14,
+                fontSize: 14.sp,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
             Container(
-              padding: const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                 horizontal: 12,
                 vertical: 6,
               ),
               decoration: BoxDecoration(
                 color: AppColors.primary,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
-              child: const Text(
+              child: Text(
                 '点击上传',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 12,
+                  fontSize: 12.sp,
                 ),
               ),
             ),
@@ -383,35 +384,35 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
 
   Widget _buildFaceStep() {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       child: Column(
         children: [
-          const Text(
+          Text(
             '人脸识别',
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             '请进行人脸识别验证',
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
-          const Spacer(),
+          Spacer(),
           Container(
-            width: 240,
-            height: 240,
+            width: 240.w,
+            height: 240.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
               shape: BoxShape.circle,
               border: Border.all(
                 color: AppColors.primary,
-                width: 3,
+                width: 3.w,
               ),
             ),
             child: Column(
@@ -422,21 +423,21 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
                   size: 80,
                   color: AppColors.primary,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.w),
                 Text(
                   '点击开始识别',
                   style: TextStyle(
                     color: AppColors.lightGrey,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
               ],
             ),
           ),
-          const Spacer(),
+          Spacer(),
           SizedBox(
             width: double.infinity,
-            height: 56,
+            height: 56.w,
             child: ElevatedButton(
               onPressed: () {
                 setState(() => _currentStep = AuthStep.success);
@@ -444,13 +445,13 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 '开始识别',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -467,53 +468,53 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 120,
-            height: 120,
+            width: 120.w,
+            height: 120.w,
             decoration: BoxDecoration(
               color: AppColors.green.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(32.r),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.check_circle,
               color: AppColors.green,
               size: 60,
             ),
           ),
-          const SizedBox(height: 32),
-          const Text(
+          SizedBox(height: 32.w),
+          Text(
             '认证成功',
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 28,
+              fontSize: 28.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
           Text(
             '您已获得认证标识',
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 16,
+              fontSize: 16.sp,
             ),
           ),
-          const SizedBox(height: 48),
+          SizedBox(height: 48.w),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 48),
+            padding: EdgeInsets.symmetric(horizontal: 48),
             child: SizedBox(
               width: double.infinity,
-              height: 56,
+              height: 56.w,
               child: ElevatedButton(
                 onPressed: () => context.pop(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   '完成',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

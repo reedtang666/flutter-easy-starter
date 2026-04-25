@@ -3,6 +3,7 @@ import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 匹配对象模型
@@ -24,7 +25,7 @@ class MatchProfile {
     this.imageUrl,
     this.isOnline = false,
     this.distance = 0,
-    this.interests = const [],
+    this.interests = [],
   });
 }
 
@@ -107,7 +108,7 @@ class HomePage extends ConsumerWidget {
             // 附近的人标题
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(
+                padding: EdgeInsets.fromLTRB(
                   AppSpacing.xxl,
                   AppSpacing.xl,
                   AppSpacing.xxl,
@@ -122,7 +123,7 @@ class HomePage extends ConsumerWidget {
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: const Text('查看全部'),
+                      child: Text('查看全部'),
                     ),
                   ],
                 ),
@@ -141,7 +142,7 @@ class HomePage extends ConsumerWidget {
             ),
 
             // 底部间距
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SizedBox(height: AppSpacing.xxxl),
             ),
           ],
@@ -157,7 +158,7 @@ class HomePage extends ConsumerWidget {
             context.push(RouteNames.profile);
           }
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite_border),
             activeIcon: Icon(Icons.favorite),
@@ -180,25 +181,25 @@ class HomePage extends ConsumerWidget {
 
   Widget _buildAppBar(BuildContext context, String name) {
     return Padding(
-      padding: const EdgeInsets.all(AppSpacing.xxl),
+      padding: EdgeInsets.all(AppSpacing.xxl),
       child: Row(
         children: [
           // 头像
           Container(
-            width: 44,
-            height: 44,
+            width: 44.w,
+            height: 44.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
               borderRadius: BorderRadius.circular(AppRadius.full),
               border: Border.all(color: AppColors.border),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.person,
               color: AppColors.lightGrey,
               size: 24,
             ),
           ),
-          const SizedBox(width: AppSpacing.md),
+          SizedBox(width: AppSpacing.md),
           // 问候语
           Expanded(
             child: Column(
@@ -210,7 +211,7 @@ class HomePage extends ConsumerWidget {
                     color: AppColors.white,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.w),
                 Text(
                   '今天想认识新朋友吗？',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -222,12 +223,12 @@ class HomePage extends ConsumerWidget {
           ),
           // 筛选按钮
           Container(
-            padding: const EdgeInsets.all(AppSpacing.sm),
+            padding: EdgeInsets.all(AppSpacing.sm),
             decoration: BoxDecoration(
               color: AppColors.surface,
               borderRadius: BorderRadius.circular(AppRadius.md),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.tune,
               color: AppColors.white,
               size: 22,
@@ -240,35 +241,35 @@ class HomePage extends ConsumerWidget {
 
   Widget _buildRecentMatches() {
     return Container(
-      height: 100,
-      margin: const EdgeInsets.only(bottom: AppSpacing.xl),
+      height: 100.w,
+      margin: EdgeInsets.only(bottom: AppSpacing.xl),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
+        padding: EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
         itemCount: recentMatches.length + 1,
         itemBuilder: (context, index) {
           if (index == 0) {
             // 查看全部按钮
             return Container(
-              width: 70,
-              margin: const EdgeInsets.only(right: AppSpacing.md),
+              width: 70.w,
+              margin: EdgeInsets.only(right: AppSpacing.md),
               child: Column(
                 children: [
                   Container(
-                    width: 60,
-                    height: 60,
+                    width: 60.w,
+                    height: 60.w,
                     decoration: BoxDecoration(
                       color: AppColors.surface,
                       borderRadius: BorderRadius.circular(AppRadius.full),
                       border: Border.all(color: AppColors.border),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.grid_view,
                       color: AppColors.lightGrey,
                       size: 24,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(height: AppSpacing.sm),
                   Text(
                     '全部',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -282,15 +283,15 @@ class HomePage extends ConsumerWidget {
 
           final match = recentMatches[index - 1];
           return Container(
-            width: 70,
-            margin: const EdgeInsets.only(right: AppSpacing.md),
+            width: 70.w,
+            margin: EdgeInsets.only(right: AppSpacing.md),
             child: Column(
               children: [
                 Stack(
                   children: [
                     Container(
-                      width: 60,
-                      height: 60,
+                      width: 60.w,
+                      height: 60.w,
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: BorderRadius.circular(AppRadius.full),
@@ -298,10 +299,10 @@ class HomePage extends ConsumerWidget {
                           color: match.isOnline
                               ? AppColors.green
                               : AppColors.border,
-                          width: 2,
+                          width: 2.w,
                         ),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.person,
                         color: AppColors.lightGrey,
                         size: 28,
@@ -312,21 +313,21 @@ class HomePage extends ConsumerWidget {
                         right: 2,
                         bottom: 2,
                         child: Container(
-                          width: 14,
-                          height: 14,
+                          width: 14.w,
+                          height: 14.w,
                           decoration: BoxDecoration(
                             color: AppColors.green,
                             borderRadius: BorderRadius.circular(AppRadius.full),
                             border: Border.all(
                               color: AppColors.background,
-                              width: 2,
+                              width: 2.w,
                             ),
                           ),
                         ),
                       ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.sm),
+                SizedBox(height: AppSpacing.sm),
                 Text(
                   match.name,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -344,8 +345,8 @@ class HomePage extends ConsumerWidget {
 
   Widget _buildSearchBar() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
-      padding: const EdgeInsets.symmetric(
+      margin: EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
+      padding: EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,
         vertical: AppSpacing.md,
       ),
@@ -355,12 +356,12 @@ class HomePage extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.search,
             color: AppColors.lightGrey,
             size: 22,
           ),
-          const SizedBox(width: AppSpacing.md),
+          SizedBox(width: AppSpacing.md),
           Expanded(
             child: Text(
               '搜索昵称、兴趣...',
@@ -377,7 +378,7 @@ class HomePage extends ConsumerWidget {
 
   Widget _buildProfileCard(BuildContext context, MatchProfile profile) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(
+      margin: EdgeInsets.fromLTRB(
         AppSpacing.xxl,
         0,
         AppSpacing.xxl,
@@ -393,20 +394,20 @@ class HomePage extends ConsumerWidget {
           // TODO: 查看详情
         },
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: EdgeInsets.all(AppSpacing.lg),
           child: Row(
             children: [
               // 头像
               Stack(
                 children: [
                   Container(
-                    width: 64,
-                    height: 64,
+                    width: 64.w,
+                    height: 64.w,
                     decoration: BoxDecoration(
                       color: AppColors.tertiaryGrey,
                       borderRadius: BorderRadius.circular(AppRadius.lg),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.person,
                       color: AppColors.lightGrey,
                       size: 32,
@@ -417,21 +418,21 @@ class HomePage extends ConsumerWidget {
                       right: 2,
                       bottom: 2,
                       child: Container(
-                        width: 14,
-                        height: 14,
+                        width: 14.w,
+                        height: 14.w,
                         decoration: BoxDecoration(
                           color: AppColors.green,
                           borderRadius: BorderRadius.circular(AppRadius.full),
                           border: Border.all(
                             color: AppColors.surface,
-                            width: 2,
+                            width: 2.w,
                           ),
                         ),
                       ),
                     ),
                 ],
               ),
-              const SizedBox(width: AppSpacing.lg),
+              SizedBox(width: AppSpacing.lg),
               // 信息
               Expanded(
                 child: Column(
@@ -445,7 +446,7 @@ class HomePage extends ConsumerWidget {
                             color: AppColors.white,
                           ),
                         ),
-                        const SizedBox(width: AppSpacing.sm),
+                        SizedBox(width: AppSpacing.sm),
                         Text(
                           '${profile.age}',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -454,7 +455,7 @@ class HomePage extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4.w),
                     if (profile.bio != null)
                       Text(
                         profile.bio!,
@@ -462,7 +463,7 @@ class HomePage extends ConsumerWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                    const SizedBox(height: AppSpacing.sm),
+                    SizedBox(height: AppSpacing.sm),
                     Row(
                       children: [
                         Icon(
@@ -470,17 +471,17 @@ class HomePage extends ConsumerWidget {
                           size: 14,
                           color: AppColors.lightGrey,
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4.w),
                         Text(
                           '${profile.distance}km',
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
-                        const SizedBox(width: AppSpacing.md),
+                        SizedBox(width: AppSpacing.md),
                         // 兴趣标签
                         ...profile.interests.take(2).map((interest) {
                           return Container(
-                            margin: const EdgeInsets.only(right: AppSpacing.sm),
-                            padding: const EdgeInsets.symmetric(
+                            margin: EdgeInsets.only(right: AppSpacing.sm),
+                            padding: EdgeInsets.symmetric(
                               horizontal: 8,
                               vertical: 2,
                             ),
@@ -490,8 +491,7 @@ class HomePage extends ConsumerWidget {
                             ),
                             child: Text(
                               interest,
-                              style: const TextStyle(
-                                fontSize: 11,
+                              style: TextStyle(fontSize: 11.sp,
                                 color: AppColors.lightGrey,
                               ),
                             ),
@@ -506,27 +506,27 @@ class HomePage extends ConsumerWidget {
               Column(
                 children: [
                   Container(
-                    width: 44,
-                    height: 44,
+                    width: 44.w,
+                    height: 44.w,
                     decoration: BoxDecoration(
                       color: AppColors.tertiaryGrey,
                       borderRadius: BorderRadius.circular(AppRadius.full),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.close,
                       color: AppColors.lightGrey,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.sm),
+                  SizedBox(height: AppSpacing.sm),
                   Container(
-                    width: 44,
-                    height: 44,
+                    width: 44.w,
+                    height: 44.w,
                     decoration: BoxDecoration(
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(AppRadius.full),
                       boxShadow: AppShadows.glow,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.favorite,
                       color: AppColors.white,
                     ),

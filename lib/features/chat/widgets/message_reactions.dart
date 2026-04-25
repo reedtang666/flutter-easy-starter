@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 消息反应表情选择器
 class MessageReactions extends StatelessWidget {
@@ -24,11 +25,11 @@ class MessageReactions extends StatelessWidget {
         color: Colors.black.withValues(alpha: 0.5),
         child: Center(
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 32),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            margin: EdgeInsets.symmetric(horizontal: 32),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(32.r),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.3),
@@ -48,14 +49,14 @@ class MessageReactions extends StatelessWidget {
                     onDismiss();
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.all(8.w),
                     decoration: BoxDecoration(
                       color: AppColors.darkGrey.withValues(alpha: 0.3),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Text(
                       emoji,
-                      style: const TextStyle(fontSize: 28),
+                      style: TextStyle(fontSize: 28.sp),
                     ),
                   ),
                 );
@@ -96,29 +97,29 @@ class ReactionChips extends StatelessWidget {
         return GestureDetector(
           onTap: () => onReactionTap?.call(emoji),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: hasMyReaction
                   ? AppColors.primary.withValues(alpha: 0.3)
                   : AppColors.tertiaryGrey.withValues(alpha: 0.5),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
               border: hasMyReaction
                   ? Border.all(
                       color: AppColors.primary.withValues(alpha: 0.5),
-                      width: 1,
+                      width: 1.w,
                     )
                   : null,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(emoji, style: const TextStyle(fontSize: 14)),
-                const SizedBox(width: 4),
+                Text(emoji, style: TextStyle(fontSize: 14.sp)),
+                SizedBox(width: 4.w),
                 Text(
                   '$count',
                   style: TextStyle(
                     color: hasMyReaction ? AppColors.primary : AppColors.lightGrey,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: hasMyReaction ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),

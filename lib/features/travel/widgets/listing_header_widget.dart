@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListingHeaderWidget extends StatelessWidget {
   const ListingHeaderWidget({
@@ -9,61 +10,61 @@ class ListingHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+      height: 70.w,
+      margin: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           Container(
-            width: 62,
-            height: 62,
+            width: 62.w,
+            height: 62.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(55),
+              borderRadius: BorderRadius.circular(55.r),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.menu_rounded,
               size: 30,
               color: AppColors.white,
             ),
           ),
-          const Spacer(),
+          Spacer(),
           Container(
-            width: 62,
-            height: 62,
+            width: 62.w,
+            height: 62.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(55),
+              borderRadius: BorderRadius.circular(55.r),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.search_rounded,
               size: 30,
               color: AppColors.white,
             ),
           ),
-          const SizedBox(width: 5),
+          SizedBox(width: 5.w),
           Container(
-            width: 62,
-            height: 62,
+            width: 62.w,
+            height: 62.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(55),
+              borderRadius: BorderRadius.circular(55.r),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.notifications_none_rounded,
               size: 30,
               color: AppColors.white,
             ),
           ),
-          const SizedBox(width: 5),
+          SizedBox(width: 5.w),
           Container(
-            width: 62,
-            height: 62,
+            width: 62.w,
+            height: 62.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(55),
+              borderRadius: BorderRadius.circular(55.r),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(55),
+              borderRadius: BorderRadius.circular(55.r),
               child: Image.asset(
                 'assets/images/travel/profile/profile_4.jpeg',
                 fit: BoxFit.cover,

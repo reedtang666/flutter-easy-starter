@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 常见问题分类
@@ -141,7 +142,7 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
         title: const Text('帮助与反馈'),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
         ),
       ),
@@ -176,9 +177,8 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _showFeedbackDialog,
         backgroundColor: AppColors.primary,
-        icon: const Icon(Icons.edit, color: Colors.white),
-        label: const Text(
-          '意见反馈',
+        icon: Icon(Icons.edit, color: Colors.white),
+        label: Text('意见反馈',
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -187,7 +187,7 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
 
   Widget _buildQuickAccess() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -199,36 +199,36 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
       child: Column(
         children: [
           Container(
-            width: 64,
-            height: 64,
+            width: 64.w,
+            height: 64.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.headset_mic,
               color: AppColors.primary,
               size: 32,
             ),
           ),
-          const SizedBox(height: 16),
-          const Text(
+          SizedBox(height: 16.w),
+          Text(
             'Hi，有什么可以帮您？',
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             '遇到问题可以先查看常见问题',
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.w),
           Row(
             children: [
               Expanded(
@@ -238,7 +238,7 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
                   onTap: () => DialogUtils.showInfo(context, message: '客服功能开发中...'),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Expanded(
                 child: _buildQuickButton(
                   icon: Icons.phone,
@@ -247,7 +247,7 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
                   onTap: () => DialogUtils.showInfo(context, message: '拨号功能开发中...'),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Expanded(
                 child: _buildQuickButton(
                   icon: Icons.email,
@@ -271,20 +271,20 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: Column(
           children: [
             Icon(icon, color: AppColors.primary, size: 28),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppColors.white,
-                fontSize: 13,
+                fontSize: 13.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -293,7 +293,7 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
                 subtitle,
                 style: TextStyle(
                   color: AppColors.lightGrey,
-                  fontSize: 11,
+                  fontSize: 11.sp,
                 ),
               ),
           ],
@@ -304,36 +304,36 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
 
   Widget _buildFaqList(FaqCategory category) {
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       itemCount: category.items.length,
       itemBuilder: (context, index) {
         final item = category.items[index];
         return Container(
-          margin: const EdgeInsets.only(bottom: 12),
+          margin: EdgeInsets.only(bottom: 12),
           decoration: BoxDecoration(
             color: AppColors.surface,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.r),
           ),
           child: ExpansionTile(
-            tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            tilePadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             collapsedIconColor: AppColors.lightGrey,
             iconColor: AppColors.primary,
             title: Text(
               item.question,
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppColors.white,
-                fontSize: 15,
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
                 child: Text(
                   item.answer,
                   style: TextStyle(
                     color: AppColors.lightGrey,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     height: 1.6,
                   ),
                 ),
@@ -368,30 +368,30 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
           builder: (context, setState) {
             return SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(20.w),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        const Text(
+                        Text(
                           '意见反馈',
                           style: TextStyle(
                             color: AppColors.white,
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Spacer(),
+                        Spacer(),
                         IconButton(
                           onPressed: () => Navigator.pop(context),
-                          icon: const Icon(Icons.close),
+                          icon: Icon(Icons.close),
                           color: AppColors.lightGrey,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                     // 多行文本输入 - 纯方形无圆角
                     TextFormField(
                       controller: controller,
@@ -399,9 +399,9 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
                       minLines: 5,
                       keyboardType: TextInputType.multiline,
                       textAlignVertical: TextAlignVertical.top,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: AppColors.white,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                       ),
                       decoration: InputDecoration(
                         filled: true,
@@ -409,7 +409,7 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
                         hintText: '请详细描述您遇到的问题或建议...',
                         hintStyle: TextStyle(
                           color: AppColors.tertiaryGrey,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.zero,
@@ -423,18 +423,18 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
                           borderRadius: BorderRadius.zero,
                           borderSide: BorderSide.none,
                         ),
-                        contentPadding: const EdgeInsets.all(16),
+                        contentPadding: EdgeInsets.all(16.w),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                     Text(
                       '常见问题类型',
                       style: TextStyle(
                         color: AppColors.lightGrey,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
@@ -447,7 +447,7 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
                             });
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
+                            padding: EdgeInsets.symmetric(
                               horizontal: 12,
                               vertical: 6,
                             ),
@@ -463,17 +463,17 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
                                 color: isSelected
                                     ? AppColors.white
                                     : AppColors.lightGrey,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                               ),
                             ),
                           ),
                         );
                       }).toList(),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
                     SizedBox(
                       width: double.infinity,
-                      height: 56,
+                      height: 56.w,
                       child: ElevatedButton(
                         onPressed: () {
                           if (controller.text.isEmpty) {
@@ -489,10 +489,10 @@ class _HelpFeedbackPageState extends State<HelpFeedbackPage>
                             borderRadius: BorderRadius.zero,
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           '提交反馈',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/features/travel/widgets/frosted_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TravelBottomNavBar extends StatefulWidget {
   final int currentIndex;
@@ -27,13 +28,13 @@ class _TravelBottomNavBarState extends State<TravelBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 92,
+      height: 92.w,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(60),
+        borderRadius: BorderRadius.circular(60.r),
         child: FrostedWidget(
           color: AppColors.darkGrey.withOpacity(.8),
           child: Padding(
-            padding: const EdgeInsets.all(5),
+            padding: EdgeInsets.all(5.w),
             child: Stack(
               children: [
                 AnimatedPositioned(
@@ -42,11 +43,11 @@ class _TravelBottomNavBarState extends State<TravelBottomNavBar> {
                   left: widget.currentIndex * 80,
                   top: 0,
                   child: Container(
-                    height: 82,
-                    width: 82,
+                    height: 82.w,
+                    width: 82.w,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(50.r),
                     ),
                   ),
                 ),

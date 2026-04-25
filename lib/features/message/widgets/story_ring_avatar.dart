@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 带故事环的头像组件
 class StoryRingAvatar extends StatelessWidget {
@@ -50,7 +51,7 @@ class StoryRingAvatar extends StatelessWidget {
           Container(
             width: size + (hasStory ? 6 : 0),
             height: size + (hasStory ? 6 : 0),
-            padding: hasStory ? const EdgeInsets.all(3) : EdgeInsets.zero,
+            padding: hasStory ? EdgeInsets.all(3.w) : EdgeInsets.zero,
             child: Container(
               decoration: BoxDecoration(
                 color: AppColors.surface,
@@ -90,7 +91,7 @@ class StoryRingAvatar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(size * 0.125),
                   border: Border.all(
                     color: AppColors.background,
-                    width: 2,
+                    width: 2.w,
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -207,7 +208,7 @@ class GroupAvatar extends StatelessWidget {
 
   Widget _buildSmallAvatar(String? imageUrl) {
     return Container(
-      margin: const EdgeInsets.all(1),
+      margin: EdgeInsets.all(1.w),
       color: AppColors.tertiaryGrey,
       child: imageUrl != null
           ? (imageUrl.startsWith('assets/')

@@ -5,6 +5,7 @@ import 'package:flutter_easy_starter/features/message/models/conversation_model.
 import 'package:flutter_easy_starter/features/message/widgets/story_ring_avatar.dart';
 import 'package:flutter_easy_starter/features/chat/widgets/typing_indicator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 消息页面 - 增强版
@@ -53,7 +54,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
             // 消息列表标题
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+                padding: EdgeInsets.fromLTRB(20, 16, 20, 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -61,7 +62,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                       '消息',
                       style: TextStyle(
                         color: AppColors.white,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -90,8 +91,8 @@ class _MessagePageState extends ConsumerState<MessagePage> {
             ),
 
             // 底部间距
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 32),
+            SliverToBoxAdapter(
+              child: SizedBox(height: 32.w),
             ),
           ],
         ),
@@ -101,17 +102,17 @@ class _MessagePageState extends ConsumerState<MessagePage> {
 
   Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         children: [
           // 搜索框
           Expanded(
             child: Container(
-              height: 44,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              height: 44.w,
+              padding: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: AppColors.surface,
-                borderRadius: BorderRadius.circular(22),
+                borderRadius: BorderRadius.circular(22.r),
               ),
               child: Row(
                 children: [
@@ -120,14 +121,14 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                     color: AppColors.lightGrey,
                     size: 20,
                   ),
-                  const SizedBox(width: 10),
+                  SizedBox(width: 10.w),
                   Expanded(
                     child: TextField(
                       controller: _searchController,
                       autofocus: false,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: AppColors.white,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         height: 1.2,
                       ),
                       cursorColor: AppColors.primary,
@@ -136,11 +137,11 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                         hintText: '搜索',
                         hintStyle: TextStyle(
                           color: AppColors.lightGrey,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                         ),
                         border: InputBorder.none,
                         isDense: false,
-                        contentPadding: const EdgeInsets.symmetric(vertical: 11),
+                        contentPadding: EdgeInsets.symmetric(vertical: 11),
                       ),
                       onChanged: (value) {
                         setState(() {
@@ -158,11 +159,11 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                         });
                       },
                       child: Container(
-                        width: 20,
-                        height: 20,
+                        width: 20.w,
+                        height: 20.w,
                         decoration: BoxDecoration(
                           color: AppColors.tertiaryGrey,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Icon(
                           Icons.close,
@@ -176,7 +177,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
             ),
           ),
 
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
 
           // 新建消息按钮
           GestureDetector(
@@ -184,13 +185,13 @@ class _MessagePageState extends ConsumerState<MessagePage> {
               DialogUtils.showInfo(context, message: '新消息功能开发中...');
             },
             child: Container(
-              width: 44,
-              height: 44,
+              width: 44.w,
+              height: 44.w,
               decoration: BoxDecoration(
                 color: AppColors.primary,
-                borderRadius: BorderRadius.circular(22),
+                borderRadius: BorderRadius.circular(22.r),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.edit,
                 color: Colors.white,
                 size: 20,
@@ -208,11 +209,11 @@ class _MessagePageState extends ConsumerState<MessagePage> {
     if (stories.isEmpty) return const SizedBox.shrink();
 
     return Container(
-      height: 100,
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      height: 100.w,
+      margin: EdgeInsets.symmetric(vertical: 8),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         itemCount: stories.length + 1, // +1 for "我的故事"
         itemBuilder: (context, index) {
           if (index == 0) {
@@ -228,22 +229,22 @@ class _MessagePageState extends ConsumerState<MessagePage> {
 
   Widget _buildMyStoryItem() {
     return Container(
-      width: 72,
-      margin: const EdgeInsets.only(right: 12),
+      width: 72.w,
+      margin: EdgeInsets.only(right: 12),
       child: Column(
         children: [
           Stack(
             children: [
               Container(
-                width: 64,
-                height: 64,
+                width: 64.w,
+                height: 64.w,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     colors: [AppColors.primary, AppColors.accent],
                   ),
-                  borderRadius: BorderRadius.circular(32),
+                  borderRadius: BorderRadius.circular(32.r),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.add,
                   color: Colors.white,
                   size: 28,
@@ -253,14 +254,14 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                 right: 0,
                 bottom: 0,
                 child: Container(
-                  width: 24,
-                  height: 24,
+                  width: 24.w,
+                  height: 24.w,
                   decoration: BoxDecoration(
                     color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     border: Border.all(color: AppColors.background, width: 2),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.add,
                     color: AppColors.primary,
                     size: 16,
@@ -269,12 +270,12 @@ class _MessagePageState extends ConsumerState<MessagePage> {
               ),
             ],
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6.w),
           Text(
             '我的故事',
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 12,
+              fontSize: 12.sp,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -288,8 +289,8 @@ class _MessagePageState extends ConsumerState<MessagePage> {
     return GestureDetector(
       onTap: () => _openChat(context, conversation),
       child: Container(
-        width: 72,
-        margin: const EdgeInsets.only(right: 12),
+        width: 72.w,
+        margin: EdgeInsets.only(right: 12),
         child: Column(
           children: [
             StoryRingAvatar(
@@ -299,12 +300,12 @@ class _MessagePageState extends ConsumerState<MessagePage> {
               isOnline: conversation.isOnline,
               onTap: () => _openUserDetail(context, conversation),
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: 6.w),
             Text(
               conversation.name,
               style: TextStyle(
                 color: AppColors.white,
-                fontSize: 12,
+                fontSize: 12.sp,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -322,7 +323,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
       direction: DismissDirection.endToStart,
       dismissThresholds: const {DismissDirection.endToStart: 0.25},
       background: Container(
-        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+        margin: EdgeInsets.symmetric(vertical: 4, horizontal: 12),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -332,18 +333,18 @@ class _MessagePageState extends ConsumerState<MessagePage> {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
           ),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
-              width: 72,
-              height: 72,
-              margin: const EdgeInsets.only(right: 20),
+              width: 72.w,
+              height: 72.w,
+              margin: EdgeInsets.only(right: 20),
               decoration: BoxDecoration(
                 color: AppColors.red,
-                borderRadius: BorderRadius.circular(36),
+                borderRadius: BorderRadius.circular(36.r),
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.red.withValues(alpha: 0.4),
@@ -352,16 +353,16 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                   ),
                 ],
               ),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.delete_outline, color: Colors.white, size: 28),
-                  SizedBox(height: 4),
+                  SizedBox(height: 4.w),
                   Text(
                     '删除',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 11,
+                      fontSize: 11.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -380,7 +381,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
       child: InkWell(
         onTap: () => _openChat(context, conversation),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           child: Row(
             children: [
               // 头像
@@ -399,7 +400,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                       ),
                     ),
 
-              const SizedBox(width: 16),
+              SizedBox(width: 16.w),
 
               // 内容
               Expanded(
@@ -414,7 +415,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                             conversation.name,
                             style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: conversation.unreadCount > 0
                                   ? FontWeight.bold
                                   : FontWeight.w600,
@@ -426,7 +427,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                         Text(
                           _formatTime(conversation.lastTime),
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             color: conversation.unreadCount > 0
                                 ? AppColors.primary
                                 : AppColors.lightGrey,
@@ -435,7 +436,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                       ],
                     ),
 
-                    const SizedBox(height: 6),
+                    SizedBox(height: 6.w),
 
                     // 第二行：最后消息
                     Row(
@@ -452,7 +453,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                                     fontWeight: conversation.unreadCount > 0
                                         ? FontWeight.w500
                                         : FontWeight.normal,
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -460,21 +461,20 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                         ),
                         if (conversation.unreadCount > 0)
                           Container(
-                            margin: const EdgeInsets.only(left: 8),
-                            padding: const EdgeInsets.symmetric(
+                            margin: EdgeInsets.only(left: 8),
+                            padding: EdgeInsets.symmetric(
                               horizontal: 8,
                               vertical: 3,
                             ),
                             decoration: BoxDecoration(
                               color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
                             child: Text(
                               conversation.unreadCount > 99
                                   ? '99+'
                                   : '${conversation.unreadCount}',
-                              style: const TextStyle(
-                                fontSize: 11,
+                              style: TextStyle(fontSize: 11.sp,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -544,7 +544,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
           backgroundColor: Colors.transparent,
           isScrollControlled: true,
           builder: (context) => Container(
-            margin: const EdgeInsets.all(16),
+            margin: EdgeInsets.all(16.w),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -552,21 +552,21 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                 Container(
                   decoration: BoxDecoration(
                     color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                   child: Column(
                     children: [
                       // 标题
                       Padding(
-                        padding: const EdgeInsets.all(20),
+                        padding: EdgeInsets.all(20.w),
                         child: Column(
                           children: [
                             Container(
-                              width: 48,
-                              height: 48,
+                              width: 48.w,
+                              height: 48.w,
                               decoration: BoxDecoration(
                                 color: AppColors.red.withValues(alpha: 0.2),
-                                borderRadius: BorderRadius.circular(24),
+                                borderRadius: BorderRadius.circular(24.r),
                               ),
                               child: Icon(
                                 Icons.delete_outline,
@@ -574,22 +574,22 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                                 size: 24,
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: 16.w),
                             Text(
                               '删除对话',
                               style: TextStyle(
                                 color: AppColors.white,
-                                fontSize: 18,
+                                fontSize: 18.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8.w),
                             Text(
                               '确定要删除与 ${conversation.name} 的对话吗？\n删除后将无法恢复。',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: AppColors.lightGrey,
-                                fontSize: 14,
+                                fontSize: 14.sp,
                               ),
                             ),
                           ],
@@ -601,13 +601,13 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                         onTap: () => Navigator.pop(context, true),
                         child: Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          padding: EdgeInsets.symmetric(vertical: 16),
                           child: Text(
                             '删除',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: AppColors.red,
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -616,23 +616,23 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.w),
                 // 取消按钮
                 GestureDetector(
                   onTap: () => Navigator.pop(context, false),
                   child: Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    padding: EdgeInsets.symmetric(vertical: 16),
                     decoration: BoxDecoration(
                       color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Text(
                       '取消',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: AppColors.primary,
-                        fontSize: 17,
+                        fontSize: 17.sp,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -651,8 +651,8 @@ class _MessagePageState extends ConsumerState<MessagePage> {
         content: Row(
           children: [
             Icon(Icons.check_circle, color: AppColors.green, size: 20),
-            const SizedBox(width: 12),
-            const Text(
+            SizedBox(width: 12.w),
+            Text(
               '已删除对话',
               style: TextStyle(color: Colors.white),
             ),
@@ -660,8 +660,8 @@ class _MessagePageState extends ConsumerState<MessagePage> {
         ),
         backgroundColor: AppColors.surface,
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        margin: const EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+        margin: EdgeInsets.all(16.w),
         duration: const Duration(seconds: 2),
       ),
     );

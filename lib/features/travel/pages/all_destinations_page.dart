@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/router/app_router.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/features/travel/pages/travel_destination_details_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 /// 全部热门目的地页面 - iOS风格下拉刷新 + 上拉加载
@@ -144,7 +145,7 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
               body = const Text('下拉刷新', style: TextStyle(color: Colors.grey));
             }
             return SizedBox(
-              height: 60,
+              height: 60.w,
               child: Center(child: body),
             );
           },
@@ -169,11 +170,11 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
                     color: AppColors.lightGrey.withOpacity(0.5),
                     size: 32,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.w),
                   Text(
                     '已经到底了，没有更多目的地',
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       color: AppColors.lightGrey.withOpacity(0.5),
                     ),
                   ),
@@ -190,8 +191,7 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
           slivers: [
             // iOS风格导航栏
             CupertinoSliverNavigationBar(
-              largeTitle: const Text(
-                '热门目的地',
+              largeTitle: Text('热门目的地',
                 style: TextStyle(color: Colors.white),
               ),
               backgroundColor: AppColors.background,
@@ -209,7 +209,7 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
 
             // 内容列表
             SliverPadding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.w),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
@@ -237,10 +237,10 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
         );
       },
       child: Container(
-        height: 280,
-        margin: const EdgeInsets.only(bottom: 16),
+        height: 280.w,
+        margin: EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(24.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
@@ -250,7 +250,7 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(24.r),
           child: Stack(
             children: [
               // 背景图片
@@ -269,7 +269,7 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
                 left: 0,
                 right: 0,
                 child: Container(
-                  height: 140,
+                  height: 140.w,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -288,24 +288,23 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
                 top: 16,
                 right: 16,
                 child: Container(
-                  height: 32,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  height: 32.w,
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                   child: Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.star,
                         color: AppColors.yellow,
                         size: 16,
                       ),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4.w),
                       Text(
                         destination['rating'],
-                        style: const TextStyle(
-                          fontSize: 14,
+                        style: TextStyle(fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
@@ -326,13 +325,12 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
                       destination['name'],
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 24,
+                      style: TextStyle(fontSize: 24.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     Row(
                       children: [
                         Icon(
@@ -340,44 +338,43 @@ class _AllDestinationsPageState extends State<AllDestinationsPage> {
                           color: AppColors.lightGrey,
                           size: 16,
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4.w),
                         Text(
                           '葡萄牙',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             color: AppColors.lightGrey,
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        SizedBox(width: 16.w),
                         Icon(
                           Icons.access_time_outlined,
                           color: AppColors.lightGrey,
                           size: 16,
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4.w),
                         Text(
                           '${destination['days']} 天',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             color: AppColors.lightGrey,
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        SizedBox(width: 16.w),
                         Text(
                           '${destination['price']}€',
-                          style: const TextStyle(
-                            fontSize: 16,
+                          style: TextStyle(fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: AppColors.primary,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     Text(
                       '${destination['reviews']} 条评价',
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         color: AppColors.lightGrey.withOpacity(0.8),
                       ),
                     ),

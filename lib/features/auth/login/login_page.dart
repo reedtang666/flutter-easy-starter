@@ -6,6 +6,7 @@ import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 登录页面 - Flutter Easy Starter 风格
@@ -64,7 +65,7 @@ class _LoginPageState extends ConsumerState<LoginPage>
 
               // 表单区域 - 固定高度避免溢出
               SizedBox(
-                height: 280,
+                height: 280.w,
                 child: TabBarView(
                   controller: _tabController,
                   children: [
@@ -91,7 +92,7 @@ class _LoginPageState extends ConsumerState<LoginPage>
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.only(
+      padding: EdgeInsets.only(
         top: 60,
         bottom: 32,
       ),
@@ -99,8 +100,8 @@ class _LoginPageState extends ConsumerState<LoginPage>
         children: [
           // Logo - 框架风格
           Container(
-            width: 80,
-            height: 80,
+            width: 80.w,
+            height: 80.w,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -108,7 +109,7 @@ class _LoginPageState extends ConsumerState<LoginPage>
                   AppColors.primary.withOpacity(0.7),
                 ],
               ),
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(24.r),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primary.withOpacity(0.4),
@@ -117,26 +118,26 @@ class _LoginPageState extends ConsumerState<LoginPage>
                 ),
               ],
             ),
-            child: const Icon(
+            child: Icon(
               Icons.rocket_launch,
               size: 40,
               color: AppColors.white,
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.w),
           Text(
             'Flutter Easy Starter',
             style: TextStyle(
-              fontSize: 28,
+              fontSize: 28.sp,
               fontWeight: FontWeight.bold,
               color: AppColors.white,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             '登录后继续体验 Demo',
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 15.sp,
               color: AppColors.lightGrey,
             ),
           ),
@@ -147,34 +148,32 @@ class _LoginPageState extends ConsumerState<LoginPage>
 
   Widget _buildTabBar() {
     return Container(
-      margin: const EdgeInsets.symmetric(
+      margin: EdgeInsets.symmetric(
         horizontal: 32,
         vertical: 16,
       ),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: TabBar(
         controller: _tabController,
         indicator: BoxDecoration(
           color: AppColors.tertiaryGrey,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         indicatorSize: TabBarIndicatorSize.tab,
         labelColor: AppColors.white,
         unselectedLabelColor: AppColors.lightGrey,
-        labelStyle: const TextStyle(
-          fontSize: 15,
+        labelStyle: TextStyle(fontSize: 15.sp,
           fontWeight: FontWeight.w600,
         ),
-        unselectedLabelStyle: const TextStyle(
-          fontSize: 15,
+        unselectedLabelStyle: TextStyle(fontSize: 15.sp,
           fontWeight: FontWeight.normal,
         ),
         dividerHeight: 0,
-        padding: const EdgeInsets.all(4),
-        tabs: const [
+        padding: EdgeInsets.all(4.w),
+        tabs: [
           Tab(text: '账号密码'),
           Tab(text: '手机验证码'),
         ],
@@ -184,7 +183,7 @@ class _LoginPageState extends ConsumerState<LoginPage>
 
   Widget _buildSocialLogin() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(32, 16, 32, 24),
+      padding: EdgeInsets.fromLTRB(32, 16, 32, 24),
       child: Column(
         children: [
           // 第三方登录方式
@@ -197,14 +196,14 @@ class _LoginPageState extends ConsumerState<LoginPage>
                 label: '微信',
                 onTap: () => _loginWithWechat(),
               ),
-              const SizedBox(width: 32),
+              SizedBox(width: 32.w),
               _SocialLoginButton(
                 icon: Icons.apple,
                 color: AppColors.white,
                 label: 'Apple',
                 onTap: () {},
               ),
-              const SizedBox(width: 32),
+              SizedBox(width: 32.w),
               _SocialLoginButton(
                 icon: Icons.bolt,
                 color: AppColors.primary,
@@ -214,36 +213,36 @@ class _LoginPageState extends ConsumerState<LoginPage>
             ],
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24.w),
 
           // 分隔线 + 演示账号
           Row(
             children: [
-              const Expanded(child: Divider()),
+              Expanded(child: Divider()),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   '演示账号',
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     color: AppColors.lightGrey,
                   ),
                 ),
               ),
-              const Expanded(child: Divider()),
+              Expanded(child: Divider()),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
 
           // 演示账号提示
           Container(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: 12,
               vertical: 8,
             ),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -253,11 +252,11 @@ class _LoginPageState extends ConsumerState<LoginPage>
                   size: 14,
                   color: AppColors.lightGrey,
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Text(
                   '账号: ${AppConstants.demoAccount} / 密码: ${AppConstants.demoPassword}',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     color: AppColors.lightGrey,
                   ),
                 ),
@@ -314,8 +313,8 @@ class _SocialLoginButton extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 56,
-            height: 56,
+            width: 56.w,
+            height: 56.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
               shape: BoxShape.circle,
@@ -324,11 +323,11 @@ class _SocialLoginButton extends StatelessWidget {
             child: Icon(icon, color: color, size: 28),
           ),
           if (label != null) ...[
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
             Text(
               label!,
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 12.sp,
                 color: AppColors.lightGrey,
               ),
             ),
@@ -378,7 +377,7 @@ class _PasswordLoginFormState extends ConsumerState<_PasswordLoginForm> {
     }
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
+      padding: EdgeInsets.symmetric(horizontal: 32),
       child: Form(
         key: _formKey,
         child: Column(
@@ -386,18 +385,18 @@ class _PasswordLoginFormState extends ConsumerState<_PasswordLoginForm> {
             // 用户名输入
             TextFormField(
               controller: _usernameController,
-              style: const TextStyle(color: AppColors.white),
+              style: TextStyle(color: AppColors.white),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: AppColors.surface,
                 hintText: '用户名',
                 hintStyle: TextStyle(color: AppColors.tertiaryGrey),
-                prefixIcon: const Icon(Icons.person_outline, color: AppColors.lightGrey),
+                prefixIcon: Icon(Icons.person_outline, color: AppColors.lightGrey),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -406,18 +405,18 @@ class _PasswordLoginFormState extends ConsumerState<_PasswordLoginForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.w),
             // 密码输入
             TextFormField(
               controller: _passwordController,
               obscureText: _obscurePassword,
-              style: const TextStyle(color: AppColors.white),
+              style: TextStyle(color: AppColors.white),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: AppColors.surface,
                 hintText: '密码',
                 hintStyle: TextStyle(color: AppColors.tertiaryGrey),
-                prefixIcon: const Icon(Icons.lock_outline, color: AppColors.lightGrey),
+                prefixIcon: Icon(Icons.lock_outline, color: AppColors.lightGrey),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _obscurePassword ? Icons.visibility_off : Icons.visibility,
@@ -430,10 +429,10 @@ class _PasswordLoginFormState extends ConsumerState<_PasswordLoginForm> {
                   },
                 ),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -445,40 +444,39 @@ class _PasswordLoginFormState extends ConsumerState<_PasswordLoginForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12.w),
             // 忘记密码
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
-                child: const Text('忘记密码?'),
+                child: Text('忘记密码?'),
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
             // 登录按钮
             SizedBox(
               width: double.infinity,
-              height: 52,
+              height: 52.w,
               child: ElevatedButton(
                 onPressed: widget.isLoading ? null : _login,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                 ),
                 child: widget.isLoading
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
+                    ? SizedBox(
+                        width: 20.w,
+                        height: 20.w,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           color: AppColors.white,
                         ),
                       )
-                    : const Text(
-                        '登录',
-                        style: TextStyle(fontSize: 16),
+                    : Text('登录',
+                        style: TextStyle(fontSize: 16.sp),
                       ),
               ),
             ),
@@ -529,7 +527,7 @@ class _PhoneLoginFormState extends ConsumerState<_PhoneLoginForm> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
+      padding: EdgeInsets.symmetric(horizontal: 32),
       child: Form(
         key: _formKey,
         child: Column(
@@ -538,18 +536,18 @@ class _PhoneLoginFormState extends ConsumerState<_PhoneLoginForm> {
             TextFormField(
               controller: _phoneController,
               keyboardType: TextInputType.phone,
-              style: const TextStyle(color: AppColors.white),
+              style: TextStyle(color: AppColors.white),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: AppColors.surface,
                 hintText: '手机号',
                 hintStyle: TextStyle(color: AppColors.tertiaryGrey),
-                prefixIcon: const Icon(Icons.phone_outlined, color: AppColors.lightGrey),
+                prefixIcon: Icon(Icons.phone_outlined, color: AppColors.lightGrey),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -561,20 +559,20 @@ class _PhoneLoginFormState extends ConsumerState<_PhoneLoginForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.w),
             // 验证码输入
             TextFormField(
               controller: _codeController,
               keyboardType: TextInputType.number,
-              style: const TextStyle(color: AppColors.white),
+              style: TextStyle(color: AppColors.white),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: AppColors.surface,
                 hintText: '验证码',
                 hintStyle: TextStyle(color: AppColors.tertiaryGrey),
-                prefixIcon: const Icon(Icons.security_outlined, color: AppColors.lightGrey),
+                prefixIcon: Icon(Icons.security_outlined, color: AppColors.lightGrey),
                 suffixIcon: Padding(
-                  padding: const EdgeInsets.only(right: 8),
+                  padding: EdgeInsets.only(right: 8),
                   child: TextButton(
                     onPressed: _isCountingDown || widget.isLoading
                         ? null
@@ -586,16 +584,16 @@ class _PhoneLoginFormState extends ConsumerState<_PhoneLoginForm> {
                             ? AppColors.lightGrey
                             : AppColors.primary,
                         fontWeight: FontWeight.w500,
-                        fontSize: 13,
+                        fontSize: 13.sp,
                       ),
                     ),
                   ),
                 ),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -607,31 +605,30 @@ class _PhoneLoginFormState extends ConsumerState<_PhoneLoginForm> {
                 return null;
               },
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32.w),
             // 登录按钮
             SizedBox(
               width: double.infinity,
-              height: 52,
+              height: 52.w,
               child: ElevatedButton(
                 onPressed: widget.isLoading ? null : _login,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                 ),
                 child: widget.isLoading
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
+                    ? SizedBox(
+                        width: 20.w,
+                        height: 20.w,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           color: AppColors.white,
                         ),
                       )
-                    : const Text(
-                        '登录',
-                        style: TextStyle(fontSize: 16),
+                    : Text('登录',
+                        style: TextStyle(fontSize: 16.sp),
                       ),
               ),
             ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 用户模型
@@ -24,7 +25,7 @@ class UserProfile {
     this.avatar,
     this.isOnline = false,
     this.distance = 0,
-    this.interests = const [],
+    this.interests = [],
   });
 }
 
@@ -127,7 +128,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
             // 最近匹配
             _buildRecentMatches(),
 
-            const SizedBox(height: 16),
+            SizedBox(height: 16.w),
 
             // 卡片滑动区域
             Expanded(
@@ -137,7 +138,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
             // 底部操作按钮
             _buildActionButtons(),
 
-            const SizedBox(height: 24),
+            SizedBox(height: 24.w),
           ],
         ),
       ),
@@ -146,13 +147,13 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   Widget _buildAppBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       child: Row(
         children: [
           // Logo
           Container(
-            width: 40,
-            height: 40,
+            width: 40.w,
+            height: 40.w,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -160,21 +161,21 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   AppColors.primary.withValues(alpha: 0.7),
                 ],
               ),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.favorite,
               color: Colors.white,
               size: 24,
             ),
           ),
-          const SizedBox(width: 12),
-          const Expanded(
+          SizedBox(width: 12.w),
+          Expanded(
             child: Text(
               '发现',
               style: TextStyle(
                 color: AppColors.white,
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -183,13 +184,13 @@ class _DiscoverPageState extends State<DiscoverPage> {
           GestureDetector(
             onTap: () => _showFilterDialog(),
             child: Container(
-              width: 44,
-              height: 44,
+              width: 44.w,
+              height: 44.w,
               decoration: BoxDecoration(
                 color: AppColors.surface,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.tune,
                 color: AppColors.white,
                 size: 22,
@@ -205,7 +206,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -214,7 +215,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 '最近匹配',
                 style: TextStyle(
                   color: AppColors.white,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -222,46 +223,46 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 '查看全部',
                 style: TextStyle(
                   color: AppColors.primary,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12.w),
         SizedBox(
-          height: 100,
+          height: 100.w,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             itemCount: recentMatches.length + 1,
             itemBuilder: (context, index) {
               if (index == 0) {
                 // 查看全部按钮
                 return Container(
-                  width: 70,
-                  margin: const EdgeInsets.only(right: 12),
+                  width: 70.w,
+                  margin: EdgeInsets.only(right: 12),
                   child: Column(
                     children: [
                       Container(
-                        width: 60,
-                        height: 60,
+                        width: 60.w,
+                        height: 60.w,
                         decoration: BoxDecoration(
                           color: AppColors.surface,
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(30.r),
                           border: Border.all(color: AppColors.border),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.grid_view,
                           color: AppColors.lightGrey,
                           size: 24,
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
+                      SizedBox(height: 8.w),
+                      Text(
                         '全部',
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           color: AppColors.lightGrey,
                         ),
                       ),
@@ -274,18 +275,18 @@ class _DiscoverPageState extends State<DiscoverPage> {
               return GestureDetector(
                 onTap: () => _openUserDetail(user),
                 child: Container(
-                  width: 70,
-                  margin: const EdgeInsets.only(right: 12),
+                  width: 70.w,
+                  margin: EdgeInsets.only(right: 12),
                   child: Column(
                     children: [
                       Stack(
                         children: [
                           Container(
-                            width: 60,
-                            height: 60,
+                            width: 60.w,
+                            height: 60.w,
                             decoration: BoxDecoration(
                               color: AppColors.surface,
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(30.r),
                               border: Border.all(
                                 color: user.isOnline
                                     ? AppColors.green
@@ -293,7 +294,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                 width: user.isOnline ? 2 : 1,
                               ),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.person,
                               color: AppColors.lightGrey,
                               size: 28,
@@ -304,25 +305,24 @@ class _DiscoverPageState extends State<DiscoverPage> {
                               right: 2,
                               bottom: 2,
                               child: Container(
-                                width: 14,
-                                height: 14,
+                                width: 14.w,
+                                height: 14.w,
                                 decoration: BoxDecoration(
                                   color: AppColors.green,
-                                  borderRadius: BorderRadius.circular(7),
+                                  borderRadius: BorderRadius.circular(7.r),
                                   border: Border.all(
                                     color: AppColors.background,
-                                    width: 2,
+                                    width: 2.w,
                                   ),
                                 ),
                               ),
                             ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8.w),
                       Text(
                         user.name,
-                        style: const TextStyle(
-                          fontSize: 12,
+                        style: TextStyle(fontSize: 12.sp,
                           color: AppColors.white,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -340,7 +340,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   Widget _buildCardStack() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: CardSwiper(
         controller: _swiperController,
         cardsCount: mockUsers.length,
@@ -373,7 +373,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(24.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.3),
@@ -389,7 +389,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
             Positioned.fill(
               child: Container(
                 color: AppColors.tertiaryGrey,
-                child: const Icon(
+                child: Icon(
                   Icons.person,
                   size: 120,
                   color: AppColors.lightGrey,
@@ -403,7 +403,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
               left: 0,
               right: 0,
               child: Container(
-                height: 200,
+                height: 200.w,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.bottomCenter,
@@ -424,15 +424,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 top: 16,
                 right: 16,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 10,
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
                     color: AppColors.green.withValues(alpha: 0.9),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20.r),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
@@ -440,12 +440,12 @@ class _DiscoverPageState extends State<DiscoverPage> {
                         size: 8,
                         color: Colors.white,
                       ),
-                      SizedBox(width: 4),
+                      SizedBox(width: 4.w),
                       Text(
                         '在线',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -460,7 +460,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
               left: 0,
               right: 0,
               child: Padding(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(20.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -468,63 +468,63 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       children: [
                         Text(
                           '${user.name}, ${user.age}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
-                            fontSize: 28,
+                            fontSize: 28.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Spacer(),
+                        Spacer(),
                         Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.location_on,
                               size: 16,
                               color: AppColors.lightGrey,
                             ),
-                            const SizedBox(width: 4),
+                            SizedBox(width: 4.w),
                             Text(
                               '${user.distance}km',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: AppColors.lightGrey,
-                                fontSize: 14,
+                                fontSize: 14.sp,
                               ),
                             ),
                           ],
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     if (user.bio != null)
                       Text(
                         user.bio!,
                         style: TextStyle(
                           color: Colors.white.withValues(alpha: 0.8),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
                     // 兴趣标签
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
                       children: user.interests.map((interest) {
                         return Container(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 12,
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
                             color: AppColors.glassWhite,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20.r),
                           ),
                           child: Text(
                             interest,
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
-                              fontSize: 13,
+                              fontSize: 13.sp,
                             ),
                           ),
                         );
@@ -542,7 +542,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   Widget _buildActionButtons() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: EdgeInsets.symmetric(horizontal: 40),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -620,32 +620,32 @@ class _DiscoverPageState extends State<DiscoverPage> {
       context: context,
       backgroundColor: AppColors.surface,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       builder: (context) {
         return Container(
-          padding: const EdgeInsets.all(24),
+          padding: EdgeInsets.all(24.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 '筛选',
                 style: TextStyle(
                   color: AppColors.white,
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 20),
-              const Text(
+              SizedBox(height: 20.w),
+              Text(
                 '距离范围',
                 style: TextStyle(
                   color: AppColors.lightGrey,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.w),
               Slider(
                 value: 10,
                 max: 100,
@@ -653,15 +653,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 inactiveColor: AppColors.tertiaryGrey,
                 onChanged: (value) {},
               ),
-              const SizedBox(height: 20),
-              const Text(
+              SizedBox(height: 20.w),
+              Text(
                 '年龄范围',
                 style: TextStyle(
                   color: AppColors.lightGrey,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.w),
               RangeSlider(
                 values: const RangeValues(20, 35),
                 min: 18,
@@ -670,23 +670,23 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 inactiveColor: AppColors.tertiaryGrey,
                 onChanged: (values) {},
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.w),
               SizedBox(
                 width: double.infinity,
-                height: 50,
+                height: 50.w,
                 child: ElevatedButton(
                   onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     '应用筛选',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -713,17 +713,17 @@ class _DiscoverPageState extends State<DiscoverPage> {
         return Dialog(
           backgroundColor: Colors.transparent,
           child: Container(
-            padding: const EdgeInsets.all(32),
+            padding: EdgeInsets.all(32.w),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(24.r),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: 100.w,
+                  height: 100.w,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -731,32 +731,32 @@ class _DiscoverPageState extends State<DiscoverPage> {
                         AppColors.primary.withValues(alpha: 0.7),
                       ],
                     ),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(50.r),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.favorite,
                     color: Colors.white,
                     size: 50,
                   ),
                 ),
-                const SizedBox(height: 24),
-                const Text(
+                SizedBox(height: 24.w),
+                Text(
                   '匹配成功！',
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 24,
+                    fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.w),
                 Text(
                   '你和 ${user.name} 互相喜欢了',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: AppColors.lightGrey,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
                 Row(
                   children: [
                     Expanded(
@@ -767,12 +767,12 @@ class _DiscoverPageState extends State<DiscoverPage> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          padding: EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           '发消息',
                           style: TextStyle(
                             color: Colors.white,

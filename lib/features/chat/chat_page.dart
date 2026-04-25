@@ -8,6 +8,7 @@ import 'package:flutter_easy_starter/features/chat/models/message_model.dart';
 import 'package:flutter_easy_starter/features/chat/widgets/message_bubble.dart';
 import 'package:flutter_easy_starter/features/chat/widgets/message_input.dart';
 import 'package:flutter_easy_starter/features/chat/widgets/message_reactions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easy_starter/features/chat/widgets/typing_indicator.dart';
 import 'package:flutter_easy_starter/features/message/models/conversation_model.dart';
 import 'package:flutter_easy_starter/features/message/widgets/story_ring_avatar.dart';
@@ -239,7 +240,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                       ? _buildEmptyState()
                       : ListView.builder(
                           controller: _scrollController,
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           itemCount: _messages.length + (_isTyping ? 1 : 0),
                           itemBuilder: (context, index) {
                             if (index == _messages.length && _isTyping) {
@@ -300,7 +301,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       backgroundColor: AppColors.background,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
+        icon: Icon(Icons.arrow_back),
         onPressed: () => context.pop(),
       ),
       titleSpacing: 0,
@@ -315,16 +316,16 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               hasStory: _hasStory,
               onTap: () => context.push('/user/${widget.userId}'),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     _userName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppColors.white,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
                     ),
                     maxLines: 1,
@@ -334,7 +335,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                     _isOnline ? '在线' : '离线',
                     style: TextStyle(
                       color: _isOnline ? AppColors.green : AppColors.lightGrey,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                     ),
                   ),
                 ],
@@ -345,13 +346,13 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.videocam_outlined),
+          icon: Icon(Icons.videocam_outlined),
           onPressed: () {
             DialogUtils.showInfo(context, message: '视频通话功能开发中...');
           },
         ),
         IconButton(
-          icon: const Icon(Icons.more_vert),
+          icon: Icon(Icons.more_vert),
           onPressed: _showOptionsMenu,
         ),
       ],
@@ -362,11 +363,11 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        margin: const EdgeInsets.only(top: 8, bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        margin: EdgeInsets.only(top: 8, bottom: 8),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         child: const TypingIndicator(),
       ),
@@ -413,8 +414,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
       builder: (context) {
         return SafeArea(
@@ -422,18 +423,17 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                margin: const EdgeInsets.only(top: 8),
-                width: 40,
-                height: 4,
+                margin: EdgeInsets.only(top: 8),
+                width: 40.w,
+                height: 4.w,
                 decoration: BoxDecoration(
                   color: AppColors.tertiaryGrey,
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(2.r),
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.person, color: AppColors.white),
-                title: const Text(
-                  '查看资料',
+                leading: Icon(Icons.person, color: AppColors.white),
+                title: Text('查看资料',
                   style: TextStyle(color: AppColors.white),
                 ),
                 onTap: () {
@@ -442,9 +442,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.search, color: AppColors.white),
-                title: const Text(
-                  '搜索聊天记录',
+                leading: Icon(Icons.search, color: AppColors.white),
+                title: Text('搜索聊天记录',
                   style: TextStyle(color: AppColors.white),
                 ),
                 onTap: () {
@@ -467,9 +466,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               ),
               const Divider(color: AppColors.divider),
               ListTile(
-                leading: const Icon(Icons.block, color: AppColors.red),
-                title: const Text(
-                  '屏蔽用户',
+                leading: Icon(Icons.block, color: AppColors.red),
+                title: Text('屏蔽用户',
                   style: TextStyle(color: AppColors.red),
                 ),
                 onTap: () {
@@ -478,7 +476,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.report, color: AppColors.orange),
+                leading: Icon(Icons.report, color: AppColors.orange),
                 title: const Text(
                   '举报',
                   style: TextStyle(color: AppColors.orange),
@@ -501,8 +499,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: AppColors.surface,
-          title: const Text(
-            '屏蔽用户',
+          title: Text('屏蔽用户',
             style: TextStyle(color: AppColors.white),
           ),
           content: Text(
@@ -512,7 +509,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('取消'),
+              child: Text('取消'),
             ),
             TextButton(
               onPressed: () {
@@ -522,7 +519,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.red,
               ),
-              child: const Text('屏蔽'),
+              child: Text('屏蔽'),
             ),
           ],
         );
@@ -532,7 +529,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   Widget _buildSkeletonList() {
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       itemCount: 8,
       itemBuilder: (context, index) {
         final isMe = index % 2 == 0;
@@ -543,42 +540,42 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   Widget _buildSkeletonItem(bool isMe) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(bottom: 16),
       child: Row(
         mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!isMe)
             Container(
-              width: 36,
-              height: 36,
+              width: 36.w,
+              height: 36.w,
               decoration: BoxDecoration(
                 color: AppColors.surface,
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(18.r),
               ),
             ),
-          if (!isMe) const SizedBox(width: 8),
+          if (!isMe) SizedBox(width: 8.w),
           Container(
             width: 150 + (isMe ? 50 : 0),
-            height: 48,
+            height: 48.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
               borderRadius: BorderRadius.only(
-                topLeft: const Radius.circular(20),
-                topRight: const Radius.circular(20),
+                topLeft: Radius.circular(20.r),
+                topRight: Radius.circular(20.r),
                 bottomLeft: Radius.circular(isMe ? 20 : 4),
                 bottomRight: Radius.circular(isMe ? 4 : 20),
               ),
             ),
           ),
-          if (isMe) const SizedBox(width: 8),
+          if (isMe) SizedBox(width: 8.w),
           if (isMe)
             Container(
-              width: 36,
-              height: 36,
+              width: 36.w,
+              height: 36.w,
               decoration: BoxDecoration(
                 color: AppColors.surface,
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(18.r),
               ),
             ),
         ],
@@ -592,11 +589,11 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 120,
-            height: 120,
+            width: 120.w,
+            height: 120.w,
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(60),
+              borderRadius: BorderRadius.circular(60.r),
             ),
             child: Icon(
               Icons.chat_bubble_outline,
@@ -604,39 +601,39 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               color: AppColors.lightGrey,
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.w),
           Text(
             '还没有消息',
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 18,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             '发送一条消息开始聊天吧',
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32.w),
           GestureDetector(
             onTap: () {
               _focusNode.requestFocus();
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               decoration: BoxDecoration(
                 color: AppColors.primary,
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(24.r),
               ),
-              child: const Text(
+              child: Text(
                 '发消息',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),

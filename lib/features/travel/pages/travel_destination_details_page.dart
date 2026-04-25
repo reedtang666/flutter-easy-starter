@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/features/travel/widgets/frosted_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TravelDestinationDetailsPage extends StatefulWidget {
   final String destinationName;
@@ -49,7 +50,7 @@ class _TravelDestinationDetailsPageState
           Positioned.fill(
             child: ListView(
               controller: _scrollController,
-              padding: const EdgeInsets.only(top: 0, bottom: 150),
+              padding: EdgeInsets.only(top: 0, bottom: 150),
               children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height * .72,
@@ -69,7 +70,7 @@ class _TravelDestinationDetailsPageState
                         left: 0,
                         right: 0,
                         child: Container(
-                          height: 200,
+                          height: 200.w,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
@@ -88,9 +89,9 @@ class _TravelDestinationDetailsPageState
                         left: 0,
                         right: 0,
                         child: Container(
-                          height: 210,
-                          width: 180,
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          height: 210.w,
+                          width: 180.w,
+                          padding: EdgeInsets.symmetric(horizontal: 25),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,13 +100,13 @@ class _TravelDestinationDetailsPageState
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Expanded(
+                                  Expanded(
                                     child: Text(
                                       '罗卡角灯塔',
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                        fontSize: 35,
+                                        fontSize: 35.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         height: 1.1,
@@ -113,10 +114,10 @@ class _TravelDestinationDetailsPageState
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(width: 15),
+                                  SizedBox(width: 15.w),
                                   SizedBox(
-                                    height: 100,
-                                    width: 100,
+                                    height: 100.w,
+                                    width: 100.w,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
@@ -131,11 +132,11 @@ class _TravelDestinationDetailsPageState
                                               color: AppColors.yellow,
                                               size: 24,
                                             ),
-                                            const SizedBox(width: 6),
+                                            SizedBox(width: 6.w),
                                             Text(
                                               '4.5',
                                               style: TextStyle(
-                                                fontSize: 21,
+                                                fontSize: 21.sp,
                                                 color: Colors.white
                                                     .withOpacity(.8),
                                                 fontWeight: FontWeight.w400,
@@ -143,11 +144,11 @@ class _TravelDestinationDetailsPageState
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(height: 8),
+                                        SizedBox(height: 8.w),
                                         Text(
                                           '123 条评价',
                                           style: TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 15.sp,
                                             color: Colors.white.withOpacity(.8),
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -157,28 +158,28 @@ class _TravelDestinationDetailsPageState
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 5),
+                              SizedBox(height: 5.w),
                               SizedBox(
-                                height: 40,
-                                width: 170,
+                                height: 40.w,
+                                width: 170.w,
                                 child: Stack(
                                   children: [
                                     for (int index = 0; index < 3; index++)
                                       Positioned(
                                         left: index * 28,
                                         child: Container(
-                                          height: 40,
-                                          width: 40,
+                                          height: 40.w,
+                                          width: 40.w,
                                           decoration: BoxDecoration(
                                             color:
                                                 Colors.white.withOpacity(.3),
                                             borderRadius:
-                                                BorderRadius.circular(20),
+                                                BorderRadius.circular(20.r),
                                           ),
-                                          padding: const EdgeInsets.all(2.5),
+                                          padding: EdgeInsets.all(2.5.w),
                                           child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(20),
+                                                BorderRadius.circular(20.r),
                                             child: Image.asset(
                                               'assets/images/travel/profile/profile_${(index % 6) + 1}.jpeg',
                                               fit: BoxFit.cover,
@@ -189,14 +190,14 @@ class _TravelDestinationDetailsPageState
                                     Positioned(
                                       left: 3 * 28,
                                       child: SizedBox(
-                                        width: 40,
-                                        height: 40,
+                                        width: 40.w,
+                                        height: 40.w,
                                         child: FrostedWidget(
                                           color: Colors.grey,
-                                          child: const Text(
+                                          child: Text(
                                             '+4',
                                             style: TextStyle(
-                                              fontSize: 13,
+                                              fontSize: 13.sp,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
                                             ),
@@ -211,7 +212,7 @@ class _TravelDestinationDetailsPageState
                           ),
                         ),
                       ),
-                      const Positioned(
+                      Positioned(
                         bottom: 0,
                         left: 0,
                         right: 0,
@@ -221,9 +222,9 @@ class _TravelDestinationDetailsPageState
                   ),
                 ),
                 Container(
-                  height: 100,
+                  height: 100.w,
                   color: AppColors.background,
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  padding: EdgeInsets.symmetric(horizontal: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -242,8 +243,8 @@ class _TravelDestinationDetailsPageState
                 ),
                 Container(
                   color: AppColors.background,
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: const Text(
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  child: Text(
                     '罗卡角是辛特拉山脉的最西端，也是葡萄牙大陆、'
                     '欧洲大陆和欧亚大陆的最西端。它位于辛特拉市阿佐亚附近，'
                     '里斯本区的西南部，形成了辛特拉山脉的最西端。'
@@ -252,7 +253,7 @@ class _TravelDestinationDetailsPageState
                     maxLines: 11,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: AppColors.lightGrey,
                       fontWeight: FontWeight.w600,
                     ),
@@ -281,7 +282,7 @@ class _TravelDestinationDetailsPageState
                     width: 65 * value,
                     decoration: BoxDecoration(
                       color: AppColors.darkGrey,
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(50.r),
                     ),
                     child: Icon(
                       Icons.arrow_back_rounded,
@@ -298,7 +299,7 @@ class _TravelDestinationDetailsPageState
             left: 0,
             right: 0,
             child: Container(
-              height: 140,
+              height: 140.w,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -317,17 +318,17 @@ class _TravelDestinationDetailsPageState
             left: 20,
             right: 20,
             child: Container(
-              height: 54,
+              height: 54.w,
               decoration: BoxDecoration(
                 color: AppColors.primary,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
               ),
               alignment: Alignment.center,
-              child: const Text(
+              child: Text(
                 '立即预订',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
                   letterSpacing: -.6,
                 ),
@@ -358,16 +359,16 @@ class DestinationStatsWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: 60,
-            width: 60,
+            height: 60.w,
+            width: 60.w,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(50.r),
             ),
             child: Icon(iconData, color: AppColors.white),
           ),
-          const SizedBox(width: 15),
+          SizedBox(width: 15.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -375,15 +376,14 @@ class DestinationStatsWidget extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: AppColors.lightGrey,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
                 value,
-                style: const TextStyle(
-                  fontSize: 18,
+                style: TextStyle(fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                   color: AppColors.white,
                 ),
@@ -410,7 +410,7 @@ class _ListViewHeaderState extends State<ListViewHeader> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130,
+      height: 130.w,
       child: Stack(
         children: [
           Positioned(
@@ -418,22 +418,22 @@ class _ListViewHeaderState extends State<ListViewHeader> {
             right: 0,
             bottom: 0,
             child: Container(
-              height: 80,
+              height: 80.w,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: AppColors.background,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(45),
-                  topRight: Radius.circular(45),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(45.r),
+                  topRight: Radius.circular(45.r),
                 ),
               ),
-              padding: const EdgeInsets.only(left: 30, top: 20),
+              padding: EdgeInsets.only(left: 30, top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   for (int i = 0; i < _tabs.length; i++)
                     Padding(
-                      padding: const EdgeInsets.only(right: 10),
+                      padding: EdgeInsets.only(right: 10),
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
@@ -441,21 +441,21 @@ class _ListViewHeaderState extends State<ListViewHeader> {
                           });
                         },
                         child: SizedBox(
-                          width: 100,
+                          width: 100.w,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 _tabs[i],
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 20.sp,
                                   color: i == _selectedIndex
                                       ? AppColors.primary
                                       : AppColors.lightGrey,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const SizedBox(height: 5),
+                              SizedBox(height: 5.w),
                               AnimatedContainer(
                                 duration: const Duration(milliseconds: 300),
                                 height: i == _selectedIndex ? 9 : 0,
@@ -464,7 +464,7 @@ class _ListViewHeaderState extends State<ListViewHeader> {
                                   color: i == _selectedIndex
                                       ? AppColors.primary
                                       : AppColors.lightGrey,
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.r),
                                 ),
                               ),
                             ],
@@ -480,11 +480,11 @@ class _ListViewHeaderState extends State<ListViewHeader> {
             right: 25,
             top: 5,
             child: Container(
-              height: 90,
-              width: 90,
+              height: 90.w,
+              width: 90.w,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(90),
+                borderRadius: BorderRadius.circular(90.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(.1),

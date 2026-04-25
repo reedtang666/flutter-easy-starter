@@ -7,6 +7,7 @@ import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/features/travel/pages/travel_destination_details_page.dart';
 import 'package:flutter_easy_starter/features/travel/widgets/activity_tile_list_view_widget.dart';
 import 'package:flutter_easy_starter/features/travel/widgets/s_custom_painter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TravelHomePage extends StatefulWidget {
   const TravelHomePage({super.key});
@@ -21,10 +22,10 @@ class _TravelHomePageState extends State<TravelHomePage> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: ListView(
-        padding: const EdgeInsets.only(top: 20, bottom: 30),
+        padding: EdgeInsets.only(top: 20, bottom: 30),
         children: [
           // 顶部欢迎语
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,39 +33,39 @@ class _TravelHomePageState extends State<TravelHomePage> {
                 Text(
                   '你好，开发者 👋',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
                     letterSpacing: -1,
                     color: AppColors.white,
                   ),
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 8.w),
                 Text(
                   '探索世界各地的精彩旅程',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: AppColors.lightGrey,
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.w),
 
           // 活动分类
           const ActivityTileListView(),
-          const SizedBox(height: 30),
+          SizedBox(height: 30.w),
 
           // 热门目的地标题
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   '热门目的地',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 22.sp,
                     fontWeight: FontWeight.bold,
                     color: AppColors.white,
                   ),
@@ -73,10 +74,10 @@ class _TravelHomePageState extends State<TravelHomePage> {
                   onTap: () {
                     AppRouter.pushNamed(RouteNames.allDestinations);
                   },
-                  child: const Text(
+                  child: Text(
                     '查看全部',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: AppColors.primary,
                     ),
                   ),
@@ -84,7 +85,7 @@ class _TravelHomePageState extends State<TravelHomePage> {
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.w),
 
           // 目的地列表
           for (int index = 0; index < 10; index++)
@@ -99,8 +100,8 @@ class _TravelHomePageState extends State<TravelHomePage> {
                 );
               },
               child: Container(
-                height: 380,
-                margin: const EdgeInsets.symmetric(
+                height: 380.w,
+                margin: EdgeInsets.symmetric(
                     horizontal: 20, vertical: 10),
                 child: Stack(
                   children: [
@@ -108,10 +109,10 @@ class _TravelHomePageState extends State<TravelHomePage> {
                     Positioned.fill(
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(32),
+                          borderRadius: BorderRadius.circular(32.r),
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(32),
+                          borderRadius: BorderRadius.circular(32.r),
                           child: Stack(
                             children: [
                               // 背景图片
@@ -130,7 +131,7 @@ class _TravelHomePageState extends State<TravelHomePage> {
                                 left: 0,
                                 right: 0,
                                 child: Container(
-                                  height: 180,
+                                  height: 180.w,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       begin: Alignment.topCenter,
@@ -149,24 +150,23 @@ class _TravelHomePageState extends State<TravelHomePage> {
                                 top: 16,
                                 right: 16,
                                 child: Container(
-                                  height: 32,
-                                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                                  height: 32.w,
+                                  padding: EdgeInsets.symmetric(horizontal: 12),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16),
+                                    borderRadius: BorderRadius.circular(16.r),
                                   ),
                                   child: Row(
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.star,
                                         color: AppColors.yellow,
                                         size: 16,
                                       ),
-                                      const SizedBox(width: 4),
+                                      SizedBox(width: 4.w),
                                       Text(
                                         '4.${Random.secure().nextInt(8) + 1}',
-                                        style: const TextStyle(
-                                          fontSize: 14,
+                                        style: TextStyle(fontSize: 14.sp,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
                                         ),
@@ -187,35 +187,34 @@ class _TravelHomePageState extends State<TravelHomePage> {
                                       _getDestinationName(index),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontSize: 28,
+                                      style: TextStyle(fontSize: 28.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         height: 1.2,
                                       ),
                                     ),
-                                    const SizedBox(height: 12),
+                                    SizedBox(height: 12.w),
                                     _buildDayAndPrice(),
-                                    const SizedBox(height: 12),
+                                    SizedBox(height: 12.w),
                                     // 参与者头像
                                     SizedBox(
-                                      height: 36,
+                                      height: 36.w,
                                       child: Row(
                                         children: [
                                           for (int i = 0; i < 3; i++)
                                             Container(
-                                              width: 36,
-                                              height: 36,
-                                              margin: const EdgeInsets.only(right: 8),
+                                              width: 36.w,
+                                              height: 36.w,
+                                              margin: EdgeInsets.only(right: 8),
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(18),
+                                                borderRadius: BorderRadius.circular(18.r),
                                                 border: Border.all(
                                                   color: Colors.white.withOpacity(0.5),
-                                                  width: 2,
+                                                  width: 2.w,
                                                 ),
                                               ),
                                               child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(18),
+                                                borderRadius: BorderRadius.circular(18.r),
                                                 child: Image.asset(
                                                   'assets/images/travel/profile/profile_${(i % 6) + 1}.jpeg',
                                                   fit: BoxFit.cover,
@@ -223,17 +222,17 @@ class _TravelHomePageState extends State<TravelHomePage> {
                                               ),
                                             ),
                                           Container(
-                                            width: 36,
-                                            height: 36,
+                                            width: 36.w,
+                                            height: 36.w,
                                             decoration: BoxDecoration(
                                               color: AppColors.surface,
-                                              borderRadius: BorderRadius.circular(18),
+                                              borderRadius: BorderRadius.circular(18.r),
                                             ),
-                                            child: const Center(
+                                            child: Center(
                                               child: Text(
                                                 '+4',
                                                 style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: 12.sp,
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.white,
                                                 ),
@@ -256,13 +255,13 @@ class _TravelHomePageState extends State<TravelHomePage> {
                       bottom: 0,
                       right: 0,
                       child: Container(
-                        width: 90,
-                        height: 90,
+                        width: 90.w,
+                        height: 90.w,
                         decoration: BoxDecoration(
                           color: AppColors.background,
                           borderRadius:
-                              const BorderRadius.only(
-                                  topLeft: Radius.circular(50)),
+                              BorderRadius.only(
+                                  topLeft: Radius.circular(50.r)),
                         ),
                       ),
                     ),
@@ -270,14 +269,14 @@ class _TravelHomePageState extends State<TravelHomePage> {
                       bottom: 10,
                       right: 10,
                       child: Container(
-                        width: 70,
-                        height: 70,
+                        width: 70.w,
+                        height: 70.w,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(35),
+                          borderRadius: BorderRadius.circular(35.r),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.arrow_forward,
                           size: 28,
                           color: Colors.white,
@@ -297,8 +296,7 @@ class _TravelHomePageState extends State<TravelHomePage> {
     final days = Random.secure().nextInt(4) + 1;
     return Text(
       '$days 天 • ${days * (Random.secure().nextInt(10) + 14)}€',
-      style: const TextStyle(
-        fontSize: 18,
+      style: TextStyle(fontSize: 18.sp,
         fontWeight: FontWeight.w600,
         color: Colors.white,
       ),

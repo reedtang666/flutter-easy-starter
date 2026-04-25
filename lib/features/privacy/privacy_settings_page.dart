@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -95,8 +96,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
       barrierDismissible: false,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.surface,
-        title: const Text(
-          '撤销隐私政策同意',
+        title: Text('撤销隐私政策同意',
           style: TextStyle(color: AppColors.white),
         ),
         content: const Text(
@@ -106,7 +106,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text(
+            child: Text(
               '取消',
               style: TextStyle(color: AppColors.lightGrey),
             ),
@@ -126,7 +126,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
                 context.go(RouteNames.privacy);
               }
             },
-            child: const Text(
+            child: Text(
               '确定撤销',
               style: TextStyle(color: AppColors.red),
             ),
@@ -146,7 +146,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
         title: const Text('隐私设置'),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
         ),
       ),
@@ -163,14 +163,14 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
           ),
 
           // 设置列表标题
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.fromLTRB(20, 24, 20, 12),
               child: Text(
                 '功能隐私设置',
                 style: TextStyle(
                   color: AppColors.lightGrey,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -179,7 +179,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
 
           // 设置列表
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => _buildSettingItem(index, settings[index]),
@@ -194,8 +194,8 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
           ),
 
           // 底部空间
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 32),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 32.w),
           ),
         ],
       ),
@@ -204,37 +204,37 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
 
   Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       child: Column(
         children: [
           Container(
-            width: 80,
-            height: 80,
+            width: 80.w,
+            height: 80.w,
             decoration: BoxDecoration(
               color: AppColors.primary.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.r),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.shield,
               color: AppColors.primary,
               size: 40,
             ),
           ),
-          const SizedBox(height: 16),
-          const Text(
+          SizedBox(height: 16.w),
+          Text(
             '保护你的隐私',
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             '这些设置决定其他用户能看到哪些信息',
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
         ],
@@ -244,82 +244,78 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
 
   Widget _buildPrivacyPolicySection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: Column(
           children: [
             // 查看隐私政策
             ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               leading: Container(
-                width: 48,
-                height: 48,
+                width: 48.w,
+                height: 48.w,
                 decoration: BoxDecoration(
                   color: AppColors.primary.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.policy,
                   color: AppColors.primary,
                 ),
               ),
-              title: const Text(
-                '隐私政策',
+              title: Text('隐私政策',
                 style: TextStyle(
                   color: AppColors.white,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              subtitle: const Text(
-                '查看完整的隐私政策内容',
+              subtitle: Text('查看完整的隐私政策内容',
                 style: TextStyle(
                   color: AppColors.lightGrey,
-                  fontSize: 13,
+                  fontSize: 13.sp,
                 ),
               ),
-              trailing: const Icon(
+              trailing: Icon(
                 Icons.chevron_right,
                 color: AppColors.lightGrey,
               ),
               onTap: _viewPrivacyPolicy,
             ),
 
-            const Divider(height: 1, indent: 72, color: AppColors.tertiaryGrey),
+            Divider(height: 1.w, indent: 72, color: AppColors.tertiaryGrey),
 
             // 撤销同意
             ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               leading: Container(
-                width: 48,
-                height: 48,
+                width: 48.w,
+                height: 48.w,
                 decoration: BoxDecoration(
                   color: AppColors.red.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.logout,
                   color: AppColors.red,
                 ),
               ),
-              title: const Text(
-                '撤销隐私政策同意',
+              title: Text('撤销隐私政策同意',
                 style: TextStyle(
                   color: AppColors.red,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              subtitle: const Text(
-                '撤销后将无法继续使用应用',
+              subtitle: Text('撤销后将无法继续使用应用',
                 style: TextStyle(
                   color: AppColors.lightGrey,
-                  fontSize: 13,
+                  fontSize: 13.sp,
                 ),
               ),
-              trailing: const Icon(
+              trailing: Icon(
                 Icons.chevron_right,
                 color: AppColors.lightGrey,
               ),
@@ -333,45 +329,45 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
 
   Widget _buildSettingItem(int index, PrivacySetting setting) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: Row(
         children: [
           Container(
-            width: 48,
-            height: 48,
+            width: 48.w,
+            height: 48.w,
             decoration: BoxDecoration(
               color: AppColors.tertiaryGrey,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Icon(
               setting.icon,
               color: AppColors.white,
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   setting.title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Text(
                   setting.subtitle,
                   style: TextStyle(
                     color: AppColors.lightGrey,
-                    fontSize: 13,
+                    fontSize: 13.sp,
                   ),
                 ),
               ],
@@ -393,17 +389,17 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
 
   Widget _buildAdvancedSettings() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
+      padding: EdgeInsets.fromLTRB(20, 24, 20, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 8, bottom: 16),
             child: Text(
               '高级设置',
               style: TextStyle(
                 color: AppColors.lightGrey,
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -411,7 +407,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
           Container(
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             child: Column(
               children: [
@@ -421,14 +417,14 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
                   subtitle: '管理已屏蔽的用户',
                   onTap: () {},
                 ),
-                const Divider(height: 1, indent: 72, color: AppColors.tertiaryGrey),
+                Divider(height: 1.w, indent: 72, color: AppColors.tertiaryGrey),
                 _buildActionTile(
                   icon: Icons.delete,
                   title: '清除聊天记录',
                   subtitle: '删除所有聊天历史',
                   onTap: () {},
                 ),
-                const Divider(height: 1, indent: 72, color: AppColors.tertiaryGrey),
+                Divider(height: 1.w, indent: 72, color: AppColors.tertiaryGrey),
                 _buildActionTile(
                   icon: Icons.delete_forever,
                   title: '注销账号',
@@ -452,15 +448,15 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
     bool isDestructive = false,
   }) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       leading: Container(
-        width: 48,
-        height: 48,
+        width: 48.w,
+        height: 48.w,
         decoration: BoxDecoration(
           color: isDestructive
               ? AppColors.red.withValues(alpha: 0.2)
               : AppColors.tertiaryGrey,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Icon(
           icon,
@@ -478,10 +474,10 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
         subtitle,
         style: TextStyle(
           color: AppColors.lightGrey,
-          fontSize: 13,
+          fontSize: 13.sp,
         ),
       ),
-      trailing: const Icon(
+      trailing: Icon(
         Icons.chevron_right,
         color: AppColors.lightGrey,
       ),

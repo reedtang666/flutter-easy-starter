@@ -3,6 +3,7 @@ import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
 import 'package:flutter_easy_starter/core/services/push_service.dart';
 import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easy_starter/core/services/wechat_service.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 隐私合规管理器
 ///

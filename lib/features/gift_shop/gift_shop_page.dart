@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 礼物模型
@@ -85,25 +86,25 @@ class _GiftShopPageState extends State<GiftShopPage> {
         actions: [
           // 金币显示
           Container(
-            margin: const EdgeInsets.only(right: 16),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            margin: EdgeInsets.only(right: 16),
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.r),
             ),
             child: Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.monetization_on,
                   color: Colors.amber,
                   size: 18,
                 ),
-                const SizedBox(width: 4),
+                SizedBox(width: 4.w),
                 Text(
                   '$_coins',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -133,29 +134,29 @@ class _GiftShopPageState extends State<GiftShopPage> {
 
   Widget _buildCategorySelector() {
     return Container(
-      height: 48,
-      margin: const EdgeInsets.symmetric(vertical: 4),
+      height: 48.w,
+      margin: EdgeInsets.symmetric(vertical: 4),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: EdgeInsets.symmetric(horizontal: 12),
         itemCount: categories.length,
         itemBuilder: (context, index) {
           final isSelected = _selectedCategory == index;
           return GestureDetector(
             onTap: () => setState(() => _selectedCategory = index),
             child: Container(
-              margin: const EdgeInsets.only(right: 8),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              margin: EdgeInsets.only(right: 8),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: isSelected ? AppColors.primary : AppColors.surface,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
               child: Center(
                 child: Text(
                   categories[index],
                   style: TextStyle(
                     color: isSelected ? Colors.white : AppColors.lightGrey,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
@@ -169,12 +170,12 @@ class _GiftShopPageState extends State<GiftShopPage> {
 
   Widget _buildGiftGrid() {
     return GridView.builder(
-      padding: const EdgeInsets.all(12),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
+      padding: EdgeInsets.all(12.w),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
-        childAspectRatio: 0.75,
+        childAspectRatio: 1.0,
       ),
       itemCount: filteredGifts.length,
       itemBuilder: (context, index) {
@@ -189,45 +190,46 @@ class _GiftShopPageState extends State<GiftShopPage> {
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
               border: Border.all(
                 color: isSelected ? AppColors.primary : Colors.transparent,
                 width: isSelected ? 2 : 0,
               ),
             ),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // 礼物图标 - 纯emoji无背景
                 Text(
                   gift.emoji,
-                  style: const TextStyle(fontSize: 40),
+                  style: TextStyle(fontSize: 36.sp),
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6.w),
                 // 礼物名称
                 Text(
                   gift.name,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 13,
+                    fontSize: 14.sp,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 3.w),
                 // 价格
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.monetization_on,
                       color: Colors.amber,
                       size: 12,
                     ),
-                    const SizedBox(width: 2),
+                    SizedBox(width: 2.w),
                     Text(
                       '${gift.coins}',
                       style: TextStyle(
                         color: isSelected ? AppColors.primary : AppColors.lightGrey,
-                        fontSize: 11,
+                        fontSize: 12.sp,
                         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                       ),
                     ),
@@ -250,10 +252,10 @@ class _GiftShopPageState extends State<GiftShopPage> {
     final totalCost = selectedGift.coins * _selectedQuantity;
 
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
       ),
       child: SafeArea(
         child: Column(
@@ -269,39 +271,39 @@ class _GiftShopPageState extends State<GiftShopPage> {
                         ? () => setState(() => _selectedQuantity--)
                         : null,
                     icon: Container(
-                      width: 32,
-                      height: 32,
+                      width: 32.w,
+                      height: 32.w,
                       decoration: BoxDecoration(
                         color: AppColors.background,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.remove,
                         color: AppColors.white,
                         size: 18,
                       ),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16.w),
                   Text(
                     '$_selectedQuantity',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppColors.white,
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16.w),
                   IconButton(
                     onPressed: () => setState(() => _selectedQuantity++),
                     icon: Container(
-                      width: 32,
-                      height: 32,
+                      width: 32.w,
+                      height: 32.w,
                       decoration: BoxDecoration(
                         color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.add,
                         color: Colors.white,
                         size: 18,
@@ -311,7 +313,7 @@ class _GiftShopPageState extends State<GiftShopPage> {
                 ],
               ),
 
-            const SizedBox(height: 12),
+            SizedBox(height: 12.w),
 
             // 赠送按钮
             Row(
@@ -321,17 +323,17 @@ class _GiftShopPageState extends State<GiftShopPage> {
                   child: GestureDetector(
                     onTap: () => context.pop(),
                     child: Container(
-                      height: 48,
+                      height: 48.w,
                       decoration: BoxDecoration(
                         color: AppColors.background,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10.r),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           '取消',
                           style: TextStyle(
                             color: AppColors.lightGrey,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -340,7 +342,7 @@ class _GiftShopPageState extends State<GiftShopPage> {
                   ),
                 ),
 
-                const SizedBox(width: 12),
+                SizedBox(width: 12.w),
 
                 // 赠送按钮
                 Expanded(
@@ -369,7 +371,7 @@ class _GiftShopPageState extends State<GiftShopPage> {
                             });
                           },
                     child: Container(
-                      height: 48,
+                      height: 48.w,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: _selectedGiftId == null
@@ -379,7 +381,7 @@ class _GiftShopPageState extends State<GiftShopPage> {
                                   AppColors.primary.withValues(alpha: 0.8),
                                 ],
                         ),
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10.r),
                         boxShadow: _selectedGiftId == null
                             ? null
                             : [
@@ -397,16 +399,16 @@ class _GiftShopPageState extends State<GiftShopPage> {
                             if (_selectedGiftId != null)
                               Text(
                                 selectedGift.emoji,
-                                style: const TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 20.sp),
                               ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8.w),
                             Text(
                               _selectedGiftId == null
                                   ? '选择礼物'
                                   : '赠送 ($totalCost)',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

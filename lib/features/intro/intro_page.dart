@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/features/main/main_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 项目介绍页面 - Apple 风格单页设计
 class IntroPage extends StatefulWidget {
@@ -105,14 +106,14 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
   // Hero 区域
   Widget _buildHeroSection() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(24, 80, 24, 40),
+      padding: EdgeInsets.fromLTRB(24, 80, 24, 40),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 项目 Logo 图标
           Container(
-            width: 80,
-            height: 80,
+            width: 80.w,
+            height: 80.w,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -122,7 +123,7 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(24.r),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primary.withOpacity(0.3),
@@ -131,13 +132,13 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
                 ),
               ],
             ),
-            child: const Icon(
+            child: Icon(
               Icons.rocket_launch,
               color: Colors.white,
               size: 40,
             ),
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32.w),
 
           // 主标题 - 渐变效果
           ShaderMask(
@@ -149,27 +150,27 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
                 ],
               ).createShader(bounds);
             },
-            child: const Text(
+            child: Text(
               'Flutter\nEasy Starter',
               style: TextStyle(
-                fontSize: 48,
+                fontSize: 48.sp,
                 height: 1.1,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
 
           // 副标题
           Text(
             '开箱即用的 Flutter 快速开发框架',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 18.sp,
               color: AppColors.lightGrey,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.w),
 
           // 核心卖点强调
           Row(
@@ -179,25 +180,25 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
                 color: AppColors.primary,
                 size: 18,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               Text(
                 '30分钟即可搭建完整应用',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 15.sp,
                   color: AppColors.primary.withOpacity(0.9),
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
 
           // 版本标签
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               border: Border.all(
                 color: Colors.white.withOpacity(0.1),
               ),
@@ -205,7 +206,7 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
             child: Text(
               'v1.0.0 · Production Ready',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.primary,
               ),
@@ -219,19 +220,18 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
   // 区块标题
   Widget _buildSection({required String title, required Widget child}) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+      padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 22,
+            style: TextStyle(fontSize: 22.sp,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
           child,
         ],
       ),
@@ -286,11 +286,11 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
 
   Widget _buildFeatureCard(_FeatureItem feature) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(14),
+      margin: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(14.r),
         border: Border.all(
           color: Colors.white.withOpacity(0.05),
         ),
@@ -298,11 +298,11 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
       child: Row(
         children: [
           Container(
-            width: 44,
-            height: 44,
+            width: 44.w,
+            height: 44.w,
             decoration: BoxDecoration(
               color: feature.color.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Icon(
               feature.icon,
@@ -310,24 +310,23 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
               size: 22,
             ),
           ),
-          const SizedBox(width: 14),
+          SizedBox(width: 14.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   feature.title,
-                  style: const TextStyle(
-                    fontSize: 15,
+                  style: TextStyle(fontSize: 15.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Text(
                   feature.desc,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     color: AppColors.lightGrey.withOpacity(0.8),
                   ),
                 ),
@@ -371,8 +370,8 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
 
   Widget _buildPatternCard(_PatternDetail pattern) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -382,7 +381,7 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
           color: Colors.white.withOpacity(0.05),
         ),
@@ -393,22 +392,21 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
           Row(
             children: [
               Container(
-                width: 8,
-                height: 8,
+                width: 8.w,
+                height: 8.w,
                 decoration: BoxDecoration(
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(4.r),
                 ),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: 10.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       pattern.title,
-                      style: const TextStyle(
-                        fontSize: 15,
+                      style: TextStyle(fontSize: 15.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
@@ -416,7 +414,7 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
                     Text(
                       pattern.subtitle,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: AppColors.lightGrey.withOpacity(0.7),
                       ),
                     ),
@@ -430,11 +428,11 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.w),
           Text(
             pattern.desc,
             style: TextStyle(
-              fontSize: 13,
+              fontSize: 13.sp,
               height: 1.5,
               color: AppColors.lightGrey.withOpacity(0.8),
             ),
@@ -460,11 +458,11 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
 
   Widget _buildConfigChip(_ConfigItem config) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(14),
+      margin: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(14.r),
         border: Border.all(
           color: Colors.white.withOpacity(0.08),
         ),
@@ -472,11 +470,11 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
       child: Row(
         children: [
           Container(
-            width: 44,
-            height: 44,
+            width: 44.w,
+            height: 44.w,
             decoration: BoxDecoration(
               color: AppColors.primary.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Icon(
               config.icon,
@@ -484,25 +482,25 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
               size: 22,
             ),
           ),
-          const SizedBox(width: 14),
+          SizedBox(width: 14.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   config.title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Text(
                   config.desc,
                   style: TextStyle(
                     color: AppColors.lightGrey.withOpacity(0.7),
-                    fontSize: 13,
+                    fontSize: 13.sp,
                   ),
                 ),
               ],
@@ -543,11 +541,11 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
 
   Widget _buildDemoCard(_DemoItem demo) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(14),
+      margin: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(14.r),
         border: Border.all(
           color: Colors.white.withOpacity(0.05),
         ),
@@ -555,8 +553,8 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
       child: Row(
         children: [
           Container(
-            width: 44,
-            height: 44,
+            width: 44.w,
+            height: 44.w,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -564,7 +562,7 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
                   AppColors.primary.withOpacity(0.1),
                 ],
               ),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Icon(
               demo.icon,
@@ -572,39 +570,38 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
               size: 22,
             ),
           ),
-          const SizedBox(width: 14),
+          SizedBox(width: 14.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   demo.title,
-                  style: const TextStyle(
-                    fontSize: 15,
+                  style: TextStyle(fontSize: 15.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.w),
                 Text(
                   demo.desc,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     color: AppColors.lightGrey.withOpacity(0.8),
                   ),
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6.w),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
                     color: AppColors.primary.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(6.r),
                   ),
                   child: Text(
                     demo.preview,
                     style: TextStyle(
                       color: AppColors.primary,
-                      fontSize: 11,
+                      fontSize: 11.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -620,19 +617,19 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
   // 底部说明区域
   Widget _buildFooterSection() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 30),
+      padding: EdgeInsets.fromLTRB(24, 16, 24, 30),
       child: Column(
         children: [
           Text(
             '本 Demo 源码可直接作为项目模板使用',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 13,
+              fontSize: 13.sp,
               color: AppColors.lightGrey.withOpacity(0.8),
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -641,11 +638,11 @@ class _IntroPageState extends State<IntroPage> with SingleTickerProviderStateMix
                 color: AppColors.lightGrey.withOpacity(0.4),
                 size: 14,
               ),
-              const SizedBox(width: 6),
+              SizedBox(width: 6.w),
               Text(
                 '开源框架 · 自由使用',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: AppColors.lightGrey.withOpacity(0.5),
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// VIP会员权益
@@ -99,9 +100,9 @@ class _VipPageState extends State<VipPage> {
 
           // 权益列表
           SliverPadding(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.w),
             sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
@@ -124,8 +125,8 @@ class _VipPageState extends State<VipPage> {
             child: _buildBottomButton(),
           ),
 
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 16),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 16.w),
           ),
         ],
       ),
@@ -134,7 +135,7 @@ class _VipPageState extends State<VipPage> {
 
   Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+      padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -153,13 +154,13 @@ class _VipPageState extends State<VipPage> {
             child: GestureDetector(
               onTap: () => context.pop(),
               child: Container(
-                width: 40,
-                height: 40,
+                width: 40.w,
+                height: 40.w,
                 decoration: BoxDecoration(
                   color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_back,
                   color: AppColors.white,
                 ),
@@ -167,12 +168,12 @@ class _VipPageState extends State<VipPage> {
             ),
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24.w),
 
           // VIP标识
           Container(
-            width: 80,
-            height: 80,
+            width: 80.w,
+            height: 80.w,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -180,7 +181,7 @@ class _VipPageState extends State<VipPage> {
                   const Color(0xFFFFA500),
                 ],
               ),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.r),
               boxShadow: [
                 BoxShadow(
                   color: const Color(0xFFFFD700).withValues(alpha: 0.4),
@@ -189,30 +190,30 @@ class _VipPageState extends State<VipPage> {
                 ),
               ],
             ),
-            child: const Icon(
+            child: Icon(
               Icons.workspace_premium,
               size: 40,
               color: Colors.white,
             ),
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
 
-          const Text(
+          Text(
             '升级 VIP 会员',
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 24.sp,
               fontWeight: FontWeight.bold,
               color: AppColors.white,
             ),
           ),
 
-          const SizedBox(height: 4),
+          SizedBox(height: 4.w),
 
           Text(
             '解锁所有特权，享受尊贵体验',
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 14.sp,
               color: AppColors.lightGrey,
             ),
           ),
@@ -223,21 +224,21 @@ class _VipPageState extends State<VipPage> {
 
   Widget _buildBenefitCard(VipBenefit benefit) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 36,
-            height: 36,
+            width: 36.w,
+            height: 36.w,
             decoration: BoxDecoration(
               color: AppColors.primary.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
             ),
             child: Icon(
               benefit.icon,
@@ -245,21 +246,21 @@ class _VipPageState extends State<VipPage> {
               size: 20,
             ),
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6.w),
           Text(
             benefit.title,
-            style: const TextStyle(
+            style: TextStyle(
               color: AppColors.white,
-              fontSize: 12,
+              fontSize: 12.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 2),
+          SizedBox(height: 2.w),
           Text(
             benefit.subtitle,
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 10,
+              fontSize: 10.sp,
             ),
             textAlign: TextAlign.center,
           ),
@@ -270,19 +271,19 @@ class _VipPageState extends State<VipPage> {
 
   Widget _buildPackages() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '选择套餐',
             style: TextStyle(
               color: AppColors.white,
-              fontSize: 16,
+              fontSize: 16.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.w),
           Row(
             children: List.generate(
               packages.length,
@@ -293,64 +294,64 @@ class _VipPageState extends State<VipPage> {
                     margin: EdgeInsets.only(
                       left: index > 0 ? 8 : 0,
                     ),
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12.w),
                     decoration: BoxDecoration(
                       color: _selectedPackage == index
                           ? AppColors.primary.withValues(alpha: 0.2)
                           : AppColors.surface,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                       border: Border.all(
                         color: _selectedPackage == index
                             ? AppColors.primary
                             : Colors.transparent,
-                        width: 2,
+                        width: 2.w,
                       ),
                     ),
                     child: Column(
                       children: [
                         if (packages[index].isRecommended)
                           Container(
-                            padding: const EdgeInsets.symmetric(
+                            padding: EdgeInsets.symmetric(
                               horizontal: 6,
                               vertical: 1,
                             ),
                             decoration: BoxDecoration(
                               color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(4.r),
                             ),
-                            child: const Text(
+                            child: Text(
                               '推荐',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 9,
+                                fontSize: 9.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                        const SizedBox(height: 6),
+                        SizedBox(height: 6.w),
                         Text(
                           packages[index].duration,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: AppColors.white,
-                            fontSize: 13,
+                            fontSize: 13.sp,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4.w),
                         Text(
                           packages[index].price,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: AppColors.white,
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         if (packages[index].originalPrice != null) ...[
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4.w),
                           Text(
                             packages[index].originalPrice!,
                             style: TextStyle(
                               color: AppColors.tertiaryGrey,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               decoration: TextDecoration.lineThrough,
                             ),
                           ),
@@ -369,7 +370,7 @@ class _VipPageState extends State<VipPage> {
 
   Widget _buildBottomButton() {
     return Padding(
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(12.w),
       child: Column(
         children: [
           GestureDetector(
@@ -380,7 +381,7 @@ class _VipPageState extends State<VipPage> {
               );
             },
             child: Container(
-              height: 48,
+              height: 48.w,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -388,7 +389,7 @@ class _VipPageState extends State<VipPage> {
                     const Color(0xFFFFA500),
                   ],
                 ),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
                 boxShadow: [
                   BoxShadow(
                     color: const Color(0xFFFFA500).withValues(alpha: 0.4),
@@ -401,17 +402,17 @@ class _VipPageState extends State<VipPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.workspace_premium,
                       color: Colors.white,
                       size: 20,
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8.w),
                     Text(
                       '立即开通 ${packages[_selectedPackage].price}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -420,11 +421,11 @@ class _VipPageState extends State<VipPage> {
               ),
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             '开通即表示同意《VIP服务协议》',
             style: TextStyle(
-              fontSize: 11,
+              fontSize: 11.sp,
               color: AppColors.tertiaryGrey,
             ),
           ),

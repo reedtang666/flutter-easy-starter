@@ -6,6 +6,7 @@ import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -117,12 +118,12 @@ class _GuidePageState extends State<GuidePage> {
             Align(
               alignment: Alignment.topRight,
               child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.lg),
+                padding: EdgeInsets.all(AppSpacing.lg),
                 child: _isLastPage
                     ? const SizedBox.shrink()
                     : TextButton(
                         onPressed: _skip,
-                        child: const Text('跳过'),
+                        child: Text('跳过'),
                       ),
               ),
             ),
@@ -142,7 +143,7 @@ class _GuidePageState extends State<GuidePage> {
 
             // 底部指示器和按钮
             Padding(
-              padding: const EdgeInsets.all(AppSpacing.xxl),
+              padding: EdgeInsets.all(AppSpacing.xxl),
               child: Column(
                 children: [
                   // 页面指示器
@@ -158,12 +159,12 @@ class _GuidePageState extends State<GuidePage> {
                       activeDotColor: AppColors.primary,
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.xxl),
+                  SizedBox(height: AppSpacing.xxl),
 
                   // 下一步/开始按钮
                   SizedBox(
                     width: double.infinity,
-                    height: 52,
+                    height: 52.w,
                     child: ElevatedButton(
                       onPressed: _nextPage,
                       style: ElevatedButton.styleFrom(
@@ -192,14 +193,14 @@ class _GuidePageState extends State<GuidePage> {
 
   Widget _buildPage(GuideItem item) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxxl),
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.xxxl),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // 图标区域 - 发光效果
           Container(
-            width: 140,
-            height: 140,
+            width: 140.w,
+            height: 140.w,
             decoration: BoxDecoration(
               color: item.color.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(AppRadius.full),
@@ -217,7 +218,7 @@ class _GuidePageState extends State<GuidePage> {
               color: item.color,
             ),
           ),
-          const SizedBox(height: AppSpacing.xxxl),
+          SizedBox(height: AppSpacing.xxxl),
 
           // 标题
           Text(
@@ -228,7 +229,7 @@ class _GuidePageState extends State<GuidePage> {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: AppSpacing.md),
+          SizedBox(height: AppSpacing.md),
 
           // 副标题
           Text(

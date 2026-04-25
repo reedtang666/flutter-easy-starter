@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 增强版消息输入栏
 class MessageInput extends StatefulWidget {
@@ -85,7 +86,7 @@ class _MessageInputState extends State<MessageInput> {
           children: [
             // 输入栏
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Row(
                 children: [
                   // 附件按钮
@@ -105,10 +106,10 @@ class _MessageInputState extends State<MessageInput> {
                   // 输入框
                   Expanded(
                     child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      margin: EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
                         color: AppColors.background,
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24.r),
                         border: Border.all(color: Colors.transparent, width: 0),
                       ),
                       child: Row(
@@ -116,21 +117,21 @@ class _MessageInputState extends State<MessageInput> {
                           Expanded(
                             child: TextField(
                               controller: widget.controller,
-                              style: const TextStyle(color: AppColors.white),
+                              style: TextStyle(color: AppColors.white),
                               decoration: InputDecoration(
                                 hintText: '输入消息...',
                                 hintStyle:
                                     TextStyle(color: AppColors.tertiaryGrey),
                                 border: InputBorder.none,
                                 contentPadding:
-                                    const EdgeInsets.symmetric(vertical: 12),
+                                    EdgeInsets.symmetric(vertical: 12),
                               ),
                               maxLines: null,
                               textInputAction: TextInputAction.send,
                               onSubmitted: (_) => widget.onSend(),
                             ),
                           ),
-                          SizedBox(width:10),
+                          SizedBox(width: 10.w),
                           // 表情按钮
                           GestureDetector(
                             onTap: () {
@@ -152,7 +153,7 @@ class _MessageInputState extends State<MessageInput> {
                               size: 24,
                             ),
                           ),
-                          SizedBox(width:10),
+                          SizedBox(width: 10.w),
                         ],
                       ),
                     ),
@@ -189,11 +190,11 @@ class _MessageInputState extends State<MessageInput> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 40,
-        height: 40,
+        width: 40.w,
+        height: 40.w,
         decoration: BoxDecoration(
           color: color?.withValues(alpha: 0.1) ?? Colors.transparent,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         child: Icon(
           icon,
@@ -208,13 +209,13 @@ class _MessageInputState extends State<MessageInput> {
     return GestureDetector(
       onTap: widget.onSend,
       child: Container(
-        width: 44,
-        height: 44,
+        width: 44.w,
+        height: 44.w,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [AppColors.primary, AppColors.accent],
           ),
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(22.r),
           boxShadow: [
             BoxShadow(
               color: AppColors.primary.withValues(alpha: 0.4),
@@ -223,7 +224,7 @@ class _MessageInputState extends State<MessageInput> {
             ),
           ],
         ),
-        child: const Icon(
+        child: Icon(
           Icons.send,
           color: Colors.white,
           size: 20,
@@ -234,7 +235,7 @@ class _MessageInputState extends State<MessageInput> {
 
   Widget _buildAttachmentPanel() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -284,11 +285,11 @@ class _MessageInputState extends State<MessageInput> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 56,
-            height: 56,
+            width: 56.w,
+            height: 56.w,
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             child: Icon(
               icon,
@@ -296,12 +297,12 @@ class _MessageInputState extends State<MessageInput> {
               size: 28,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             label,
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 12,
+              fontSize: 12.sp,
             ),
           ),
         ],
@@ -311,10 +312,10 @@ class _MessageInputState extends State<MessageInput> {
 
   Widget _buildEmojiPanel() {
     return Container(
-      height: 250,
-      padding: const EdgeInsets.all(12),
+      height: 250.w,
+      padding: EdgeInsets.all(12.w),
       child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 8,
           childAspectRatio: 1,
         ),
@@ -326,7 +327,7 @@ class _MessageInputState extends State<MessageInput> {
               alignment: Alignment.center,
               child: Text(
                 _emojis[index],
-                style: const TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 24.sp),
               ),
             ),
           );

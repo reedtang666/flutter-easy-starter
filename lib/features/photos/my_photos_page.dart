@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 相册照片
@@ -80,7 +81,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
         title: const Text('我的相册'),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
         ),
         actions: [
@@ -89,7 +90,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
               // 编辑模式
               DialogUtils.showInfo(context, message: '编辑模式开发中...');
             },
-            child: const Text('管理'),
+            child: Text('管理'),
           ),
         ],
       ),
@@ -107,9 +108,9 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
 
           // 相册网格
           SliverPadding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w),
             sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
@@ -131,14 +132,14 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddPhotoOptions,
         backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add_a_photo, color: Colors.white),
+        child: Icon(Icons.add_a_photo, color: Colors.white),
       ),
     );
   }
 
   Widget _buildStats() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       child: Row(
         children: [
           Expanded(
@@ -157,30 +158,30 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
 
   Widget _buildStatItem(String label, String value, IconData icon) {
     return Container(
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.symmetric(horizontal: 4),
+      padding: EdgeInsets.all(16.w),
+      margin: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: Column(
         children: [
           Icon(icon, color: AppColors.primary, size: 24),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               color: AppColors.white,
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4.w),
           Text(
             label,
             style: TextStyle(
               color: AppColors.lightGrey,
-              fontSize: 12,
+              fontSize: 12.sp,
             ),
           ),
         ],
@@ -190,8 +191,8 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
 
   Widget _buildUploadSection() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -199,7 +200,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
             AppColors.surface,
           ],
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
           color: AppColors.primary.withValues(alpha: 0.3),
         ),
@@ -207,37 +208,37 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
       child: Row(
         children: [
           Container(
-            width: 56,
-            height: 56,
+            width: 56.w,
+            height: 56.w,
             decoration: BoxDecoration(
               color: AppColors.primary.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.cloud_upload,
               color: AppColors.primary,
               size: 28,
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   '上传照片',
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Text(
                   '支持上传 9 张照片，展示你的精彩生活',
                   style: TextStyle(
                     color: AppColors.lightGrey,
-                    fontSize: 13,
+                    fontSize: 13.sp,
                   ),
                 ),
               ],
@@ -245,7 +246,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
           ),
           IconButton(
             onPressed: _showAddPhotoOptions,
-            icon: const Icon(
+            icon: Icon(
               Icons.add_circle,
               color: AppColors.primary,
               size: 32,
@@ -264,7 +265,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         clipBehavior: Clip.hardEdge,
         child: Stack(
@@ -273,7 +274,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
             // 照片占位
             Container(
               color: AppColors.tertiaryGrey,
-              child: const Icon(
+              child: Icon(
                 Icons.image,
                 color: AppColors.lightGrey,
                 size: 40,
@@ -286,19 +287,19 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
                 top: 8,
                 left: 8,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 8,
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
                     color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
-                  child: const Text(
+                  child: Text(
                     '头像',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 10,
+                      fontSize: 10.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -310,28 +311,28 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
               bottom: 8,
               right: 8,
               child: Container(
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: 8,
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
                   color: Colors.black.withValues(alpha: 0.6),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.favorite,
                       color: AppColors.primary,
                       size: 12,
                     ),
-                    const SizedBox(width: 4),
+                    SizedBox(width: 4.w),
                     Text(
                       '${photo.likes}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
-                        fontSize: 11,
+                        fontSize: 11.sp,
                       ),
                     ),
                   ],
@@ -346,13 +347,13 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
               child: GestureDetector(
                 onTap: () => _showPhotoOptions(photo),
                 child: Container(
-                  width: 28,
-                  height: 28,
+                  width: 28.w,
+                  height: 28.w,
                   decoration: BoxDecoration(
                     color: Colors.black.withValues(alpha: 0.6),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.more_vert,
                     color: Colors.white,
                     size: 16,
@@ -368,14 +369,14 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
 
   Widget _buildBottomHint() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Row(
               children: [
@@ -384,20 +385,20 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
                   color: AppColors.primary,
                   size: 20,
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12.w),
                 Expanded(
                   child: Text(
                     '小贴士：清晰的正面照片能让你获得更多匹配机会',
                     style: TextStyle(
                       color: AppColors.lightGrey,
-                      fontSize: 13,
+                      fontSize: 13.sp,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.w),
         ],
       ),
     );
@@ -407,13 +408,13 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       builder: (context) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20.w),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -421,11 +422,11 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
                   '添加照片',
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.w),
                 _buildOptionTile(
                   icon: Icons.camera_alt,
                   title: '拍照',
@@ -481,13 +482,13 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       builder: (context) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20.w),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -495,11 +496,11 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
                   '照片操作',
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.w),
                 if (!photo.isAvatar)
                   _buildOptionTile(
                     icon: Icons.account_circle,

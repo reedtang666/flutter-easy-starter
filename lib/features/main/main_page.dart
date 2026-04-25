@@ -4,6 +4,7 @@ import 'package:flutter_easy_starter/features/intro/intro_page.dart';
 import 'package:flutter_easy_starter/features/message/message_page.dart';
 import 'package:flutter_easy_starter/features/profile/profile_page.dart';
 import 'package:flutter_easy_starter/features/travel/pages/travel_home_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 主框架页面 - 底部导航
 class MainPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = const [
+  final List<Widget> _pages = [
     IntroPage(),
     TravelHomePage(),
     MessagePage(),
@@ -52,7 +53,7 @@ class MainPageState extends State<MainPage> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -80,10 +81,10 @@ class MainPageState extends State<MainPage> {
       onTap: () => setState(() => _currentIndex = index),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primary.withValues(alpha: 0.2) : Colors.transparent,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -94,12 +95,12 @@ class MainPageState extends State<MainPage> {
               size: 24,
             ),
             if (isSelected) ...[
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               Text(
                 label,
                 style: TextStyle(
                   color: AppColors.primary,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),

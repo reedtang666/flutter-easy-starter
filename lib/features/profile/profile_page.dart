@@ -7,6 +7,7 @@ import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
 import 'package:flutter_easy_starter/models/user_model.dart';
 import 'package:flutter_easy_starter/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 设置页面 - Dark Social 风格
@@ -51,7 +52,7 @@ class ProfilePage extends ConsumerWidget {
                     icon: Icons.verified_outlined,
                     title: '实名认证',
                     trailing: Container(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: 8,
                         vertical: 2,
                       ),
@@ -59,10 +60,10 @@ class ProfilePage extends ConsumerWidget {
                         color: AppColors.green.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(AppRadius.sm),
                       ),
-                      child: const Text(
+                      child: Text(
                         '已认证',
                         style: TextStyle(
-                          fontSize: 11,
+                          fontSize: 11.sp,
                           color: AppColors.green,
                         ),
                       ),
@@ -116,7 +117,7 @@ class ProfilePage extends ConsumerWidget {
                     title: '礼物商城',
                     subtitle: '用金币兑换精美礼物',
                     trailing: Container(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: 12,
                         vertical: 6,
                       ),
@@ -127,16 +128,16 @@ class ProfilePage extends ConsumerWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.monetization_on,
                             color: Colors.amber,
                             size: 16,
                           ),
-                          const SizedBox(width: 4),
-                          const Text(
+                          SizedBox(width: 4.w),
+                          Text(
                             '1250',
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               color: AppColors.white,
                               fontWeight: FontWeight.bold,
                             ),
@@ -151,7 +152,7 @@ class ProfilePage extends ConsumerWidget {
                     title: 'VIP会员',
                     subtitle: '解锁更多特权',
                     trailing: Container(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: 8,
                         vertical: 2,
                       ),
@@ -162,7 +163,7 @@ class ProfilePage extends ConsumerWidget {
                       child: Text(
                         '升级',
                         style: TextStyle(
-                          fontSize: 11,
+                          fontSize: 11.sp,
                           color: AppColors.accent,
                         ),
                       ),
@@ -206,20 +207,20 @@ class ProfilePage extends ConsumerWidget {
             // 退出登录
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.xxl),
+                padding: EdgeInsets.all(AppSpacing.xxl),
                 child: OutlinedButton(
                   onPressed: () => _showLogoutConfirm(context, ref),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppColors.red,
                     side: const BorderSide(color: AppColors.red),
                   ),
-                  child: const Text('退出登录'),
+                  child: Text('退出登录'),
                 ),
               ),
             ),
 
             // 底部间距
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SizedBox(height: AppSpacing.xxxl),
             ),
           ],
@@ -230,8 +231,8 @@ class ProfilePage extends ConsumerWidget {
 
   Widget _buildUserHeader(BuildContext context, UserModel? user) {
     return Container(
-      margin: const EdgeInsets.all(AppSpacing.xxl),
-      padding: const EdgeInsets.all(AppSpacing.xxl),
+      margin: EdgeInsets.all(AppSpacing.xxl),
+      padding: EdgeInsets.all(AppSpacing.xxl),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
@@ -242,8 +243,8 @@ class ProfilePage extends ConsumerWidget {
           Stack(
             children: [
               Container(
-                width: 72,
-                height: 72,
+                width: 72.w,
+                height: 72.w,
                 decoration: BoxDecoration(
                   color: AppColors.tertiaryGrey,
                   borderRadius: BorderRadius.circular(AppRadius.full),
@@ -273,21 +274,21 @@ class ProfilePage extends ConsumerWidget {
                 right: 0,
                 bottom: 0,
                 child: Container(
-                  width: 20,
-                  height: 20,
+                  width: 20.w,
+                  height: 20.w,
                   decoration: BoxDecoration(
                     color: AppColors.green,
                     borderRadius: BorderRadius.circular(AppRadius.full),
                     border: Border.all(
                       color: AppColors.surface,
-                      width: 2,
+                      width: 2.w,
                     ),
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(width: AppSpacing.lg),
+          SizedBox(width: AppSpacing.lg),
           // 用户信息
           Expanded(
             child: Column(
@@ -299,14 +300,14 @@ class ProfilePage extends ConsumerWidget {
                     color: AppColors.white,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Text(
                   user?.username ?? '点击编辑个人信息',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.w),
                 Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 8,
                     vertical: 2,
                   ),
@@ -314,10 +315,10 @@ class ProfilePage extends ConsumerWidget {
                     color: AppColors.primary.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(AppRadius.sm),
                   ),
-                  child: const Text(
+                  child: Text(
                     'VIP 会员',
                     style: TextStyle(
-                      fontSize: 11,
+                      fontSize: 11.sp,
                       color: AppColors.primary,
                     ),
                   ),
@@ -327,7 +328,7 @@ class ProfilePage extends ConsumerWidget {
           ),
           // 编辑按钮
           IconButton(
-            icon: const Icon(Icons.chevron_right),
+            icon: Icon(Icons.chevron_right),
             color: AppColors.lightGrey,
             onPressed: () => context.push(RouteNames.userInfo),
           ),
@@ -345,7 +346,7 @@ class ProfilePage extends ConsumerWidget {
       children: [
         // 分组标题
         Padding(
-          padding: const EdgeInsets.fromLTRB(
+          padding: EdgeInsets.fromLTRB(
             AppSpacing.xxl,
             AppSpacing.lg,
             AppSpacing.xxl,
@@ -362,7 +363,7 @@ class ProfilePage extends ConsumerWidget {
         ),
         // 菜单列表
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
+          margin: EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(AppRadius.lg),
@@ -383,7 +384,7 @@ class ProfilePage extends ConsumerWidget {
                     ),
                     title: Text(
                       item.title,
-                      style: const TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.white),
                     ),
                     subtitle: item.subtitle != null
                         ? Text(
@@ -395,7 +396,7 @@ class ProfilePage extends ConsumerWidget {
                           )
                         : null,
                     trailing: item.trailing ??
-                        const Icon(
+                        Icon(
                           Icons.chevron_right,
                           size: 20,
                           color: AppColors.lightGrey,
@@ -439,14 +440,14 @@ class ProfilePage extends ConsumerWidget {
       applicationName: 'Flutter Easy Starter',
       applicationVersion: 'v${AppConstants.appVersion}',
       applicationIcon: Container(
-        width: 56,
-        height: 56,
+        width: 56.w,
+        height: 56.w,
         decoration: BoxDecoration(
           color: AppColors.primary,
           borderRadius: BorderRadius.circular(AppRadius.lg),
           boxShadow: AppShadows.glow,
         ),
-        child: const Icon(
+        child: Icon(
           Icons.rocket_launch,
           size: 32,
           color: AppColors.white,
@@ -454,7 +455,7 @@ class ProfilePage extends ConsumerWidget {
       ),
       applicationLegalese: '© 2024 Flutter Easy Starter. MIT License.',
       children: [
-        const SizedBox(height: AppSpacing.lg),
+        SizedBox(height: AppSpacing.lg),
         Text(
           'Flutter Easy Starter 是一个开箱即用的 Flutter 快速开发框架，集成了路由、状态管理、网络请求等核心能力，帮助你快速构建高质量的 Flutter 应用。',
           style: Theme.of(context).textTheme.bodyMedium,

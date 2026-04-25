@@ -4,6 +4,7 @@ import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 启动页 - Flutter Easy Starter
@@ -143,8 +144,8 @@ class _SplashPageState extends State<SplashPage>
                   child: ScaleTransition(
                     scale: _pulseAnimation,
                     child: Container(
-                      width: 120,
-                      height: 120,
+                      width: 120.w,
+                      height: 120.w,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
@@ -154,7 +155,7 @@ class _SplashPageState extends State<SplashPage>
                             AppColors.primary.withOpacity(0.8),
                           ],
                         ),
-                        borderRadius: BorderRadius.circular(32),
+                        borderRadius: BorderRadius.circular(32.r),
                         boxShadow: [
                           BoxShadow(
                             color: AppColors.primary.withOpacity(0.4),
@@ -163,7 +164,7 @@ class _SplashPageState extends State<SplashPage>
                           ),
                         ],
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.rocket_launch,
                         size: 60,
                         color: Colors.white,
@@ -172,15 +173,15 @@ class _SplashPageState extends State<SplashPage>
                   ),
                 ),
 
-                const SizedBox(height: 40),
+                SizedBox(height: 40.w),
 
                 // App 名称
                 FadeTransition(
                   opacity: _fadeAnimation,
-                  child: const Text(
+                  child: Text(
                     'Flutter Easy Starter',
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 32.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       letterSpacing: 1,
@@ -188,7 +189,7 @@ class _SplashPageState extends State<SplashPage>
                   ),
                 ),
 
-                const SizedBox(height: 12),
+                SizedBox(height: 12.w),
 
                 // Slogan
                 FadeTransition(
@@ -196,32 +197,32 @@ class _SplashPageState extends State<SplashPage>
                   child: Text(
                     '开箱即用的快速开发框架',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: AppColors.lightGrey,
                       letterSpacing: 0.5,
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 80),
+                SizedBox(height: 80.w),
 
                 // 加载指示器
                 SizedBox(
-                  width: 32,
-                  height: 32,
+                  width: 32.w,
+                  height: 32.w,
                   child: CircularProgressIndicator(
                     strokeWidth: 2.5,
                     color: AppColors.primary,
                   ),
                 ),
 
-                const SizedBox(height: 16),
+                SizedBox(height: 16.w),
 
                 // 版本号
                 Text(
                   'v1.0.0',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     color: AppColors.tertiaryGrey,
                   ),
                 ),

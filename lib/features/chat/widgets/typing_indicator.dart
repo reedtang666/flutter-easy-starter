@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 正在输入指示器动画
 class TypingIndicator extends StatefulWidget {
@@ -73,10 +74,10 @@ class _TypingIndicatorState extends State<TypingIndicator>
           '正在输入',
           style: TextStyle(
             color: AppColors.lightGrey,
-            fontSize: 12,
+            fontSize: 12.sp,
           ),
         ),
-        const SizedBox(width: 6),
+        SizedBox(width: 6.w),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: List.generate(3, (index) {
@@ -117,10 +118,10 @@ class TypingBadge extends StatelessWidget {
     if (!isTyping) return const SizedBox.shrink();
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -129,14 +130,14 @@ class TypingBadge extends StatelessWidget {
             '输入中',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 10,
+              fontSize: 10.sp,
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(width: 3),
+          SizedBox(width: 3.w),
           SizedBox(
-            width: 12,
-            height: 8,
+            width: 12.w,
+            height: 8.w,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -153,11 +154,11 @@ class TypingBadge extends StatelessWidget {
 
   Widget _buildDot(int index) {
     return Container(
-      width: 3,
-      height: 3,
+      width: 3.w,
+      height: 3.w,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(1.5),
+        borderRadius: BorderRadius.circular(1.5.r),
       ),
     );
   }

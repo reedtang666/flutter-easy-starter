@@ -4,6 +4,7 @@ import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/models/user_model.dart';
 import 'package:flutter_easy_starter/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 用户信息页 - 深色主题，与个人中心风格一致
@@ -44,25 +45,25 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
         title: const Text('个人信息'),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.white),
+          icon: Icon(Icons.arrow_back, color: AppColors.white),
           onPressed: () => context.pop(),
         ),
         actions: [
           TextButton(
             onPressed: authState.isLoading ? null : _save,
-            child: const Text(
+            child: Text(
               '保存',
               style: TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w600,
-                fontSize: 15,
+                fontSize: 15.sp,
               ),
             ),
           ),
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20.w),
         child: Form(
           key: _formKey,
           child: Column(
@@ -70,7 +71,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
             children: [
               // 头像区域
               _buildAvatarSection(),
-              const SizedBox(height: 32),
+              SizedBox(height: 32.w),
 
               // 昵称
               _buildSectionTitle('昵称'),
@@ -88,17 +89,17 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                   return null;
                 },
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.w),
 
               // 性别
               _buildSectionTitle('性别'),
               _buildGenderSelector(),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.w),
 
               // 简介
               _buildSectionTitle('个人简介'),
               _buildBioEditor(),
-              const SizedBox(height: 48),
+              SizedBox(height: 48.w),
             ],
           ),
         ),
@@ -116,8 +117,8 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
               alignment: Alignment.center,
               children: [
                 Container(
-                  width: 120,
-                  height: 120,
+                  width: 120.w,
+                  height: 120.w,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -141,22 +142,22 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                           child: _avatar!.startsWith('http')
                               ? Image.network(
                                   _avatar!,
-                                  width: 120,
-                                  height: 120,
+                                  width: 120.w,
+                                  height: 120.w,
                                   fit: BoxFit.cover,
                                 )
                               : Image.asset(
                                   _avatar!,
-                                  width: 120,
-                                  height: 120,
+                                  width: 120.w,
+                                  height: 120.w,
                                   fit: BoxFit.cover,
                                 ),
                         )
                       : ClipOval(
                           child: Image.asset(
                             'assets/images/avatar_default.png',
-                            width: 120,
-                            height: 120,
+                            width: 120.w,
+                            height: 120.w,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -166,17 +167,17 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                   bottom: 0,
                   right: 0,
                   child: Container(
-                    width: 40,
-                    height: 40,
+                    width: 40.w,
+                    height: 40.w,
                     decoration: BoxDecoration(
                       color: AppColors.primary,
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: AppColors.background,
-                        width: 3,
+                        width: 3.w,
                       ),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.camera_alt,
                       size: 20,
                       color: Colors.white,
@@ -186,12 +187,12 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
           Text(
             '点击更换头像',
             style: TextStyle(
               color: AppColors.lightGrey.withOpacity(0.8),
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
         ],
@@ -201,12 +202,12 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
 
   Widget _buildSectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.only(bottom: 12),
       child: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           color: AppColors.white,
-          fontSize: 16,
+          fontSize: 16.sp,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -223,7 +224,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
     return TextFormField(
       controller: controller,
       maxLength: maxLength,
-      style: const TextStyle(color: AppColors.white),
+      style: TextStyle(color: AppColors.white),
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.surface,
@@ -236,16 +237,16 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
           color: AppColors.lightGrey,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide.none,
         ),
-        contentPadding: const EdgeInsets.symmetric(
+        contentPadding: EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 16,
         ),
         counterStyle: TextStyle(
           color: AppColors.tertiaryGrey,
-          fontSize: 12,
+          fontSize: 12.sp,
         ),
       ),
       validator: validator,
@@ -261,12 +262,12 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
               onTap: () => setState(() => _selectedGender = i),
               child: Container(
                 margin: EdgeInsets.only(right: i < 2 ? 12 : 0),
-                padding: const EdgeInsets.symmetric(vertical: 14),
+                padding: EdgeInsets.symmetric(vertical: 14),
                 decoration: BoxDecoration(
                   color: _selectedGender == i
                       ? _genderColors[i].withOpacity(0.15)
                       : AppColors.surface,
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(14.r),
                   border: Border.all(
                     color: _selectedGender == i
                         ? _genderColors[i]
@@ -283,7 +284,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                           ? _genderColors[i]
                           : AppColors.lightGrey,
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8.w),
                     Text(
                       _genderLabels[i],
                       style: TextStyle(
@@ -311,7 +312,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
       minLines: 5,
       keyboardType: TextInputType.multiline,
       textAlignVertical: TextAlignVertical.top,
-      style: const TextStyle(color: AppColors.white),
+      style: TextStyle(color: AppColors.white),
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.surface,
@@ -331,7 +332,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
           borderRadius: BorderRadius.zero,
           borderSide: BorderSide.none,
         ),
-        contentPadding: const EdgeInsets.all(16),
+        contentPadding: EdgeInsets.all(16.w),
       ),
     );
   }
@@ -340,24 +341,24 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       builder: (context) => SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(20.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              Text(
                 '更换头像',
                 style: TextStyle(
                   color: AppColors.white,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.w),
               _buildImagePickerOption(
                 icon: Icons.photo_library_outlined,
                 title: '从相册选择',
@@ -368,7 +369,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                   });
                 },
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.w),
               _buildImagePickerOption(
                 icon: Icons.camera_alt_outlined,
                 title: '拍照',
@@ -376,7 +377,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                   Navigator.pop(context);
                 },
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.w),
               _buildImagePickerOption(
                 icon: Icons.delete_outline,
                 title: '删除头像',
@@ -404,12 +405,12 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
           color: isDestructive
               ? AppColors.red.withOpacity(0.1)
               : Colors.white.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(14.r),
         ),
         child: Row(
           children: [
@@ -418,12 +419,12 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
               color: isDestructive ? AppColors.red : AppColors.primary,
               size: 24,
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16.w),
             Text(
               title,
               style: TextStyle(
                 color: isDestructive ? AppColors.red : AppColors.white,
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),

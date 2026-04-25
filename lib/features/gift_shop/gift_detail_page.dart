@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 礼物详情页 - 融合 E-commerce Product Detail + Dark Theme
@@ -103,7 +104,7 @@ class _GiftDetailPageState extends State<GiftDetailPage>
 
   Widget _buildAppBar() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -112,10 +113,10 @@ class _GiftDetailPageState extends State<GiftDetailPage>
             onPressed: () => context.pop(),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
               color: AppColors.surface,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.r),
             ),
             child: Row(
               children: [
@@ -124,7 +125,7 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                   color: Colors.amber,
                   size: 18,
                 ),
-                const SizedBox(width: 4),
+                SizedBox(width: 4.w),
                 Text(
                   '1250',
                   style: TextStyle(
@@ -154,11 +155,11 @@ class _GiftDetailPageState extends State<GiftDetailPage>
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 44,
-        height: 44,
+        width: 44.w,
+        height: 44.w,
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(14.r),
           border: Border.all(color: AppColors.border),
         ),
         child: Icon(icon, color: color, size: 20),
@@ -178,15 +179,15 @@ class _GiftDetailPageState extends State<GiftDetailPage>
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.45,
-        padding: const EdgeInsets.all(40),
+        padding: EdgeInsets.all(40.w),
         child: Center(
           child: Stack(
             alignment: Alignment.center,
             children: [
               // 背景光晕
               Container(
-                width: 280,
-                height: 280,
+                width: 280.w,
+                height: 280.w,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
                     colors: [
@@ -199,14 +200,14 @@ class _GiftDetailPageState extends State<GiftDetailPage>
               ),
               // 礼物图标
               Container(
-                width: 200,
-                height: 200,
+                width: 200.w,
+                height: 200.w,
                 decoration: BoxDecoration(
                   color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(40),
+                  borderRadius: BorderRadius.circular(40.r),
                   border: Border.all(
                     color: AppColors.primary.withValues(alpha: 0.3),
-                    width: 2,
+                    width: 2.w,
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -227,19 +228,19 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                 top: 20,
                 right: 20,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 12,
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
                     color: AppColors.pink,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Text(
                     'HOT',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -261,9 +262,9 @@ class _GiftDetailPageState extends State<GiftDetailPage>
         return Container(
           decoration: BoxDecoration(
             color: AppColors.surface,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(40),
-              topRight: Radius.circular(40),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40.r),
+              topRight: Radius.circular(40.r),
             ),
             boxShadow: [
               BoxShadow(
@@ -275,22 +276,22 @@ class _GiftDetailPageState extends State<GiftDetailPage>
           ),
           child: SingleChildScrollView(
             controller: scrollController,
-            padding: const EdgeInsets.fromLTRB(24, 20, 24, 100),
+            padding: EdgeInsets.fromLTRB(24, 20, 24, 100),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 拖动手柄
                 Center(
                   child: Container(
-                    width: 50,
-                    height: 5,
+                    width: 50.w,
+                    height: 5.w,
                     decoration: BoxDecoration(
                       color: AppColors.tertiaryGrey,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
 
                 // 标题和价格
                 Row(
@@ -302,18 +303,18 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                         children: [
                           Text(
                             giftData['name'],
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: AppColors.white,
-                              fontSize: 24,
+                              fontSize: 24.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8.w),
                           Text(
                             giftData['category'],
                             style: TextStyle(
                               color: AppColors.lightGrey,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                             ),
                           ),
                         ],
@@ -331,9 +332,9 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                             ),
                             Text(
                               '${giftData['price']}',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: AppColors.white,
-                                fontSize: 28,
+                                fontSize: 28.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -346,19 +347,19 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                               color: Colors.amber,
                               size: 16,
                             ),
-                            const SizedBox(width: 4),
+                            SizedBox(width: 4.w),
                             Text(
                               '${giftData['rating']}',
                               style: TextStyle(
                                 color: AppColors.lightGrey,
-                                fontSize: 14,
+                                fontSize: 14.sp,
                               ),
                             ),
                             Text(
                               ' (${giftData['reviews']})',
                               style: TextStyle(
                                 color: AppColors.tertiaryGrey,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                               ),
                             ),
                           ],
@@ -368,38 +369,38 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                   ],
                 ),
 
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
 
                 // 颜色选择
                 _buildColorSelector(),
 
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
 
                 // 数量选择
                 _buildQuantitySelector(),
 
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
 
                 // 描述
-                const Text(
+                Text(
                   '礼物描述',
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.w),
                 Text(
                   giftData['description'],
                   style: TextStyle(
                     color: AppColors.lightGrey,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     height: 1.6,
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.w),
 
                 // 底部按钮
                 _buildBottomButton(),
@@ -420,15 +421,15 @@ class _GiftDetailPageState extends State<GiftDetailPage>
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '选择颜色',
               style: TextStyle(
                 color: AppColors.white,
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12.w),
             Row(
               children: colors.map((color) {
                 final isSelected = selectedColor == color;
@@ -439,8 +440,8 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                     });
                   },
                   child: Container(
-                    margin: const EdgeInsets.only(right: 16),
-                    padding: const EdgeInsets.all(3),
+                    margin: EdgeInsets.only(right: 16),
+                    padding: EdgeInsets.all(3.w),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: isSelected
@@ -465,15 +466,15 @@ class _GiftDetailPageState extends State<GiftDetailPage>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           '数量',
           style: TextStyle(
             color: AppColors.white,
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.w600,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12.w),
         Row(
           children: [
             GestureDetector(
@@ -485,26 +486,26 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                 }
               },
               child: Container(
-                width: 40,
-                height: 40,
+                width: 40.w,
+                height: 40.w,
                 decoration: BoxDecoration(
                   color: AppColors.tertiaryGrey,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.remove,
                   color: AppColors.white,
                 ),
               ),
             ),
             Container(
-              width: 60,
+              width: 60.w,
               alignment: Alignment.center,
               child: Text(
                 '$quantity',
-                style: const TextStyle(
+                style: TextStyle(
                   color: AppColors.white,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -516,13 +517,13 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                 });
               },
               child: Container(
-                width: 40,
-                height: 40,
+                width: 40.w,
+                height: 40.w,
                 decoration: BoxDecoration(
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.add,
                   color: Colors.white,
                 ),
@@ -536,7 +537,7 @@ class _GiftDetailPageState extends State<GiftDetailPage>
 
   Widget _buildBottomButton() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         color: AppColors.surface,
         border: Border(
@@ -554,10 +555,10 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                   '总计',
                   style: TextStyle(
                     color: AppColors.lightGrey,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Row(
                   children: [
                     Icon(
@@ -567,9 +568,9 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                     ),
                     Text(
                       '${giftData['price'] * quantity}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: AppColors.white,
-                        fontSize: 28,
+                        fontSize: 28.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -590,12 +591,12 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                 );
               },
               child: Container(
-                height: 56,
+                height: 56.w,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     colors: [AppColors.primary, AppColors.accent],
                   ),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.primary.withValues(alpha: 0.4),
@@ -604,7 +605,7 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                     ),
                   ],
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
@@ -612,12 +613,12 @@ class _GiftDetailPageState extends State<GiftDetailPage>
                       color: Colors.white,
                       size: 24,
                     ),
-                    SizedBox(width: 8),
+                    SizedBox(width: 8.w),
                     Text(
                       '赠送礼物',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
