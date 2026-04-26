@@ -11,11 +11,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 /// 设置页面 - Dark Social 风格
-class ProfilePage extends ConsumerWidget {
+class ProfilePage extends ConsumerStatefulWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends ConsumerState<ProfilePage> {
+  bool _notificationsEnabled = true;
+  bool _locationEnabled = true;
+
+  @override
+  Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
     final user = authState.user;
 
@@ -82,21 +90,23 @@ class ProfilePage extends ConsumerWidget {
                   _MenuItem(
                     icon: Icons.notifications_outlined,
                     title: '消息通知',
-                    trailing: Switch(
-                      value: true,
-                      onChanged: (value) {},
+                    trailing: _CustomSwitch(
+                      value: _notificationsEnabled,
+                      activeColor: AppColors.primary,
+                      onChanged: (value) => setState(() => _notificationsEnabled = value),
                     ),
-                    onTap: () {},
+                    onTap: () => setState(() => _notificationsEnabled = !_notificationsEnabled),
                   ),
                   _MenuItem(
                     icon: Icons.location_on_outlined,
                     title: '位置服务',
                     subtitle: '开启位置发现附近的人',
-                    trailing: Switch(
-                      value: true,
-                      onChanged: (value) {},
+                    trailing: _CustomSwitch(
+                      value: _locationEnabled,
+                      activeColor: AppColors.primary,
+                      onChanged: (value) => setState(() => _locationEnabled = value),
                     ),
-                    onTap: () {},
+                    onTap: () => setState(() => _locationEnabled = !_locationEnabled),
                   ),
                   _MenuItem(
                     icon: Icons.visibility_outlined,
@@ -479,4 +489,55 @@ class _MenuItem {
     this.trailing,
     required this.onTap,
   });
+}
+
+/// 自定义开关组件
+class _CustomSwitch extends StatelessWidget {
+  final bool value;
+  final Color activeColor;
+  final ValueChanged<bool> onChanged;
+
+  const _CustomSwitch({
+    required this.value,
+    required this.activeColor,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onChanged(!value),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        width: 52.w,
+        height: 32.w,
+        decoration: BoxDecoration(
+          color: value ? activeColor : AppColors.surfaceVariant,
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+        child: AnimatedAlign(
+          duration: const Duration(milliseconds: 200),
+          alignment: value ? Alignment.centerRight : Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.all(3.w),
+            child: Container(
+              width: 26.w,
+              height: 26.w,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(13.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.2),
+                    blurRadius: 4,
+                    spreadRadius: 0,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
