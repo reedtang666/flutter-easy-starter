@@ -50,20 +50,20 @@ class ImagePickerUtils {
 
     switch (source) {
       case ImageSource.camera:
-        return await pickFromCamera();
+        return await pickFromCamera(context);
       case ImageSource.gallery:
-        return await pickFromGallery();
+        return await pickFromGallery(context);
       default:
         return null;
     }
   }
 
   /// 从相册选择单张图片
-  static Future<ImagePickResult?> pickFromGallery() async {
+  static Future<ImagePickResult?> pickFromGallery(BuildContext context) async {
     try {
       // 使用 wechat_assets_picker 获得更好的体验
       final assets = await AssetPicker.pickAssets(
-        rootNavigatorKey.currentContext!,
+        context,
         pickerConfig: const AssetPickerConfig(
           maxAssets: 1,
           requestType: RequestType.image,
@@ -88,12 +88,13 @@ class ImagePickerUtils {
   }
 
   /// 从相册选择多张图片
-  static Future<List<ImagePickResult>> pickMultipleImages({
+  static Future<List<ImagePickResult>> pickMultipleImages(
+    BuildContext context, {
     int maxAssets = 9,
   }) async {
     try {
       final assets = await AssetPicker.pickAssets(
-        rootNavigatorKey.currentContext!,
+        context,
         pickerConfig: AssetPickerConfig(
           maxAssets: maxAssets,
           requestType: RequestType.image,
@@ -123,11 +124,11 @@ class ImagePickerUtils {
   }
 
   /// 拍照
-  static Future<ImagePickResult?> pickFromCamera() async {
+  static Future<ImagePickResult?> pickFromCamera(BuildContext context) async {
     try {
       // 使用 wechat_camera_picker
       final asset = await CameraPicker.pickFromCamera(
-        rootNavigatorKey.currentContext!,
+        context,
         pickerConfig: const CameraPickerConfig(
           enableAudio: false,
           enableRecording: false,

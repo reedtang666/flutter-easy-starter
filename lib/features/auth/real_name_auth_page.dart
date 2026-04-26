@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
+import 'package:flutter_easy_starter/core/widgets/image_picker.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,6 +23,8 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
   final _nameController = TextEditingController();
   final _idController = TextEditingController();
   final _phoneController = TextEditingController();
+  File? _frontIdImage;
+  File? _backIdImage;
 
   @override
   void dispose() {
@@ -291,6 +295,7 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
                 child: _buildIdCardUpload(
                   title: '身份证正面',
                   icon: Icons.badge,
+                  isFront: true,
                 ),
               ),
               SizedBox(width: 16.w),
@@ -298,6 +303,7 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
                 child: _buildIdCardUpload(
                   title: '身份证反面',
                   icon: Icons.badge_outlined,
+                  isFront: false,
                 ),
               ),
             ],
@@ -330,51 +336,294 @@ class _RealNameAuthPageState extends State<RealNameAuthPage> {
     );
   }
 
-  Widget _buildIdCardUpload({required String title, required IconData icon}) {
+  Widget _buildIdCardUpload({
+    required String title,
+    required IconData icon,
+    required bool isFront,
+  }) {
+    final selectedImage = isFront ? _frontIdImage : _backIdImage;
+
     return GestureDetector(
-      onTap: () {
-        DialogUtils.showInfo(context, message: '相机功能开发中...');
-      },
+      onTap: () => _pickIdCardImage(isFront),
       child: Container(
         height: 180.w,
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(16.r),
-          border: Border.all(color: AppColors.tertiaryGrey),
+          border: Border.all(
+            color: selectedImage != null ? AppColors.primary : AppColors.tertiaryGrey,
+            width: selectedImage != null ? 2.w : 1.w,
+          ),
+          image: selectedImage != null
+              ? DecorationImage(
+                  image: FileImage(selectedImage),
+                  fit: BoxFit.cover,
+                )
+              : null,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 48,
-              color: AppColors.lightGrey,
+        child: selectedImage != null
+            ? _buildImageOverlay(title)
+            : _buildUploadPlaceholder(title, icon),
+      ),
+    );
+  }
+
+  Widget _buildUploadPlaceholder(String title, IconData icon) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          size: 48,
+          color: AppColors.lightGrey,
+        ),
+        SizedBox(height: 12.w),
+        Text(
+          title,
+          style: TextStyle(
+            color: AppColors.lightGrey,
+            fontSize: 14.sp,
+          ),
+        ),
+        SizedBox(height: 8.w),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 12.w,
+            vertical: 6.w,
+          ),
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          child: Text(
+            '点击上传',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 12.sp,
             ),
-            SizedBox(height: 12.w),
-            Text(
-              title,
-              style: TextStyle(
-                color: AppColors.lightGrey,
-                fontSize: 14.sp,
-              ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildImageOverlay(String title) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.r),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.transparent,
+            Colors.black.withValues(alpha: 0.7),
+          ],
+        ),
+      ),
+      padding: EdgeInsets.all(12.w),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
             ),
-            SizedBox(height: 8.w),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 6,
+          ),
+          SizedBox(height: 4.w),
+          Row(
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: AppColors.green,
+                size: 16,
               ),
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-              child: Text(
-                '点击上传',
+              SizedBox(width: 4.w),
+              Text(
+                '已上传',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.green,
                   fontSize: 12.sp,
                 ),
               ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _pickIdCardImage(bool isFront) async {
+    final title = isFront ? '身份证正面' : '身份证反面';
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+          ),
+          child: SafeArea(
+            top: false,
+            child: Padding(
+              padding: EdgeInsets.all(20.w),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // 拖动条
+                  Container(
+                    width: 40.w,
+                    height: 4.w,
+                    decoration: BoxDecoration(
+                      color: AppColors.tertiaryGrey,
+                      borderRadius: BorderRadius.circular(2.r),
+                    ),
+                  ),
+                  SizedBox(height: 20.w),
+                  Text(
+                    '上传$title',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 20.w),
+                  _buildOptionTile(
+                    icon: LucideIcons.camera,
+                    title: '拍照',
+                    subtitle: '使用相机拍摄$title',
+                    gradient: [const Color(0xFF5AC8FA), const Color(0xFF007AFF)],
+                    onTap: () async {
+                      Navigator.pop(context);
+                      final result = await ImagePickerUtils.pickFromCamera(context);
+                      if (result != null) {
+                        setState(() {
+                          if (isFront) {
+                            _frontIdImage = result.file;
+                          } else {
+                            _backIdImage = result.file;
+                          }
+                        });
+                      }
+                    },
+                  ),
+                  SizedBox(height: 12.w),
+                  _buildOptionTile(
+                    icon: LucideIcons.image_plus,
+                    title: '从相册选择',
+                    subtitle: '选择已有照片',
+                    gradient: [AppColors.primary, AppColors.primaryLight],
+                    onTap: () async {
+                      Navigator.pop(context);
+                      final result = await ImagePickerUtils.pickFromGallery(context);
+                      if (result != null) {
+                        setState(() {
+                          if (isFront) {
+                            _frontIdImage = result.file;
+                          } else {
+                            _backIdImage = result.file;
+                          }
+                        });
+                      }
+                    },
+                  ),
+                  SizedBox(height: 12.w),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: 16.w),
+                      decoration: BoxDecoration(
+                        color: AppColors.tertiaryGrey,
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Text(
+                        '取消',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildOptionTile({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required List<Color> gradient,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              gradient.first.withValues(alpha: 0.15),
+              gradient.last.withValues(alpha: 0.05),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(
+            color: gradient.first.withValues(alpha: 0.2),
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 48.w,
+              height: 48.w,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: gradient),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Icon(icon, color: Colors.white, size: 24),
+            ),
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 4.w),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: AppColors.lightGrey,
+                      fontSize: 13.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              LucideIcons.chevron_right,
+              color: gradient.first,
+              size: 20,
             ),
           ],
         ),

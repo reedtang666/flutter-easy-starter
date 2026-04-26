@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
 import 'package:flutter_easy_starter/core/widgets/animated_button.dart';
+import 'package:flutter_easy_starter/core/widgets/image_picker.dart';
 import 'package:flutter_easy_starter/core/widgets/shimmer_widgets.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -866,7 +868,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
                     gradient: [const Color(0xFF5AC8FA), const Color(0xFF007AFF)],
                     onTap: () {
                       Navigator.pop(context);
-                      DialogUtils.showInfo(context, message: '相机功能开发中...');
+                      _pickImageFromCamera();
                     },
                   ),
                   SizedBox(height: 12.w),
@@ -877,7 +879,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
                     gradient: [AppColors.primary, AppColors.primaryLight],
                     onTap: () {
                       Navigator.pop(context);
-                      DialogUtils.showInfo(context, message: '相册功能开发中...');
+                      _pickImageFromGallery();
                     },
                   ),
                   SizedBox(height: 12.w),
@@ -1294,6 +1296,34 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
         ],
       ),
     );
+  }
+
+  Future<void> _pickImageFromCamera() async {
+    final result = await ImagePickerUtils.pickFromCamera(context);
+    if (result != null) {
+      _addPhotoFromFile(result.file);
+    }
+  }
+
+  Future<void> _pickImageFromGallery() async {
+    final result = await ImagePickerUtils.pickFromGallery(context);
+    if (result != null) {
+      _addPhotoFromFile(result.file);
+    }
+  }
+
+  void _addPhotoFromFile(File file) {
+    setState(() {
+      _photos.insert(
+        0,
+        PhotoItem(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          date: DateTime.now(),
+          likes: 0,
+        ),
+      );
+    });
+    DialogUtils.showSuccess(context, message: '照片添加成功');
   }
 
   String _formatDate(DateTime date) {

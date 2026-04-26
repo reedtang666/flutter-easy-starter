@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_easy_starter/core/widgets/image_picker.dart';
 import 'package:flutter_easy_starter/models/user_model.dart';
 import 'package:flutter_easy_starter/providers/auth_provider.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -146,12 +149,19 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                                   height: 120.w,
                                   fit: BoxFit.cover,
                                 )
-                              : Image.asset(
-                                  _avatar!,
-                                  width: 120.w,
-                                  height: 120.w,
-                                  fit: BoxFit.cover,
-                                ),
+                              : (_avatar!.startsWith('assets')
+                                  ? Image.asset(
+                                      _avatar!,
+                                      width: 120.w,
+                                      height: 120.w,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.file(
+                                      File(_avatar!),
+                                      width: 120.w,
+                                      height: 120.w,
+                                      fit: BoxFit.cover,
+                                    )),
                         )
                       : ClipOval(
                           child: Image.asset(
@@ -340,93 +350,177 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
   void _showImagePicker() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
-      ),
-      builder: (context) => SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20.w),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '更换头像',
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              SizedBox(height: 20.w),
-              _buildImagePickerOption(
-                icon: Icons.photo_library_outlined,
-                title: '从相册选择',
-                onTap: () {
-                  Navigator.pop(context);
-                  setState(() {
-                    _avatar = 'https://via.placeholder.com/150';
-                  });
-                },
-              ),
-              SizedBox(height: 12.w),
-              _buildImagePickerOption(
-                icon: Icons.camera_alt_outlined,
-                title: '拍照',
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              SizedBox(height: 12.w),
-              _buildImagePickerOption(
-                icon: Icons.delete_outline,
-                title: '删除头像',
-                isDestructive: true,
-                onTap: () {
-                  Navigator.pop(context);
-                  setState(() {
-                    _avatar = null;
-                  });
-                },
-              ),
-            ],
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
           ),
-        ),
-      ),
+          child: SafeArea(
+            top: false,
+            child: Padding(
+              padding: EdgeInsets.all(20.w),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // 拖动条
+                  Container(
+                    width: 40.w,
+                    height: 4.w,
+                    decoration: BoxDecoration(
+                      color: AppColors.tertiaryGrey,
+                      borderRadius: BorderRadius.circular(2.r),
+                    ),
+                  ),
+                  SizedBox(height: 20.w),
+                  Text(
+                    '更换头像',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 20.w),
+                  _buildOptionTile(
+                    icon: LucideIcons.camera,
+                    title: '拍照',
+                    subtitle: '使用相机拍摄新头像',
+                    gradient: [const Color(0xFF5AC8FA), const Color(0xFF007AFF)],
+                    onTap: () async {
+                      Navigator.pop(context);
+                      final result = await ImagePickerUtils.pickFromCamera(context);
+                      if (result != null) {
+                        setState(() {
+                          _avatar = result.path;
+                        });
+                      }
+                    },
+                  ),
+                  SizedBox(height: 12.w),
+                  _buildOptionTile(
+                    icon: LucideIcons.image_plus,
+                    title: '从相册选择',
+                    subtitle: '选择已有照片',
+                    gradient: [AppColors.primary, AppColors.primaryLight],
+                    onTap: () async {
+                      Navigator.pop(context);
+                      final result = await ImagePickerUtils.pickFromGallery(context);
+                      if (result != null) {
+                        setState(() {
+                          _avatar = result.path;
+                        });
+                      }
+                    },
+                  ),
+                  if (_avatar != null) ...[
+                    SizedBox(height: 12.w),
+                    _buildOptionTile(
+                      icon: LucideIcons.trash_2,
+                      title: '删除头像',
+                      subtitle: '恢复默认头像',
+                      gradient: [AppColors.red, const Color(0xFFFF453A)],
+                      onTap: () {
+                        Navigator.pop(context);
+                        setState(() {
+                          _avatar = null;
+                        });
+                      },
+                    ),
+                  ],
+                  SizedBox(height: 12.w),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: 16.w),
+                      decoration: BoxDecoration(
+                        color: AppColors.tertiaryGrey,
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Text(
+                        '取消',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildImagePickerOption({
+  Widget _buildOptionTile({
     required IconData icon,
     required String title,
+    required String subtitle,
+    required List<Color> gradient,
     required VoidCallback onTap,
-    bool isDestructive = false,
   }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-          color: isDestructive
-              ? AppColors.red.withValues(alpha: 0.1)
-              : Colors.white.withValues(alpha: 0.05),
-          borderRadius: BorderRadius.circular(14.r),
+          gradient: LinearGradient(
+            colors: [
+              gradient.first.withValues(alpha: 0.15),
+              gradient.last.withValues(alpha: 0.05),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(
+            color: gradient.first.withValues(alpha: 0.2),
+          ),
         ),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: isDestructive ? AppColors.red : AppColors.primary,
-              size: 24,
+            Container(
+              width: 48.w,
+              height: 48.w,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: gradient),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Icon(icon, color: Colors.white, size: 24),
             ),
             SizedBox(width: 16.w),
-            Text(
-              title,
-              style: TextStyle(
-                color: isDestructive ? AppColors.red : AppColors.white,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 4.w),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: AppColors.lightGrey,
+                      fontSize: 13.sp,
+                    ),
+                  ),
+                ],
               ),
+            ),
+            Icon(
+              LucideIcons.chevron_right,
+              color: gradient.first,
+              size: 20,
             ),
           ],
         ),

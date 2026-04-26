@@ -4,6 +4,7 @@ import 'package:flutter_easy_starter/core/theme/app_theme.dart';
 import 'package:flutter_easy_starter/core/router/app_router.dart';
 import 'package:flutter_easy_starter/core/services/http_service.dart';
 import 'package:flutter_easy_starter/core/services/storage_service.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -39,11 +40,15 @@ class EasyStarterApp extends ConsumerWidget {
             Locale('en', 'US'),
           ],
           builder: (context, child) {
-            return MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                textScaler: const TextScaler.linear(1.0),
+            // 初始化 EasyLoading 并包装 child
+            return EasyLoading.init()(
+              context,
+              MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: const TextScaler.linear(1.0),
+                ),
+                child: child!,
               ),
-              child: child!,
             );
           },
         );
