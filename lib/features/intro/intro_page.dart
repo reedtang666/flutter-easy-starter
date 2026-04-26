@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/widgets/animated_button.dart';
+import 'package:flutter_easy_starter/core/widgets/dialogs/dialogs.dart';
 import 'package:flutter_easy_starter/core/widgets/shimmer_widgets.dart';
 import 'package:flutter_easy_starter/features/main/main_page.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
@@ -145,6 +146,15 @@ class _IntroPageState extends State<IntroPage>
             title: '快速体验',
             subtitle: '点击下方卡片跳转对应页面',
             child: _buildDemoContent(),
+          ),
+        ),
+
+        // 弹窗演示区块
+        SliverToBoxAdapter(
+          child: _buildSection(
+            title: '弹窗组件',
+            subtitle: '各种场景的弹窗交互演示',
+            child: _buildDialogDemos(),
           ),
         ),
 
@@ -1033,6 +1043,295 @@ class _IntroPageState extends State<IntroPage>
     );
   }
 
+  // 弹窗演示区域
+  Widget _buildDialogDemos() {
+    final dialogs = [
+      _DialogDemoItem(
+        icon: LucideIcons.message_circle,
+        title: '确认弹窗',
+        desc: '确认、取消操作',
+        color: const Color(0xFF5856D6),
+        onTap: (context) => _showConfirmDemo(context),
+      ),
+      _DialogDemoItem(
+        icon: LucideIcons.menu,
+        title: '底部菜单',
+        desc: '操作列表选择',
+        color: const Color(0xFF0A84FF),
+        onTap: (context) => _showBottomSheetDemo(context),
+      ),
+      _DialogDemoItem(
+        icon: LucideIcons.pencil,
+        title: '输入弹窗',
+        desc: '表单输入交互',
+        color: const Color(0xFFFF9F0A),
+        onTap: (context) => _showInputDemo(context),
+      ),
+      _DialogDemoItem(
+        icon: LucideIcons.list,
+        title: '选择弹窗',
+        desc: '单选列表项',
+        color: const Color(0xFF30D158),
+        onTap: (context) => _showSelectionDemo(context),
+      ),
+      _DialogDemoItem(
+        icon: LucideIcons.bell,
+        title: '通知弹窗',
+        desc: '系统消息通知',
+        color: const Color(0xFFFF375F),
+        onTap: (context) => _showNotificationDemo(context),
+      ),
+      _DialogDemoItem(
+        icon: LucideIcons.message_circle,
+        title: 'Toast 提示',
+        desc: '轻量级反馈',
+        color: const Color(0xFF64D2FF),
+        onTap: (context) => _showToastDemo(context),
+      ),
+    ];
+
+    return Column(
+      children: dialogs.map((dialog) => _buildDialogCard(dialog)).toList(),
+    );
+  }
+
+  Widget _buildDialogCard(_DialogDemoItem dialog) {
+    return AnimatedButton(
+      onTap: () => dialog.onTap(context),
+      scaleDown: 0.97,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10.w),
+        padding: EdgeInsets.all(14.w),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              AppColors.surface,
+              AppColors.surfaceVariant.withValues(alpha: 0.2),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(14.r),
+          border: Border.all(
+            color: AppColors.white.withValues(alpha: 0.05),
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 44.w,
+              height: 44.w,
+              decoration: BoxDecoration(
+                color: dialog.color.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Icon(
+                dialog.icon,
+                color: dialog.color,
+                size: 22,
+              ),
+            ),
+            SizedBox(width: 14.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    dialog.title,
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 2.w),
+                  Text(
+                    dialog.desc,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: AppColors.lightGrey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.w),
+              decoration: BoxDecoration(
+                color: dialog.color.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+              child: Text(
+                '试试',
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                  color: dialog.color,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // 确认弹窗演示
+  Future<void> _showConfirmDemo(BuildContext context) async {
+    final result = await AppDialogs.showConfirm(
+      context: context,
+      title: '确认删除?',
+      content: '删除后将无法恢复，是否继续?',
+      confirmText: '删除',
+      cancelText: '取消',
+      isDanger: true,
+    );
+    if (result == true && context.mounted) {
+      AppDialogs.showSuccess(context: context, message: '已删除');
+    }
+  }
+
+  // 底部菜单演示
+  Future<void> _showBottomSheetDemo(BuildContext context) async {
+    final result = await AppDialogs.showBottomSheet<String>(
+      context: context,
+      title: '选择操作',
+      actions: [
+        const BottomSheetAction(
+          label: '分享给好友',
+          value: 'share',
+          icon: LucideIcons.share_2,
+        ),
+        const BottomSheetAction(
+          label: '收藏内容',
+          value: 'favorite',
+          icon: LucideIcons.heart,
+        ),
+        const BottomSheetAction(
+          label: '举报违规',
+          value: 'report',
+          icon: LucideIcons.flag,
+          iconColor: AppColors.orange,
+        ),
+        const BottomSheetAction(
+          label: '删除项目',
+          value: 'delete',
+          icon: LucideIcons.trash_2,
+          isDestructive: true,
+          isBold: true,
+        ),
+      ],
+    );
+    if (result != null && context.mounted) {
+      AppDialogs.showInfo(context: context, message: '选择了: $result');
+    }
+  }
+
+  // 输入弹窗演示
+  Future<void> _showInputDemo(BuildContext context) async {
+    final result = await AppDialogs.showInput(
+      context: context,
+      title: '修改昵称',
+      hint: '请输入新的昵称',
+      initialValue: '当前昵称',
+      confirmText: '保存',
+      validator: (v) {
+        if (v?.trim().isEmpty == true) return '昵称不能为空';
+        if (v!.length > 20) return '昵称最多20个字符';
+        return null;
+      },
+    );
+    if (result != null && context.mounted) {
+      AppDialogs.showSuccess(context: context, message: '昵称已更新为: $result');
+    }
+  }
+
+  // 选择弹窗演示
+  Future<void> _showSelectionDemo(BuildContext context) async {
+    final languages = [
+      const SelectionItem(label: '简体中文', value: 'zh', icon: LucideIcons.globe),
+      const SelectionItem(label: 'English', value: 'en', icon: LucideIcons.globe),
+      const SelectionItem(label: '日本語', value: 'ja', icon: LucideIcons.globe),
+      const SelectionItem(label: '한국어', value: 'ko', icon: LucideIcons.globe),
+    ];
+
+    final result = await AppDialogs.showSelection<String>(
+      context: context,
+      title: '选择语言',
+      items: languages,
+      selectedValue: 'zh',
+    );
+    if (result != null && context.mounted) {
+      final selected = languages.firstWhere((l) => l.value == result);
+      AppDialogs.showSuccess(context: context, message: '已切换到: ${selected.label}');
+    }
+  }
+
+  // 通知弹窗演示
+  Future<void> _showNotificationDemo(BuildContext context) async {
+    await AppDialogs.showNotification(
+      context: context,
+      title: '系统更新',
+      content: '发现新版本 v2.0，包含多项功能优化和问题修复，建议立即更新。',
+      icon: LucideIcons.download,
+      iconColor: AppColors.blue,
+      actionText: '立即更新',
+      onAction: () {
+        AppDialogs.showLoading(context: context, message: '下载更新中...');
+        Future.delayed(const Duration(seconds: 2), () {
+          AppDialogs.hide(context);
+          AppDialogs.showSuccess(context: context, message: '更新完成!');
+        });
+      },
+    );
+  }
+
+  // Toast 提示演示
+  void _showToastDemo(BuildContext context) {
+    AppDialogs.showBottomSheet<String>(
+      context: context,
+      title: '选择提示类型',
+      actions: [
+        BottomSheetAction(
+          label: '成功提示',
+          value: 'success',
+          icon: LucideIcons.circle_check,
+          iconColor: AppColors.green,
+        ),
+        BottomSheetAction(
+          label: '错误提示',
+          value: 'error',
+          icon: LucideIcons.circle_x,
+          iconColor: AppColors.red,
+        ),
+        BottomSheetAction(
+          label: '警告提示',
+          value: 'warning',
+          icon: LucideIcons.triangle_alert,
+          iconColor: AppColors.orange,
+        ),
+        BottomSheetAction(
+          label: '信息提示',
+          value: 'info',
+          icon: LucideIcons.info,
+          iconColor: AppColors.blue,
+        ),
+      ],
+    ).then((type) {
+      if (!context.mounted) return;
+      switch (type) {
+        case 'success':
+          AppDialogs.showSuccess(context: context, message: '操作成功完成!');
+        case 'error':
+          AppDialogs.showError(context: context, message: '网络连接失败，请重试');
+        case 'warning':
+          AppDialogs.showWarning(context: context, message: '注意: 此操作不可撤销');
+        case 'info':
+          AppDialogs.showInfo(context: context, message: '您有一条新消息');
+      }
+    });
+  }
+
   // 底部说明区域
   Widget _buildFooterSection() {
     return Container(
@@ -1142,5 +1441,21 @@ class _DemoItem {
     required this.title,
     required this.desc,
     required this.gradient,
+  });
+}
+
+class _DialogDemoItem {
+  final IconData icon;
+  final String title;
+  final String desc;
+  final Color color;
+  final void Function(BuildContext context) onTap;
+
+  _DialogDemoItem({
+    required this.icon,
+    required this.title,
+    required this.desc,
+    required this.color,
+    required this.onTap,
   });
 }
