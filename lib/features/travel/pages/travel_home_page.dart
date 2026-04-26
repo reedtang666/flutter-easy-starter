@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/router/app_router.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_easy_starter/core/widgets/animated_button.dart';
 import 'package:flutter_easy_starter/features/travel/pages/travel_destination_details_page.dart';
 import 'package:flutter_easy_starter/features/travel/widgets/activity_tile_list_view_widget.dart';
-import 'package:flutter_easy_starter/features/travel/widgets/s_custom_painter.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TravelHomePage extends StatefulWidget {
@@ -22,64 +23,28 @@ class _TravelHomePageState extends State<TravelHomePage> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: ListView(
-        padding: EdgeInsets.only(top: 20, bottom: 30),
+        padding: EdgeInsets.only(top: 42.w, bottom: 24.w),
         children: [
           // 顶部欢迎语
           Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   '你好，开发者 👋',
                   style: TextStyle(
-                    fontSize: 24.sp,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: -1,
                     color: AppColors.white,
                   ),
                 ),
-                SizedBox(height: 8.w),
+                SizedBox(height: 6.w),
                 Text(
                   '探索世界各地的精彩旅程',
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 14.sp,
                     color: AppColors.lightGrey,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 24.w),
-
-          // 活动分类
-          const ActivityTileListView(),
-          SizedBox(height: 30.w),
-
-          // 热门目的地标题
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '热门目的地',
-                  style: TextStyle(
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    AppRouter.pushNamed(RouteNames.allDestinations);
-                  },
-                  child: Text(
-                    '查看全部',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: AppColors.primary,
-                    ),
                   ),
                 ),
               ],
@@ -87,9 +52,46 @@ class _TravelHomePageState extends State<TravelHomePage> {
           ),
           SizedBox(height: 20.w),
 
+          // 活动分类
+          const ActivityTileListView(),
+          SizedBox(height: 24.w),
+
+          // 热门目的地标题
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '热门目的地',
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.white,
+                  ),
+                ),
+                AnimatedButton(
+                  onTap: () {
+                    AppRouter.pushNamed(RouteNames.allDestinations);
+                  },
+                  scaleDown: 0.95,
+                  child: Text(
+                    '查看全部',
+                    style: TextStyle(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 16.w),
+
           // 目的地列表
           for (int index = 0; index < 10; index++)
-            GestureDetector(
+            AnimatedButton(
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -99,20 +101,24 @@ class _TravelHomePageState extends State<TravelHomePage> {
                   ),
                 );
               },
+              scaleDown: 0.97,
+              enableHaptic: true,
               child: Container(
-                height: 380.w,
+                height: 320.w,
                 margin: EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 10),
+                  horizontal: 20.w,
+                  vertical: 8.w,
+                ),
                 child: Stack(
                   children: [
                     // 主卡片
                     Positioned.fill(
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(32.r),
+                          borderRadius: BorderRadius.circular(24.r),
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(32.r),
+                          borderRadius: BorderRadius.circular(24.r),
                           child: Stack(
                             children: [
                               // 背景图片
@@ -131,15 +137,15 @@ class _TravelHomePageState extends State<TravelHomePage> {
                                 left: 0,
                                 right: 0,
                                 child: Container(
-                                  height: 180.w,
+                                  height: 140.w,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       begin: Alignment.topCenter,
                                       end: Alignment.bottomCenter,
                                       colors: [
-                                        Colors.black.withOpacity(0),
-                                        Colors.black.withOpacity(0.5),
-                                        Colors.black.withOpacity(0.85),
+                                        Colors.black.withValues(alpha: 0),
+                                        Colors.black.withValues(alpha: 0.5),
+                                        Colors.black.withValues(alpha: 0.85),
                                       ],
                                     ),
                                   ),
@@ -147,26 +153,27 @@ class _TravelHomePageState extends State<TravelHomePage> {
                               ),
                               // 评分标签
                               Positioned(
-                                top: 16,
-                                right: 16,
+                                top: 12.w,
+                                right: 12.w,
                                 child: Container(
-                                  height: 32.w,
-                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  height: 28.w,
+                                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16.r),
+                                    borderRadius: BorderRadius.circular(14.r),
                                   ),
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.star,
+                                        LucideIcons.star,
                                         color: AppColors.yellow,
-                                        size: 16,
+                                        size: 14,
                                       ),
                                       SizedBox(width: 4.w),
                                       Text(
                                         '4.${Random.secure().nextInt(8) + 1}',
-                                        style: TextStyle(fontSize: 14.sp,
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
                                         ),
@@ -177,9 +184,9 @@ class _TravelHomePageState extends State<TravelHomePage> {
                               ),
                               // 底部信息
                               Positioned(
-                                left: 24,
-                                right: 100,
-                                bottom: 24,
+                                left: 16.w,
+                                right: 80.w,
+                                bottom: 16.w,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -187,99 +194,48 @@ class _TravelHomePageState extends State<TravelHomePage> {
                                       _getDestinationName(index),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 28.sp,
+                                      style: TextStyle(
+                                        fontSize: 22.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         height: 1.2,
                                       ),
                                     ),
-                                    SizedBox(height: 12.w),
+                                    SizedBox(height: 8.w),
                                     _buildDayAndPrice(),
-                                    SizedBox(height: 12.w),
+                                    SizedBox(height: 8.w),
                                     // 参与者头像
-                                    SizedBox(
-                                      height: 36.w,
-                                      child: Row(
-                                        children: [
-                                          for (int i = 0; i < 3; i++)
-                                            Container(
-                                              width: 36.w,
-                                              height: 36.w,
-                                              margin: EdgeInsets.only(right: 8),
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(18.r),
-                                                border: Border.all(
-                                                  color: Colors.white.withOpacity(0.5),
-                                                  width: 2.w,
-                                                ),
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(18.r),
-                                                child: Image.asset(
-                                                  'assets/images/travel/profile/profile_${(i % 6) + 1}.jpeg',
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          Container(
-                                            width: 36.w,
-                                            height: 36.w,
-                                            decoration: BoxDecoration(
-                                              color: AppColors.surface,
-                                              borderRadius: BorderRadius.circular(18.r),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                '+4',
-                                                style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                    _buildParticipants(),
+                                  ],
+                                ),
+                              ),
+                              // 收藏按钮
+                              Positioned(
+                                right: 16.w,
+                                bottom: 16.w,
+                                child: AnimatedButton(
+                                  onTap: () {},
+                                  scaleDown: 0.85,
+                                  child: Container(
+                                    width: 44.w,
+                                    height: 44.w,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.white.withValues(alpha: 0.2),
+                                      borderRadius: BorderRadius.circular(12.r),
+                                      border: Border.all(
+                                        color: AppColors.white.withValues(alpha: 0.3),
                                       ),
                                     ),
-                                  ],
+                                    child: Icon(
+                                      LucideIcons.heart,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                    ),
-                    // 右下角弧形装饰和按钮
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        width: 90.w,
-                        height: 90.w,
-                        decoration: BoxDecoration(
-                          color: AppColors.background,
-                          borderRadius:
-                              BorderRadius.only(
-                                  topLeft: Radius.circular(50.r)),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: Container(
-                        width: 70.w,
-                        height: 70.w,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(35.r),
-                        ),
-                        child: Icon(
-                          Icons.arrow_forward,
-                          size: 28,
-                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -293,28 +249,101 @@ class _TravelHomePageState extends State<TravelHomePage> {
   }
 
   Widget _buildDayAndPrice() {
-    final days = Random.secure().nextInt(4) + 1;
-    return Text(
-      '$days 天 • ${days * (Random.secure().nextInt(10) + 14)}€',
-      style: TextStyle(fontSize: 18.sp,
-        fontWeight: FontWeight.w600,
-        color: Colors.white,
-      ),
+    return Row(
+      children: [
+        Icon(
+          LucideIcons.calendar,
+          color: AppColors.white.withValues(alpha: 0.8),
+          size: 14,
+        ),
+        SizedBox(width: 6.w),
+        Text(
+          '${Random.secure().nextInt(5) + 3} 天',
+          style: TextStyle(
+            fontSize: 13.sp,
+            color: AppColors.white.withValues(alpha: 0.8),
+          ),
+        ),
+        SizedBox(width: 12.w),
+        Container(
+          width: 4.w,
+          height: 4.w,
+          decoration: BoxDecoration(
+            color: AppColors.white.withValues(alpha: 0.5),
+            shape: BoxShape.circle,
+          ),
+        ),
+        SizedBox(width: 12.w),
+        Text(
+          '¥${(Random.secure().nextInt(20) + 5) * 100}',
+          style: TextStyle(
+            fontSize: 13.sp,
+            fontWeight: FontWeight.bold,
+            color: AppColors.white,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildParticipants() {
+    return Row(
+      children: [
+        // 头像堆叠
+        SizedBox(
+          width: 60.w,
+          height: 24.w,
+          child: Stack(
+            children: [
+              for (int i = 0; i < 3; i++)
+                Positioned(
+                  left: i * 16.w,
+                  child: Container(
+                    width: 24.w,
+                    height: 24.w,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2.w,
+                      ),
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.r),
+                      child: Image.asset(
+                        'assets/images/travel/profile/profile_${(i % 6) + 1}.jpeg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+        SizedBox(width: 8.w),
+        Text(
+          '${Random.secure().nextInt(50) + 10} 人已参加',
+          style: TextStyle(
+            fontSize: 12.sp,
+            color: AppColors.white.withValues(alpha: 0.7),
+          ),
+        ),
+      ],
     );
   }
 
   String _getDestinationName(int index) {
     final names = [
-      '塞拉多艾拉',
-      '马德拉群岛',
-      '里斯本老城',
-      '辛特拉宫',
-      '阿尔加维海滩',
-      '波尔图酒庄',
-      '阿威罗水城',
-      '埃武拉古城',
-      '科英布拉大学',
-      '布拉加大教堂',
+      '马尔代夫蓝色天堂',
+      '瑞士阿尔卑斯山',
+      '日本京都古韵',
+      '希腊圣托里尼',
+      '新西兰南岛探险',
+      '冰岛极光之旅',
+      '巴厘岛热带天堂',
+      '挪威峡湾巡游',
+      '摩洛哥撒哈拉',
+      '秘鲁马丘比丘',
     ];
     return names[index % names.length];
   }

@@ -192,19 +192,19 @@ class _AnimatedGlowCardState extends State<AnimatedGlowCard> {
           curve: Curves.easeInOut,
           decoration: BoxDecoration(
             color: widget.isSelected
-                ? widget.glowColor.withOpacity(0.15)
+                ? widget.glowColor.withValues(alpha: 0.15)
                 : AppColors.surface,
             borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
               color: showGlow
                   ? widget.glowColor
-                  : Colors.white.withOpacity(0.05),
+                  : Colors.white.withValues(alpha: 0.05),
               width: showGlow ? 2.w : 1.w,
             ),
             boxShadow: showGlow
                 ? [
                     BoxShadow(
-                      color: widget.glowColor.withOpacity(
+                      color: widget.glowColor.withValues(alpha: 
                           widget.isSelected ? widget.glowIntensity : 0.2),
                       blurRadius: widget.isSelected ? 16 : 8,
                       spreadRadius: widget.isSelected ? 2 : 0,

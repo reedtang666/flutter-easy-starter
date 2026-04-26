@@ -83,7 +83,7 @@ class _LandingPageState extends State<LandingPage> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.primary.withOpacity(0.2),
+                    AppColors.primary.withValues(alpha: 0.2),
                     AppColors.background,
                     AppColors.background,
                   ],
@@ -103,7 +103,7 @@ class _LandingPageState extends State<LandingPage> {
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppColors.primary.withOpacity(0.3),
+                    AppColors.primary.withValues(alpha: 0.3),
                     Colors.transparent,
                   ],
                 ),
@@ -128,13 +128,13 @@ class _LandingPageState extends State<LandingPage> {
                         gradient: LinearGradient(
                           colors: [
                             AppColors.primary,
-                            AppColors.primary.withOpacity(0.7),
+                            AppColors.primary.withValues(alpha: 0.7),
                           ],
                         ),
                         borderRadius: BorderRadius.circular(28.r),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withOpacity(0.4),
+                            color: AppColors.primary.withValues(alpha: 0.4),
                             blurRadius: 30,
                             spreadRadius: 5,
                           ),
@@ -203,13 +203,13 @@ class _LandingPageState extends State<LandingPage> {
                           gradient: LinearGradient(
                             colors: [
                               AppColors.primary,
-                              AppColors.primary.withOpacity(0.85),
+                              AppColors.primary.withValues(alpha: 0.85),
                             ],
                           ),
                           borderRadius: BorderRadius.circular(16.r),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.4),
+                              color: AppColors.primary.withValues(alpha: 0.4),
                               blurRadius: 20,
                               spreadRadius: 2,
                             ),
@@ -245,7 +245,7 @@ class _LandingPageState extends State<LandingPage> {
                     Text(
                       '基于本框架，快速构建你的 Flutter 应用',
                       style: TextStyle(
-                        color: AppColors.lightGrey.withOpacity(0.8),
+                        color: AppColors.lightGrey.withValues(alpha: 0.8),
                         fontSize: 13.sp,
                       ),
                     ),
@@ -268,7 +268,7 @@ class _LandingPageState extends State<LandingPage> {
           width: 80.w,
           height: 80.w,
           decoration: BoxDecoration(
-            color: item.color.withOpacity(0.15),
+            color: item.color.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(24.r),
           ),
           child: Icon(

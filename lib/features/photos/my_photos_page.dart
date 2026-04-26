@@ -161,11 +161,11 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
               decoration: BoxDecoration(
                 color: _isEditMode
-                    ? AppColors.primary.withOpacity(0.2)
+                    ? AppColors.primary.withValues(alpha: 0.2)
                     : AppColors.surface,
                 borderRadius: BorderRadius.circular(8.r),
                 border: _isEditMode
-                    ? Border.all(color: AppColors.primary.withOpacity(0.3))
+                    ? Border.all(color: AppColors.primary.withValues(alpha: 0.3))
                     : null,
               ),
               child: Text(
@@ -350,12 +350,12 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
               end: Alignment.bottomRight,
               colors: [
                 AppColors.surface,
-                AppColors.surfaceVariant.withOpacity(0.5),
+                AppColors.surfaceVariant.withValues(alpha: 0.5),
               ],
             ),
             borderRadius: BorderRadius.circular(16.r),
             border: Border.all(
-              color: AppColors.white.withOpacity(0.05),
+              color: AppColors.white.withValues(alpha: 0.05),
             ),
           ),
           child: Column(
@@ -363,7 +363,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
               Container(
                 padding: EdgeInsets.all(10.w),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.15),
+                  color: AppColors.primary.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Icon(
@@ -407,17 +407,17 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              AppColors.primary.withOpacity(0.15),
+              AppColors.primary.withValues(alpha: 0.15),
               AppColors.surface,
             ],
           ),
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
-            color: AppColors.primary.withOpacity(0.2),
+            color: AppColors.primary.withValues(alpha: 0.2),
           ),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               blurRadius: 20,
               spreadRadius: 0,
             ),
@@ -508,7 +508,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
           border: Border.all(
             color: isSelected
                 ? AppColors.primary
-                : AppColors.white.withOpacity(0.05),
+                : AppColors.white.withValues(alpha: 0.05),
             width: isSelected ? 2.w : 1.w,
           ),
           boxShadow: isSelected
@@ -606,7 +606,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
                     vertical: 4.w,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.6),
+                    color: Colors.black.withValues(alpha: 0.6),
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Row(
@@ -633,7 +633,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
             // 编辑模式遮罩
             if (_isEditMode && !isSelected)
               Container(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
               ),
           ],
         ),
@@ -653,12 +653,12 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
             gradient: LinearGradient(
               colors: [
                 AppColors.surface,
-                AppColors.surfaceVariant.withOpacity(0.3),
+                AppColors.surfaceVariant.withValues(alpha: 0.3),
               ],
             ),
             borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
-              color: AppColors.white.withOpacity(0.05),
+              color: AppColors.white.withValues(alpha: 0.05),
             ),
           ),
           child: Row(
@@ -666,7 +666,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
               Container(
                 padding: EdgeInsets.all(10.w),
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.15),
+                  color: AppColors.primary.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: Icon(
@@ -700,7 +700,7 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
         border: Border(
           top: BorderSide(
-            color: AppColors.white.withOpacity(0.05),
+            color: AppColors.white.withValues(alpha: 0.05),
           ),
         ),
       ),
@@ -733,10 +733,10 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 14.w),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.2),
+                        color: AppColors.primary.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(
-                          color: AppColors.primary.withOpacity(0.3),
+                          color: AppColors.primary.withValues(alpha: 0.3),
                         ),
                       ),
                       child: Row(
@@ -787,10 +787,10 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 14.w),
                       decoration: BoxDecoration(
-                        color: AppColors.red.withOpacity(0.2),
+                        color: AppColors.red.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(
-                          color: AppColors.red.withOpacity(0.3),
+                          color: AppColors.red.withValues(alpha: 0.3),
                         ),
                       ),
                       child: Row(
@@ -924,13 +924,13 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              gradient.first.withOpacity(0.15),
-              gradient.last.withOpacity(0.05),
+              gradient.first.withValues(alpha: 0.15),
+              gradient.last.withValues(alpha: 0.05),
             ],
           ),
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
-            color: gradient.first.withOpacity(0.2),
+            color: gradient.first.withValues(alpha: 0.2),
           ),
         ),
         child: Row(
@@ -1090,16 +1090,16 @@ class _MyPhotosPageState extends State<MyPhotosPage> {
               ? null
               : LinearGradient(
                   colors: [
-                    gradient.first.withOpacity(0.15),
-                    gradient.last.withOpacity(0.05),
+                    gradient.first.withValues(alpha: 0.15),
+                    gradient.last.withValues(alpha: 0.05),
                   ],
                 ),
-          color: isDestructive ? AppColors.red.withOpacity(0.1) : null,
+          color: isDestructive ? AppColors.red.withValues(alpha: 0.1) : null,
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: isDestructive
-                ? AppColors.red.withOpacity(0.2)
-                : gradient.first.withOpacity(0.2),
+                ? AppColors.red.withValues(alpha: 0.2)
+                : gradient.first.withValues(alpha: 0.2),
           ),
         ),
         child: Row(

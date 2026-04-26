@@ -53,6 +53,7 @@
 | **Riverpod** | 类型安全的状态管理 | ✅ |
 | **Go Router** | 声明式路由，支持深度链接 | ✅ |
 | **Dio** | 支持拦截器的 HTTP 客户端 | ✅ |
+| **WebSocket** | 实时通信，自动重连、心跳检测 | ✅ |
 | **仓库模式** | 抽象的数据层 | ✅ |
 
 ### 📱 完整流程
@@ -78,11 +79,15 @@
 - **引导页** - 带平滑页面指示器的 onboarding
 - **登录页** - 多种认证方式（密码、短信、微信）
 - **用户信息** - 带图片选择器的资料完善页
+- **介绍页** - 功能展示和快速导航入口
 - **主页/旅游** - 带 hero 动画的目的地浏览
 - **消息** - 带故事环和滑动操作的聊天列表
+- **聊天** - 实时聊天界面（WebSocket 支持）
 - **个人中心** - 带 VIP 会员的用户资料
 - **礼物商店** - 带购物车功能的精美礼品店
 - **VIP** - 带发光效果的订阅计划页
+- **我的相册** - 照片管理和上传
+- **帮助反馈** - 用户支持和问题反馈
 
 ---
 
@@ -410,6 +415,80 @@ LoadingWidget(
   message: '加载中...',
 )
 ```
+
+---
+
+## 🔌 WebSocket 实时通信
+
+### 基础用法
+
+```dart
+// 初始化 WebSocket
+final config = WebSocketConfig(
+  url: 'wss://your-websocket-server.com',
+  heartbeatInterval: 30000,  // 30秒心跳
+  maxReconnectAttempts: 60,   // 最大重连60次
+  reconnectDelay: 3000,       // 3秒后重连
+);
+
+WebSocketService.instance.init(config);
+```
+
+### 连接管理
+
+```dart
+// 连接
+await WebSocketService.instance.connect();
+
+// 断开
+WebSocketService.instance.disconnect();
+
+// 监听连接状态
+WebSocketService.instance.statusStream.listen((status) {
+  switch (status) {
+    case WebSocketStatus.connected:
+      print('WebSocket 已连接');
+    case WebSocketStatus.disconnected:
+      print('WebSocket 已断开');
+    case WebSocketStatus.reconnecting:
+      print('WebSocket 重连中...');
+    default:
+  }
+});
+```
+
+### 发送和接收消息
+
+```dart
+// 发送消息
+WebSocketService.instance.send({
+  'type': 'chat',
+  'data': {
+    'message': 'Hello!',
+    'toUserId': '123',
+  },
+});
+
+// 接收消息
+WebSocketService.instance.messageStream.listen((message) {
+  final msg = WebSocketMessage.fromJson(message);
+  switch (msg.type) {
+    case 'chat':
+      // 处理聊天消息
+      break;
+    case 'notification':
+      // 处理通知
+      break;
+  }
+});
+```
+
+### 自动重连机制
+
+WebSocketService 内置了智能重连机制：
+- 网络断开时自动重连
+- 可配置重连间隔和最大重连次数
+- 重连时自动恢复之前的订阅
 
 ---
 

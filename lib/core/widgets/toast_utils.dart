@@ -69,7 +69,7 @@ void initEasyLoading() {
     ..backgroundColor = Colors.black87
     ..indicatorColor = Colors.white
     ..textColor = Colors.white
-    ..maskColor = Colors.black.withOpacity(0.5)
+    ..maskColor = Colors.black.withValues(alpha: 0.5)
     ..userInteractions = true
     ..dismissOnTap = false;
 }

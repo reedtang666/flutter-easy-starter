@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_easy_starter/core/widgets/animated_button.dart';
 import 'package:flutter_easy_starter/features/travel/model/activity_model.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ActivityTileListView extends StatefulWidget {
@@ -16,57 +18,75 @@ class _ActivityTileListViewState extends State<ActivityTileListView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 65.w,
+      height: 56.w,
       child: ListView.builder(
         itemCount: ActivityModel.dummyList.length,
-        padding: EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(left: 20.w),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final model = ActivityModel.dummyList[index];
-          return GestureDetector(
+          final isSelected = _selectedIndex == index;
+
+          return AnimatedButton(
             onTap: () {
               setState(() {
                 _selectedIndex = index;
               });
             },
+            scaleDown: 0.95,
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 350),
-              height: 60.w,
-              margin: EdgeInsets.only(right: 15),
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeInOut,
+              height: 52.w,
+              margin: EdgeInsets.only(right: 12.w),
               decoration: BoxDecoration(
-                color: AppColors.surface,
-                border: _selectedIndex == index
-                    ? Border.all(
-                        color: AppColors.white,
-                        width: 1.1,
+                gradient: isSelected
+                    ? LinearGradient(
+                        colors: [
+                          AppColors.primary.withValues(alpha: 0.2),
+                          AppColors.primary.withValues(alpha: 0.05),
+                        ],
                       )
                     : null,
-                borderRadius: BorderRadius.circular(50.r),
+                color: isSelected ? null : AppColors.surface,
+                border: Border.all(
+                  color: isSelected
+                      ? AppColors.primary
+                      : AppColors.white.withValues(alpha: 0.05),
+                  width: isSelected ? 1.5.w : 1.w,
+                ),
+                borderRadius: BorderRadius.circular(26.r),
               ),
-              padding: EdgeInsets.only(left: 5, right: 22, top: 5, bottom: 5),
+              padding: EdgeInsets.only(
+                left: 4.w,
+                right: 16.w,
+                top: 4.w,
+                bottom: 4.w,
+              ),
               child: Row(
                 children: [
                   Container(
                     decoration: BoxDecoration(
                       color: AppColors.background,
-                      borderRadius: BorderRadius.circular(50.r),
+                      borderRadius: BorderRadius.circular(22.r),
                     ),
-                    height: 66.w,
-                    width: 53.w,
+                    height: 44.w,
+                    width: 44.w,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50.r),
+                      borderRadius: BorderRadius.circular(22.r),
                       child: Image.asset(
                         'assets/images/travel/activity/${model.assetName}',
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(width: 10.w),
                   Text(
                     model.name,
-                    style: TextStyle(fontSize: 17.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.white,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: isSelected ? AppColors.primary : AppColors.white,
                     ),
                   ),
                 ],

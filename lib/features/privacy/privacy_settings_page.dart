@@ -259,7 +259,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
                 width: 48.w,
                 height: 48.w,
                 decoration: BoxDecoration(
-                  color: AppColors.primary.withOpacity(0.15),
+                  color: AppColors.primary.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Icon(
@@ -295,7 +295,7 @@ class _PrivacySettingsPageState extends State<PrivacySettingsPage> {
                 width: 48.w,
                 height: 48.w,
                 decoration: BoxDecoration(
-                  color: AppColors.red.withOpacity(0.15),
+                  color: AppColors.red.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Icon(

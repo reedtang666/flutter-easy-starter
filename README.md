@@ -53,6 +53,7 @@
 | **Riverpod** | Type-safe state management | ✅ |
 | **Go Router** | Declarative routing with deep links | ✅ |
 | **Dio** | HTTP client with interceptors | ✅ |
+| **WebSocket** | Real-time communication with auto-reconnect | ✅ |
 | **Repository Pattern** | Abstracted data layer | ✅ |
 
 ### 📱 Complete Flow
@@ -78,11 +79,15 @@
 - **Guide** - Onboarding with smooth page indicators
 - **Login** - Multiple auth methods (password, SMS, WeChat)
 - **User Info** - Profile completion with image picker
+- **Intro** - Feature showcase and quick navigation hub
 - **Home/Travel** - Destination browsing with hero animations
 - **Message** - Chat list with stories, swipe actions
+- **Chat** - Real-time chat interface (WebSocket support)
 - **Profile** - User profile with VIP membership
 - **Gift Shop** - Beautiful gift store with cart functionality
 - **VIP** - Subscription plans with glowing effects
+- **My Photos** - Photo management and upload
+- **Help & Feedback** - User support and issue reporting
 
 ---
 
@@ -410,6 +415,80 @@ LoadingWidget(
   message: 'Loading...',
 )
 ```
+
+---
+
+## 🔌 WebSocket Real-time Communication
+
+### Basic Usage
+
+```dart
+// Initialize WebSocket
+final config = WebSocketConfig(
+  url: 'wss://your-websocket-server.com',
+  heartbeatInterval: 30000,  // 30 second heartbeat
+  maxReconnectAttempts: 60,   // Max 60 reconnect attempts
+  reconnectDelay: 3000,       // Reconnect after 3 seconds
+);
+
+WebSocketService.instance.init(config);
+```
+
+### Connection Management
+
+```dart
+// Connect
+await WebSocketService.instance.connect();
+
+// Disconnect
+WebSocketService.instance.disconnect();
+
+// Listen to connection status
+WebSocketService.instance.statusStream.listen((status) {
+  switch (status) {
+    case WebSocketStatus.connected:
+      print('WebSocket connected');
+    case WebSocketStatus.disconnected:
+      print('WebSocket disconnected');
+    case WebSocketStatus.reconnecting:
+      print('WebSocket reconnecting...');
+    default:
+  }
+});
+```
+
+### Sending and Receiving Messages
+
+```dart
+// Send message
+WebSocketService.instance.send({
+  'type': 'chat',
+  'data': {
+    'message': 'Hello!',
+    'toUserId': '123',
+  },
+});
+
+// Receive messages
+WebSocketService.instance.messageStream.listen((message) {
+  final msg = WebSocketMessage.fromJson(message);
+  switch (msg.type) {
+    case 'chat':
+      // Handle chat message
+      break;
+    case 'notification':
+      // Handle notification
+      break;
+  }
+});
+```
+
+### Auto-reconnect Mechanism
+
+WebSocketService has built-in intelligent reconnection:
+- Auto-reconnect when network is lost
+- Configurable reconnect interval and max attempts
+- Automatic subscription restoration after reconnection
 
 ---
 

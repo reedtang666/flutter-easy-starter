@@ -225,7 +225,7 @@ class DeviceInfoDisplay {
               borderRadius: BorderRadius.circular(24),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
@@ -243,8 +243,8 @@ class DeviceInfoDisplay {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        AppColors.primary.withOpacity(0.3),
-                        AppColors.primary.withOpacity(0.1),
+                        AppColors.primary.withValues(alpha: 0.3),
+                        AppColors.primary.withValues(alpha: 0.1),
                       ],
                     ),
                     borderRadius: const BorderRadius.vertical(
@@ -258,10 +258,10 @@ class DeviceInfoDisplay {
                         width: 64,
                         height: 64,
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.2),
+                          color: AppColors.primary.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: AppColors.primary.withOpacity(0.3),
+                            color: AppColors.primary.withValues(alpha: 0.3),
                             width: 2,
                           ),
                         ),
@@ -286,7 +286,7 @@ class DeviceInfoDisplay {
                         info.osVersion,
                         style: TextStyle(
                           fontSize: 14,
-                          color: AppColors.lightGrey.withOpacity(0.8),
+                          color: AppColors.lightGrey.withValues(alpha: 0.8),
                         ),
                       ),
                     ],
@@ -366,7 +366,7 @@ class DeviceInfoDisplay {
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w600,
-            color: AppColors.primary.withOpacity(0.9),
+            color: AppColors.primary.withValues(alpha: 0.9),
           ),
         ),
       ],
@@ -384,7 +384,7 @@ class DeviceInfoDisplay {
               label,
               style: TextStyle(
                 fontSize: 13,
-                color: AppColors.lightGrey.withOpacity(0.7),
+                color: AppColors.lightGrey.withValues(alpha: 0.7),
               ),
             ),
           ),

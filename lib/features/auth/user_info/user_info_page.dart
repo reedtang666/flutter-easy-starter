@@ -123,7 +123,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                     gradient: LinearGradient(
                       colors: [
                         AppColors.primary,
-                        AppColors.primary.withOpacity(0.7),
+                        AppColors.primary.withValues(alpha: 0.7),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -131,7 +131,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withOpacity(0.3),
+                        color: AppColors.primary.withValues(alpha: 0.3),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -191,7 +191,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
           Text(
             '点击更换头像',
             style: TextStyle(
-              color: AppColors.lightGrey.withOpacity(0.8),
+              color: AppColors.lightGrey.withValues(alpha: 0.8),
               fontSize: 14.sp,
             ),
           ),
@@ -265,13 +265,13 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                 padding: EdgeInsets.symmetric(vertical: 14),
                 decoration: BoxDecoration(
                   color: _selectedGender == i
-                      ? _genderColors[i].withOpacity(0.15)
+                      ? _genderColors[i].withValues(alpha: 0.15)
                       : AppColors.surface,
                   borderRadius: BorderRadius.circular(14.r),
                   border: Border.all(
                     color: _selectedGender == i
                         ? _genderColors[i]
-                        : Colors.white.withOpacity(0.05),
+                        : Colors.white.withValues(alpha: 0.05),
                   ),
                 ),
                 child: Row(
@@ -408,8 +408,8 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
           color: isDestructive
-              ? AppColors.red.withOpacity(0.1)
-              : Colors.white.withOpacity(0.05),
+              ? AppColors.red.withValues(alpha: 0.1)
+              : Colors.white.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(14.r),
         ),
         child: Row(

@@ -106,13 +106,13 @@ class _LoginPageState extends ConsumerState<LoginPage>
               gradient: LinearGradient(
                 colors: [
                   AppColors.primary,
-                  AppColors.primary.withOpacity(0.7),
+                  AppColors.primary.withValues(alpha: 0.7),
                 ],
               ),
               borderRadius: BorderRadius.circular(24.r),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(0.4),
+                  color: AppColors.primary.withValues(alpha: 0.4),
                   blurRadius: 30,
                   offset: const Offset(0, 10),
                 ),

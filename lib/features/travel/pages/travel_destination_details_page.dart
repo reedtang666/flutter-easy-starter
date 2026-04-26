@@ -75,8 +75,8 @@ class _TravelDestinationDetailsPageState
                             gradient: LinearGradient(
                               colors: [
                                 Colors.black,
-                                Colors.black.withOpacity(0.67),
-                                Colors.black.withOpacity(0.0),
+                                Colors.black.withValues(alpha: 0.67),
+                                Colors.black.withValues(alpha: 0.0),
                               ],
                               begin: Alignment.bottomCenter,
                               end: Alignment.topCenter,
@@ -138,7 +138,7 @@ class _TravelDestinationDetailsPageState
                                               style: TextStyle(
                                                 fontSize: 21.sp,
                                                 color: Colors.white
-                                                    .withOpacity(.8),
+                                                    .withValues(alpha: .8),
                                                 fontWeight: FontWeight.w400,
                                               ),
                                             ),
@@ -149,7 +149,7 @@ class _TravelDestinationDetailsPageState
                                           '123 条评价',
                                           style: TextStyle(
                                             fontSize: 15.sp,
-                                            color: Colors.white.withOpacity(.8),
+                                            color: Colors.white.withValues(alpha: .8),
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
@@ -172,7 +172,7 @@ class _TravelDestinationDetailsPageState
                                           width: 40.w,
                                           decoration: BoxDecoration(
                                             color:
-                                                Colors.white.withOpacity(.3),
+                                                Colors.white.withValues(alpha: .3),
                                             borderRadius:
                                                 BorderRadius.circular(20.r),
                                           ),
@@ -304,8 +304,8 @@ class _TravelDestinationDetailsPageState
                 gradient: LinearGradient(
                   colors: [
                     AppColors.background,
-                    AppColors.background.withOpacity(0.67),
-                    AppColors.background.withOpacity(0.0),
+                    AppColors.background.withValues(alpha: 0.67),
+                    AppColors.background.withValues(alpha: 0.0),
                   ],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
@@ -487,7 +487,7 @@ class _ListViewHeaderState extends State<ListViewHeader> {
                 borderRadius: BorderRadius.circular(90.r),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(.1),
+                    color: Colors.black.withValues(alpha: .1),
                     blurRadius: 10,
                     spreadRadius: 5,
                   ),

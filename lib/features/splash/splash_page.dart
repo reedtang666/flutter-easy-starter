@@ -125,7 +125,7 @@ class _SplashPageState extends State<SplashPage>
                   center: const Alignment(0, -0.3),
                   radius: 0.8,
                   colors: [
-                    AppColors.primary.withOpacity(0.15),
+                    AppColors.primary.withValues(alpha: 0.15),
                     Colors.transparent,
                   ],
                 ),
@@ -152,13 +152,13 @@ class _SplashPageState extends State<SplashPage>
                           end: Alignment.bottomRight,
                           colors: [
                             AppColors.primary,
-                            AppColors.primary.withOpacity(0.8),
+                            AppColors.primary.withValues(alpha: 0.8),
                           ],
                         ),
                         borderRadius: BorderRadius.circular(32.r),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withOpacity(0.4),
+                            color: AppColors.primary.withValues(alpha: 0.4),
                             blurRadius: 40,
                             spreadRadius: 5,
                           ),

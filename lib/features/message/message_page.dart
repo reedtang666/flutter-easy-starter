@@ -92,7 +92,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                           vertical: 6.w,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.15),
+                          color: AppColors.primary.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(20.r),
                         ),
                         child: Row(
@@ -170,7 +170,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                 color: AppColors.surface,
                 borderRadius: BorderRadius.circular(22.r),
                 border: Border.all(
-                  color: AppColors.white.withOpacity(0.05),
+                  color: AppColors.white.withValues(alpha: 0.05),
                 ),
               ),
               child: Row(
@@ -466,7 +466,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
             gradient: LinearGradient(
               colors: [
                 AppColors.surface,
-                AppColors.red.withOpacity(0.8),
+                AppColors.red.withValues(alpha: 0.8),
               ],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
@@ -487,7 +487,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                   borderRadius: BorderRadius.circular(36.r),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.red.withOpacity(0.4),
+                      color: AppColors.red.withValues(alpha: 0.4),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -718,8 +718,8 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [
-                                    AppColors.red.withOpacity(0.2),
-                                    AppColors.red.withOpacity(0.05),
+                                    AppColors.red.withValues(alpha: 0.2),
+                                    AppColors.red.withValues(alpha: 0.05),
                                   ],
                                 ),
                                 borderRadius: BorderRadius.circular(24.r),

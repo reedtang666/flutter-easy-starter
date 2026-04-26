@@ -227,7 +227,7 @@ class _VipPageState extends State<VipPage>
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppColors.primary.withOpacity(0.25),
+            AppColors.primary.withValues(alpha: 0.25),
             AppColors.background,
           ],
         ),
@@ -294,9 +294,9 @@ class _VipPageState extends State<VipPage>
                           decoration: BoxDecoration(
                             gradient: SweepGradient(
                               colors: [
-                                Colors.white.withOpacity(0.0),
-                                Colors.white.withOpacity(0.3),
-                                Colors.white.withOpacity(0.0),
+                                Colors.white.withValues(alpha: 0.0),
+                                Colors.white.withValues(alpha: 0.3),
+                                Colors.white.withValues(alpha: 0.0),
                               ],
                             ),
                             borderRadius: BorderRadius.circular(35.r),
@@ -376,7 +376,7 @@ class _VipPageState extends State<VipPage>
                 borderRadius: BorderRadius.circular(12.r),
                 boxShadow: [
                   BoxShadow(
-                    color: benefit.gradient.first.withOpacity(0.4),
+                    color: benefit.gradient.first.withValues(alpha: 0.4),
                     blurRadius: 12,
                     spreadRadius: 1,
                   ),
@@ -692,13 +692,13 @@ class _AnimatedPackageCardState extends State<AnimatedPackageCard>
               border: Border.all(
                 color: widget.isSelected
                     ? const Color(0xFFFFD700)
-                    : Colors.white.withOpacity(0.05),
+                    : Colors.white.withValues(alpha: 0.05),
                 width: widget.isSelected ? 2.w : 1.w,
               ),
               boxShadow: widget.isSelected
                   ? [
                       BoxShadow(
-                        color: Color(0xFFFFD700).withOpacity(
+                        color: Color(0xFFFFD700).withValues(alpha: 
                           widget.package.isRecommended
                               ? _glowAnimation.value
                               : 0.3,
@@ -786,7 +786,7 @@ class _AnimatedPackageCardState extends State<AnimatedPackageCard>
                   vertical: 2.w,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.red.withOpacity(0.1),
+                  color: AppColors.red.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(4.r),
                 ),
                 child: Text(
