@@ -8,6 +8,10 @@
 </p>
 
 <p align="center">
+  <b>English</b> | <a href="./README.zh.md">中文</a>
+</p>
+
+<p align="center">
   <b>开箱即用的 Flutter 快速开发框架</b><br>
   <i>Production-ready Flutter starter with clean architecture, beautiful UI, and comprehensive features</i>
 </p>
