@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/widgets/animated_button.dart';
-import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 通知弹窗

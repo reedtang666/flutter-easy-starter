@@ -386,37 +386,53 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
 
               return Column(
                 children: [
-                  ListTile(
-                    leading: Icon(
-                      item.icon,
-                      color: AppColors.lightGrey,
-                      size: 22,
-                    ),
-                    title: Text(
-                      item.title,
-                      style: TextStyle(color: AppColors.white),
-                    ),
-                    subtitle: item.subtitle != null
-                        ? Text(
-                            item.subtitle!,
-                            style: const TextStyle(
-                              fontSize: AppTypography.caption,
-                              color: AppColors.lightGrey,
-                            ),
-                          )
-                        : null,
-                    trailing: item.trailing ??
-                        Icon(
-                          Icons.chevron_right,
-                          size: 20,
-                          color: AppColors.lightGrey,
-                        ),
+                  GestureDetector(
                     onTap: item.onTap,
-                    shape: isLast
-                        ? null
-                        : const Border(
-                            bottom: BorderSide(color: AppColors.divider),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      decoration: BoxDecoration(
+                        border: isLast
+                            ? null
+                            : const Border(
+                                bottom: BorderSide(color: AppColors.divider),
+                              ),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            item.icon,
+                            color: AppColors.lightGrey,
+                            size: 22,
                           ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.title,
+                                  style: TextStyle(color: AppColors.white),
+                                ),
+                                if (item.subtitle != null)
+                                  Text(
+                                    item.subtitle!,
+                                    style: const TextStyle(
+                                      fontSize: AppTypography.caption,
+                                      color: AppColors.lightGrey,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                          item.trailing ??
+                              Icon(
+                                Icons.chevron_right,
+                                size: 20,
+                                color: AppColors.lightGrey,
+                              ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               );

@@ -53,8 +53,6 @@ class ImagePickerUtils {
         return await pickFromCamera(context);
       case ImageSource.gallery:
         return await pickFromGallery(context);
-      default:
-        return null;
     }
   }
 

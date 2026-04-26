@@ -544,6 +544,7 @@ class _IntroPageState extends State<IntroPage>
     return AnimatedButton(
       onTap: onTap,
       scaleDown: 0.95,
+      enableRipple: false,
       child: Container(
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
@@ -729,6 +730,7 @@ class _IntroPageState extends State<IntroPage>
         // 显示详情
       },
       scaleDown: 0.97,
+      enableRipple: false,
       child: Container(
         margin: EdgeInsets.only(bottom: 12.w),
         padding: EdgeInsets.all(16.w),
@@ -839,6 +841,7 @@ class _IntroPageState extends State<IntroPage>
         HapticFeedback.lightImpact();
       },
       scaleDown: 0.97,
+      enableRipple: false,
       child: Container(
         margin: EdgeInsets.only(bottom: 12.w),
         padding: EdgeInsets.all(18.w),
@@ -961,6 +964,7 @@ class _IntroPageState extends State<IntroPage>
         });
       },
       scaleDown: 0.95,
+      enableRipple: false,
       child: AnimatedContainer(
         duration: AppDurations.normal,
         margin: EdgeInsets.only(bottom: 12.w),
@@ -1117,6 +1121,7 @@ class _IntroPageState extends State<IntroPage>
     return AnimatedButton(
       onTap: () => dialog.onTap(context),
       scaleDown: 0.97,
+      enableRipple: false,
       child: Container(
         margin: EdgeInsets.only(bottom: 10.w),
         padding: EdgeInsets.all(14.w),
@@ -1675,283 +1680,6 @@ class _IntroPageState extends State<IntroPage>
         // 步进器
         _StepperDemo(),
       ],
-    );
-  }
-
-  Widget _buildToggleCategory({required String title, required Widget child}) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(
-          color: AppColors.white.withValues(alpha: 0.05),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.lightGrey,
-            ),
-          ),
-          SizedBox(height: 16.w),
-          child,
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCustomSwitch(bool value, Color activeColor) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      width: 52.w,
-      height: 32.w,
-      decoration: BoxDecoration(
-        color: value ? activeColor : AppColors.surfaceVariant,
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: AnimatedAlign(
-        duration: const Duration(milliseconds: 200),
-        alignment: value ? Alignment.centerRight : Alignment.centerLeft,
-        child: Padding(
-          padding: EdgeInsets.all(3.w),
-          child: Container(
-            width: 26.w,
-            height: 26.w,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(13.r),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.2),
-                  blurRadius: 4,
-                  spreadRadius: 0,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSegmentedControl() {
-    final options = ['日', '周', '月', '年'];
-    return StatefulBuilder(
-      builder: (context, setState) {
-        int selectedIndex = 1;
-        return Container(
-          padding: EdgeInsets.all(4.w),
-          decoration: BoxDecoration(
-            color: AppColors.background,
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: options.asMap().entries.map((entry) {
-              final index = entry.key;
-              final label = entry.value;
-              final isSelected = index == selectedIndex;
-              return AnimatedButton(
-                onTap: () => setState(() => selectedIndex = index),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.w),
-                  decoration: BoxDecoration(
-                    color: isSelected ? AppColors.surface : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                      color: isSelected ? Colors.white : AppColors.lightGrey,
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildRadioGroup() {
-    return StatefulBuilder(
-      builder: (context, setState) {
-        int selectedValue = 1;
-        return Row(
-          children: [
-            _buildRadioItem('选项一', 1, selectedValue, () => setState(() => selectedValue = 1)),
-            SizedBox(width: 20.w),
-            _buildRadioItem('选项二', 2, selectedValue, () => setState(() => selectedValue = 2)),
-            SizedBox(width: 20.w),
-            _buildRadioItem('选项三', 3, selectedValue, () => setState(() => selectedValue = 3)),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildRadioItem(String label, int value, int selectedValue, VoidCallback onTap) {
-    final isSelected = value == selectedValue;
-    return AnimatedButton(
-      onTap: onTap,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            width: 22.w,
-            height: 22.w,
-            decoration: BoxDecoration(
-              color: isSelected ? AppColors.primary : Colors.transparent,
-              borderRadius: BorderRadius.circular(11.r),
-              border: Border.all(
-                color: isSelected ? AppColors.primary : AppColors.lightGrey,
-                width: 2,
-              ),
-            ),
-            child: isSelected
-                ? Icon(LucideIcons.check, color: Colors.white, size: 14)
-                : null,
-          ),
-          SizedBox(width: 8.w),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: isSelected ? Colors.white : AppColors.lightGrey,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCheckboxGroup() {
-    return StatefulBuilder(
-      builder: (context, setState) {
-        final checkedItems = {1, 3};
-        return Wrap(
-          spacing: 16.w,
-          runSpacing: 12.w,
-          children: [
-            _buildCheckboxItem('选项 A', 1, checkedItems.contains(1), (v) {
-              setState(() => v ? checkedItems.add(1) : checkedItems.remove(1));
-            }),
-            _buildCheckboxItem('选项 B', 2, checkedItems.contains(2), (v) {
-              setState(() => v ? checkedItems.add(2) : checkedItems.remove(2));
-            }),
-            _buildCheckboxItem('选项 C', 3, checkedItems.contains(3), (v) {
-              setState(() => v ? checkedItems.add(3) : checkedItems.remove(3));
-            }),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildCheckboxItem(String label, int value, bool isChecked, Function(bool) onChanged) {
-    return AnimatedButton(
-      onTap: () => onChanged(!isChecked),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            width: 22.w,
-            height: 22.w,
-            decoration: BoxDecoration(
-              color: isChecked ? AppColors.primary : Colors.transparent,
-              borderRadius: BorderRadius.circular(6.r),
-              border: Border.all(
-                color: isChecked ? AppColors.primary : AppColors.lightGrey,
-                width: 2,
-              ),
-            ),
-            child: isChecked
-                ? Icon(LucideIcons.check, color: Colors.white, size: 14)
-                : null,
-          ),
-          SizedBox(width: 8.w),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: isChecked ? Colors.white : AppColors.lightGrey,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStepper() {
-    return StatefulBuilder(
-      builder: (context, setState) {
-        int count = 1;
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.w),
-          decoration: BoxDecoration(
-            color: AppColors.background,
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AnimatedButton(
-                onTap: count > 1 ? () => setState(() => count--) : null,
-                child: Container(
-                  width: 32.w,
-                  height: 32.w,
-                  decoration: BoxDecoration(
-                    color: count > 1 ? AppColors.surface : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Icon(
-                    LucideIcons.minus,
-                    color: count > 1 ? Colors.white : AppColors.lightGrey,
-                    size: 16,
-                  ),
-                ),
-              ),
-              Container(
-                width: 48.w,
-                alignment: Alignment.center,
-                child: Text(
-                  '$count',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              AnimatedButton(
-                onTap: () => setState(() => count++),
-                child: Container(
-                  width: 32.w,
-                  height: 32.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Icon(LucideIcons.plus, color: Colors.white, size: 16),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/features/travel/widgets/frosted_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

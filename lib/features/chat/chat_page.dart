@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
 import 'package:flutter_easy_starter/features/chat/models/message_model.dart';
@@ -38,7 +36,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   // 模拟聊天数据加载
   bool _isLoading = true;
-  bool _hasMore = true;
 
   // 模拟聊天数据
   late List<ChatMessage> _messages;

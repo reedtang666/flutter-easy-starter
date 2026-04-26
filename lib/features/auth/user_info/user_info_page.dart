@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/widgets/image_picker.dart';
 import 'package:flutter_easy_starter/models/user_model.dart';

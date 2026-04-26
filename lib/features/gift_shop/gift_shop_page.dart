@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';

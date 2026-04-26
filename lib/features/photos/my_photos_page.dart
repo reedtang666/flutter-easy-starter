@@ -37,7 +37,6 @@ class MyPhotosPage extends StatefulWidget {
 
 class _MyPhotosPageState extends State<MyPhotosPage> {
   final List<PhotoItem> _photos = [];
-  int _selectedCount = 0;
   bool _isLoading = true;
   bool _isEditMode = false;
   final Set<String> _selectedPhotos = {};

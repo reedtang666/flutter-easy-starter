@@ -8,7 +8,6 @@ import 'package:flutter_easy_starter/features/travel/widgets/frosted_widget.dart
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shimmer/shimmer.dart';
 
 /// VIP会员权益
 class VipBenefit {

@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 /// 会话类型枚举
 enum ConversationType {
   single, // 单聊

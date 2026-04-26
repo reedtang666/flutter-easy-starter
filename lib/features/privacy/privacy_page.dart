@@ -93,7 +93,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
         context.go(RouteNames.landing);
       }
     } catch (e) {
-      debugPrint('保存失败: $e');
+      // 保存失败
     } finally {
       if (mounted) {
         setState(() {

@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 /// 网络状态类型
@@ -66,7 +64,6 @@ class NetworkStatusUtil {
     if (_currentType == newType) return;
 
     _currentType = newType;
-    debugPrint('NetworkStatus: $newType');
     onStatusChanged?.call(newType);
   }
 

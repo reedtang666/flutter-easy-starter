@@ -40,7 +40,7 @@ class _LoginPageState extends ConsumerState<LoginPage>
     ref.listen(authProvider, (previous, next) async {
       if (previous?.isAuthenticated == false && next.isAuthenticated) {
         // 登录成功后检查是否是首次启动
-        final isFirstLaunch = StorageService.instance.getBool(StorageKeys.isFirstLaunch) ?? true;
+        final isFirstLaunch = StorageService.instance.getBool(StorageKeys.isFirstLaunch);
         if (isFirstLaunch) {
           // 首次启动，进入引导页
           context.go(RouteNames.landing);

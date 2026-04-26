@@ -22,7 +22,6 @@ class MessagePage extends ConsumerStatefulWidget {
 
 class _MessagePageState extends ConsumerState<MessagePage> {
   final TextEditingController _searchController = TextEditingController();
-  bool _isSearching = false;
   bool _isLoading = true;
   String _searchQuery = '';
 

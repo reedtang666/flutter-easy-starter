@@ -1,8 +1,6 @@
 import 'package:flutter_easy_starter/core/constants/app_constants.dart';
 import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
-import 'package:flutter_easy_starter/core/services/http_service.dart';
 import 'package:flutter_easy_starter/core/services/storage_service.dart';
-import 'package:flutter_easy_starter/models/api_response.dart';
 import 'package:flutter_easy_starter/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

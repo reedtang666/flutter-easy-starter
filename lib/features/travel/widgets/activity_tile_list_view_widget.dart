@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/core/widgets/animated_button.dart';
 import 'package:flutter_easy_starter/features/travel/model/activity_model.dart';
-import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ActivityTileListView extends StatefulWidget {

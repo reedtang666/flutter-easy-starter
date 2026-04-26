@@ -78,7 +78,7 @@ class _SplashPageState extends State<SplashPage>
     if (!mounted) return;
 
     // 1. 检查隐私政策是否同意
-    final privacyAccepted = StorageService.instance.getBool(StorageKeys.privacyAccepted) ?? false;
+    final privacyAccepted = StorageService.instance.getBool(StorageKeys.privacyAccepted);
     if (!privacyAccepted) {
       context.go(RouteNames.privacy);
       return;
@@ -94,7 +94,7 @@ class _SplashPageState extends State<SplashPage>
     }
 
     // 3. 检查是否首次启动（已登录情况下跳过引导页）
-    final isFirstLaunch = StorageService.instance.getBool(StorageKeys.isFirstLaunch) ?? true;
+    final isFirstLaunch = StorageService.instance.getBool(StorageKeys.isFirstLaunch);
     if (isFirstLaunch) {
       // 首次启动，进入引导页
       context.go(RouteNames.landing);

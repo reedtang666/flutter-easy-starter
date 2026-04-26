@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 /// EventBus - 跨组件事件通信
 ///
 /// 使用场景：

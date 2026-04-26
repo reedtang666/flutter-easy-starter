@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/constants/app_constants.dart';
 import 'package:flutter_easy_starter/core/theme/app_theme.dart';
 import 'package:flutter_easy_starter/core/router/app_router.dart';
-import 'package:flutter_easy_starter/core/services/http_service.dart';
-import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
