@@ -94,8 +94,32 @@
 ## 📸 Screenshots
 
 <p align="center">
-  <i>Screenshots will be added here</i>
+  <img src="screenshots/common/splash.png" width="200" alt="Splash">
+  <img src="screenshots/common/privacy.png" width="200" alt="Privacy Policy">
+  <img src="screenshots/common/guide.png" width="200" alt="Guide">
+  <img src="screenshots/common/login.png" width="200" alt="Login">
 </p>
+
+<p align="center">
+  <img src="screenshots/common/intro.png" width="200" alt="Home/Intro">
+  <img src="screenshots/common/travel.png" width="200" alt="Travel">
+  <img src="screenshots/common/message.png" width="200" alt="Message">
+  <img src="screenshots/common/chat.png" width="200" alt="Chat">
+</p>
+
+> 💡 **Note**: Run the app and take screenshots to populate this section. Recommended pages to capture (in user flow order):
+> - **Splash** - Branded launch screen with rocket animation
+> - **Privacy Policy** - GDPR-compliant privacy consent (must accept to proceed) ⭐ **Critical Pre-entry Page**
+> - **Guide** - Onboarding flow with feature highlights
+> - **Login** - Authentication methods (password, SMS, WeChat)
+> - **Home/Intro** (Tab 1) - Feature showcase and quick navigation hub ⭐ **Main Page**
+> - **Travel** (Tab 2) - Destination browsing with hero animations
+> - **Message** (Tab 3) - Chat list with stories ring
+> - **Chat** - Real-time conversation interface
+> - **Profile** (Tab 4) - User center with VIP and settings
+> - **VIP** - Subscription plans with glowing effects
+> - **Gift Shop** - Product browsing and cart
+> - **My Photos** - Photo gallery management
 
 ---
 

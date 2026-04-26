@@ -94,8 +94,32 @@
 ## 📸 截图预览
 
 <p align="center">
-  <i>截图将在此添加</i>
+  <img src="screenshots/common/splash.png" width="200" alt="启动页">
+  <img src="screenshots/common/privacy.png" width="200" alt="隐私政策">
+  <img src="screenshots/common/guide.png" width="200" alt="引导页">
+  <img src="screenshots/common/login.png" width="200" alt="登录页">
 </p>
+
+<p align="center">
+  <img src="screenshots/common/intro.png" width="200" alt="主页/介绍页">
+  <img src="screenshots/common/travel.png" width="200" alt="探索页">
+  <img src="screenshots/common/message.png" width="200" alt="消息页">
+  <img src="screenshots/common/chat.png" width="200" alt="聊天页">
+</p>
+
+> 💡 **提示**: 运行应用并截图填充此部分。建议截图的页面（按用户使用流程）：
+> - **启动页** - 带火箭动画的品牌启动屏幕
+> - **隐私政策** - 必须同意才能进入App的隐私合规页面 ⭐ **关键前置页面**
+> - **引导页** - 功能亮点的首次启动流程
+> - **登录页** - 多种认证方式（密码、短信、微信）
+> - **主页/介绍页** (Tab 1) - 功能展示和快速导航入口 ⭐ **核心页面**
+> - **探索页** (Tab 2) - 带 Hero 动画的旅游目的地浏览
+> - **消息页** (Tab 3) - 带故事环的聊天列表
+> - **聊天页** - 实时对话界面（从消息页进入）
+> - **个人中心** (Tab 4) - 用户资料、VIP、设置
+> - **VIP页** - 带发光效果的订阅计划
+> - **礼物商店** - 商品浏览和购物车
+> - **我的相册** - 照片管理和上传
 
 ---
 
