@@ -1,230 +1,460 @@
-# Flutter Easy Starter
+# Flutter Easy Starter 🚀
 
-Flutter 简易开箱即用框架 | 快速二次开发
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-3.0+-blue.svg" alt="Flutter Version">
+  <img src="https://img.shields.io/badge/Dart-3.0+-blue.svg" alt="Dart Version">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+  <img src="https://img.shields.io/badge/Platform-iOS%20%7C%20Android-9cf.svg" alt="Platform">
+</p>
 
-## ✨ 特性
+<p align="center">
+  <b>开箱即用的 Flutter 快速开发框架</b><br>
+  <i>Production-ready Flutter starter with clean architecture, beautiful UI, and comprehensive features</i>
+</p>
 
-- ✅ **完整的启动流程**：启动页 → 隐私政策 → 引导页 → 登录 → 主页
-- ✅ **隐私合规**：符合应用商店上架要求，必须同意隐私政策后才能初始化第三方SDK
-- ✅ **多种登录方式**：账号密码、手机验证码、微信一键登录
-- ✅ **状态管理**：使用 Riverpod，类型安全、性能优秀
-- ✅ **路由管理**：使用 go_router，支持深度链接
-- ✅ **网络请求**：Dio 封装，支持拦截器、统一响应、错误处理
-- ✅ **第三方服务预留**：极光推送、微信登录/分享/支付（预留接口，需自行配置）
-- ✅ **主题管理**：支持亮/暗模式切换
-- ✅ **示例丰富**：登录页、主页、个人中心、信息补充等完整示例
+---
 
-## 🚀 快速开始
+## 📋 Table of Contents
 
-### 1. 克隆项目
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Quick Start](#-quick-start)
+- [Architecture](#-architecture)
+- [Project Structure](#-project-structure)
+- [Animation System](#-animation-system)
+- [UI Components](#-ui-components)
+- [Configuration](#-configuration)
+- [API Reference](#-api-reference)
+- [Troubleshooting](#-troubleshooting)
+
+---
+
+## ✨ Features
+
+### 🎨 UI/UX Excellence
+
+| Feature | Description | Status |
+|---------|-------------|--------|
+| **Dark Theme** | Elegant dark mode with purple accent | ✅ |
+| **Animations** | Micro-interactions, skeleton screens, shimmer effects | ✅ |
+| **Responsive** | Screen adaptation with flutter_screenutil | ✅ |
+| **Glassmorphism** | Frosted glass effects throughout the app | ✅ |
+| **Gradient Icons** | Lucide icons with gradient backgrounds | ✅ |
+
+### 🏗️ Architecture
+
+| Feature | Description | Status |
+|---------|-------------|--------|
+| **Clean Architecture** | Feature-first, layered architecture | ✅ |
+| **Riverpod** | Type-safe state management | ✅ |
+| **Go Router** | Declarative routing with deep links | ✅ |
+| **Dio** | HTTP client with interceptors | ✅ |
+| **Repository Pattern** | Abstracted data layer | ✅ |
+
+### 📱 Complete Flow
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  Splash     │────▶│   Privacy   │────▶│   Guide     │
+│  (2s)       │     │   Policy    │     │   (First)   │
+└─────────────┘     └─────────────┘     └─────────────┘
+                                                │
+                        ┌───────────────────────┘
+                        ▼
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   Home      │◀────│   Login     │◀────│   Auth      │
+│             │     │             │     │   Check     │
+└─────────────┘     └─────────────┘     └─────────────┘
+```
+
+### 🎯 Pre-built Pages
+
+- **Splash** - Branded launch screen with animation
+- **Privacy** - GDPR-compliant privacy policy with HTML rendering
+- **Guide** - Onboarding with smooth page indicators
+- **Login** - Multiple auth methods (password, SMS, WeChat)
+- **User Info** - Profile completion with image picker
+- **Home/Travel** - Destination browsing with hero animations
+- **Message** - Chat list with stories, swipe actions
+- **Profile** - User profile with VIP membership
+- **Gift Shop** - Beautiful gift store with cart functionality
+- **VIP** - Subscription plans with glowing effects
+
+---
+
+## 📸 Screenshots
+
+<p align="center">
+  <i>Screenshots will be added here</i>
+</p>
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
 
 ```bash
+# Flutter 3.0 or higher
+flutter --version
+
+# Dart 3.0 or higher
+dart --version
+```
+
+### Installation
+
+```bash
+# Clone the repository
 git clone https://github.com/reedtang666/flutter-easy-starter.git
+
+# Navigate to project
 cd flutter-easy-starter
-```
 
-### 2. 安装依赖
-
-```bash
+# Install dependencies
 flutter pub get
-```
 
-### 3. 运行项目
-
-```bash
+# Run the app
 flutter run
 ```
 
-### 4. 登录体验
-
-**演示账号：**
-- 账号：`test`
-- 密码：`123456`
-
-也可以直接使用"演示"快捷登录按钮。
-
-## 📱 启动流程
+### Demo Credentials
 
 ```
-Splash (启动页 2秒)
-    ↓
-判断隐私政策
-    ↓ 未同意
-PrivacyPage (隐私政策)
-    ↓ 同意
-GuidePage (引导页 首次启动展示)
-    ↓
-判断登录状态
-    ↓ 未登录
-LoginPage (登录页)
-    ↓ 登录成功
-UserInfoPage (信息补充页，可选)
-    ↓
-HomePage (主页)
+Username: test
+Password: 123456
 ```
 
-## 📁 目录结构
+Or use the **"演示登录"** (Demo Login) button for instant access.
+
+---
+
+## 🏗️ Architecture
+
+### Clean Architecture Layers
 
 ```
-lib/
-├── main.dart                      # App 入口
-├── app.dart                       # MaterialApp 配置
-├── core/                          # 核心层
-│   ├── constants/                 # 常量
-│   │   ├── app_constants.dart     # App信息
-│   │   ├── api_constants.dart     # API地址
-│   │   └── storage_keys.dart      # 存储Key
-│   ├── router/                    # 路由
-│   │   ├── app_router.dart        # go_router配置
-│   │   └── route_names.dart       # 路由名称
-│   ├── services/                  # 服务
-│   │   ├── http_service.dart      # Dio封装
-│   │   ├── storage_service.dart   # 本地存储
-│   │   ├── push_service.dart      # 极光推送预留
-│   │   └── wechat_service.dart    # 微信SDK预留
-│   ├── theme/                     # 主题
-│   │   ├── app_colors.dart        # 颜色配置
-│   │   ├── app_theme.dart         # 亮/暗主题
-│   │   └── theme_provider.dart    # 主题状态
-│   └── utils/                     # 工具类
-├── features/                      # 功能模块
-│   ├── splash/                    # 启动页
-│   ├── privacy/                   # 隐私政策
-│   ├── guide/                     # 引导页
-│   ├── auth/                      # 认证
-│   │   ├── login/                 # 登录页
-│   │   └── user_info/             # 信息补充
-│   ├── home/                      # 主页
-│   └── profile/                   # 个人中心
-├── models/                        # 数据模型
-│   ├── api_response.dart
-│   └── user_model.dart
-├── providers/                     # 全局状态
-│   └── auth_provider.dart
-└── widgets/                       # 通用组件
+┌─────────────────────────────────────────┐
+│         Presentation Layer              │
+│  ┌─────────┐ ┌─────────┐ ┌──────────┐  │
+│  │  Pages  │ │ Widgets │ │ Providers│  │
+│  └────┬────┘ └────┬────┘ └────┬─────┘  │
+│       └─────────────┴─────────┘         │
+├─────────────────────────────────────────┤
+│           Domain Layer                  │
+│  ┌─────────┐ ┌─────────┐ ┌──────────┐  │
+│  │  Models │ │Use Cases│ │Repository│  │
+│  │         │ │         │ │ Interface│  │
+│  └────┬────┘ └────┬────┘ └────┬─────┘  │
+│       └─────────────┴─────────┘         │
+├─────────────────────────────────────────┤
+│           Data Layer                    │
+│  ┌─────────┐ ┌─────────┐ ┌──────────┐  │
+│  │  Repos  │ │  APIs   │ │  Local   │  │
+│  │         │ │         │ │ Storage  │  │
+│  └─────────┘ └─────────┘ └──────────┘  │
+└─────────────────────────────────────────┘
 ```
 
-## ⚙️ 配置第三方服务
+### State Management with Riverpod
 
-### 1. 极光推送
-
-**获取 AppKey：**
-1. 前往极光官网注册：https://www.jiguang.cn/
-2. 创建应用，获取 AppKey
-
-**Android 配置：**
-
-修改 `android/app/build.gradle`：
-```gradle
-android {
-    defaultConfig {
-        manifestPlaceholders = [
-            JPUSH_APPKEY: "your_app_key",
-            JPUSH_CHANNEL: "developer-default",
-        ]
-    }
-}
-```
-
-**iOS 配置：**
-
-修改 `ios/Runner/Info.plist`：
-```xml
-<key>jiguang_appKey</key>
-<string>your_app_key</string>
-```
-
-**代码启用：**
-
-编辑 `lib/core/services/push_service.dart`，取消 `init` 方法的注释。
-
-编辑 `lib/features/privacy/privacy_manager.dart`，取消 `_initJPush` 中相关代码的注释。
-
-### 2. 微信 SDK
-
-**获取 AppID：**
-1. 前往微信开放平台：https://open.weixin.qq.com/
-2. 注册应用，获取 AppID
-3. 配置 Universal Link（iOS 必须）
-
-**Android 配置：**
-
-修改 `android/app/build.gradle`：
-```gradle
-android {
-    defaultConfig {
-        manifestPlaceholders = [
-            WX_APP_ID: "your_wx_app_id",
-        ]
-    }
-}
-```
-
-**iOS 配置：**
-
-1. 修改 `ios/Runner/Info.plist`
-2. 配置 URL Types
-3. 配置 Universal Link
-
-**代码启用：**
-
-编辑 `lib/core/services/wechat_service.dart`，取消相关方法的注释。
-
-编辑 `lib/features/privacy/privacy_manager.dart`，取消 `_initWechat` 中相关代码的注释。
-
-### 3. 隐私政策动态获取（可选）
-
-当前隐私政策为本地 HTML，如需从服务器动态获取：
-
-1. 编辑 `lib/features/privacy/privacy_page.dart`
-2. 修改 `PrivacyContent.htmlContent` 为网络请求获取
-3. 添加加载状态和错误处理
-
-## 🔧 自定义配置
-
-### 修改 App 信息
-
-编辑 `lib/core/constants/app_constants.dart`：
 ```dart
-static const String appName = '您的应用名称';
-static const String appVersion = '1.0.0';
-```
+// Define a provider
+final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
+  return AuthNotifier();
+});
 
-### 修改 API 地址
-
-编辑 `lib/core/constants/api_constants.dart`：
-```dart
-static String get baseUrl {
-  if (isProduction) {
-    return 'https://your-production-api.com';
+// Use in widget
+class MyWidget extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(authProvider);
+    
+    return ElevatedButton(
+      onPressed: () => ref.read(authProvider.notifier).login(),
+      child: Text('Login'),
+    );
   }
-  return 'https://your-dev-api.com';
 }
 ```
 
-### 修改引导页内容
+---
 
-编辑 `lib/features/guide/guide_page.dart`：
+## 📁 Project Structure
+
+```
+flutter-easy-starter/
+├── android/                      # Android platform code
+├── ios/                          # iOS platform code
+├── assets/                       # Static resources
+│   ├── images/                   # Image assets
+│   │   ├── profiles/            # User avatars
+│   │   ├── guide/               # Onboarding images
+│   │   └── travel/              # Travel destination images
+│   ├── animations/              # Lottie animations
+│   └── fonts/                   # Custom fonts (optional)
+├── lib/
+│   ├── main.dart                # Application entry point
+│   ├── app.dart                 # MaterialApp configuration
+│   │
+│   ├── core/                    # Core layer (shared)
+│   │   ├── constants/           # App constants
+│   │   │   ├── app_constants.dart
+│   │   │   ├── api_constants.dart
+│   │   │   └── storage_keys.dart
+│   │   ├── router/              # Navigation
+│   │   │   ├── app_router.dart  # GoRouter configuration
+│   │   │   └── route_names.dart # Route constants
+│   │   ├── services/            # Business services
+│   │   │   ├── http_service.dart    # Dio wrapper
+│   │   │   ├── storage_service.dart # SharedPreferences
+│   │   │   ├── push_service.dart    # JPush integration
+│   │   │   └── wechat_service.dart  # WeChat SDK
+│   │   ├── theme/               # Theming
+│   │   │   ├── app_colors.dart  # Color palette
+│   │   │   ├── app_theme.dart   # Light/Dark themes
+│   │   │   └── theme_provider.dart
+│   │   ├── utils/               # Utilities
+│   │   │   ├── dialog_utils.dart
+│   │   │   └── validators.dart
+│   │   └── widgets/             # Shared widgets
+│   │       ├── animated_button.dart   # Animation system
+│   │       ├── shimmer_widgets.dart   # Skeleton screens
+│   │       └── empty_widgets.dart     # Empty states
+│   │
+│   ├── features/                # Feature modules
+│   │   ├── splash/              # Launch screen
+│   │   ├── privacy/             # Privacy policy
+│   │   ├── guide/               # Onboarding
+│   │   ├── auth/                # Authentication
+│   │   │   ├── login/
+│   │   │   ├── user_info/
+│   │   │   └── real_name_auth/
+│   │   ├── intro/               # Introduction page
+│   │   ├── travel/              # Travel feature
+│   │   │   ├── pages/
+│   │   │   └── widgets/
+│   │   ├── message/             # Messaging
+│   │   │   ├── models/
+│   │   │   └── widgets/
+│   │   ├── chat/                # Chat functionality
+│   │   ├── profile/             # User profile
+│   │   ├── vip/                 # VIP membership
+│   │   ├── gift_shop/           # Gift store
+│   │   ├── photos/              # Photo gallery
+│   │   ├── help/                # Help & feedback
+│   │   └── main/                # Main shell with bottom nav
+│   │
+│   ├── models/                  # Data models
+│   │   ├── user_model.dart
+│   │   └── api_response.dart
+│   │
+│   └── providers/               # Global providers
+│       └── auth_provider.dart
+│
+├── test/                        # Unit tests
+├── pubspec.yaml                 # Dependencies
+└── README.md                    # This file
+```
+
+---
+
+## 🎬 Animation System
+
+### Built-in Animations
+
+Our animation system provides ready-to-use widgets for common animation patterns:
+
+#### 1. AnimatedButton
+
+Tap animations with haptic feedback:
+
 ```dart
-const List<GuideItem> guideItems = [
-  GuideItem(
-    title: '您的标题',
-    subtitle: '您的描述',
-    icon: Icons.your_icon,
-    color: YourColor,
+AnimatedButton(
+  onTap: () => print('Tapped!'),
+  scaleDown: 0.95,
+  enableHaptic: true,
+  hapticType: HapticFeedbackType.medium,
+  child: Container(
+    padding: EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.blue,
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Text('Tap Me'),
   ),
-  // ...
-];
+)
 ```
 
-### 添加新的路由
+#### 2. PulseAnimation
 
-1. 在 `lib/core/router/route_names.dart` 添加路由名：
+Attention-grabbing pulse effect:
+
 ```dart
-static const String myPage = '/my-page';
+PulseAnimation(
+  duration: Duration(milliseconds: 1500),
+  minScale: 1.0,
+  maxScale: 1.05,
+  child: MyWidget(),
+)
 ```
 
-2. 在 `lib/core/router/app_router.dart` 添加路由配置：
+#### 3. StaggeredAnimation
+
+Staggered entrance animations for lists:
+
+```dart
+ListView.builder(
+  itemBuilder: (context, index) {
+    return StaggeredAnimation(
+      index: index,
+      type: AnimationType.slideUp,
+      child: ListTile(...),
+    );
+  },
+)
+```
+
+#### 4. AnimatedGlowCard
+
+Cards with selectable glow effects:
+
+```dart
+AnimatedGlowCard(
+  isSelected: isSelected,
+  onTap: () => setState(() => isSelected = !isSelected),
+  glowColor: AppColors.primary,
+  child: MyContent(),
+)
+```
+
+### Animation Durations
+
+| Type | Duration | Use Case |
+|------|----------|----------|
+| `AppDurations.fast` | 150ms | Micro-interactions, button presses |
+| `AppDurations.normal` | 300ms | Page transitions, card expansions |
+| `AppDurations.slow` | 500ms | Complex transitions, hero animations |
+
+---
+
+## 🎨 UI Components
+
+### FrostedWidget (Glassmorphism)
+
+Create beautiful frosted glass effects:
+
+```dart
+FrostedWidget(
+  borderRadius: 20,
+  blurSigma: 20,
+  backgroundColor: Colors.white.withOpacity(0.1),
+  child: Padding(
+    padding: EdgeInsets.all(16),
+    child: Text('Frosted Content'),
+  ),
+)
+```
+
+### Shimmer Loading
+
+Skeleton screens for loading states:
+
+```dart
+// List shimmer
+ShimmerList(
+  itemCount: 6,
+  hasImage: true,
+  hasSubtitle: true,
+)
+
+// Grid shimmer
+ShimmerGrid(
+  crossAxisCount: 3,
+  itemCount: 9,
+)
+
+// Custom shimmer
+ShimmerContainer(
+  width: 200,
+  height: 100,
+  borderRadius: 12,
+)
+```
+
+### Empty States
+
+Beautiful empty and error states:
+
+```dart
+// Empty state
+EmptyWidget(
+  icon: LucideIcons.inbox,
+  title: 'No Messages',
+  subtitle: 'Start a conversation to see it here',
+  onRetry: () => loadData(),
+)
+
+// Error state
+AppErrorWidget(
+  message: 'Failed to load',
+  onRetry: () => retry(),
+)
+
+// Loading state
+LoadingWidget(
+  message: 'Loading...',
+)
+```
+
+---
+
+## ⚙️ Configuration
+
+### App Constants
+
+Edit `lib/core/constants/app_constants.dart`:
+
+```dart
+class AppConstants {
+  static const String appName = 'My App';
+  static const String appVersion = '1.0.0';
+  static const String apiBaseUrl = 'https://api.example.com';
+}
+```
+
+### Theme Customization
+
+Edit `lib/core/theme/app_colors.dart`:
+
+```dart
+class AppColors {
+  // Primary brand color
+  static const Color primary = Color(0xFFAF52DE);
+  static const Color primaryLight = Color(0xFFBF5AF2);
+  
+  // Background colors
+  static const Color background = Color(0xFF000000);
+  static const Color surface = Color(0xFF1C1C1E);
+  
+  // Text colors
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color lightGrey = Color(0xFF8E8E93);
+}
+```
+
+### Adding New Routes
+
+1. Add route name in `lib/core/router/route_names.dart`:
+
+```dart
+class RouteNames {
+  static const String myPage = '/my-page';
+}
+```
+
+2. Add route configuration in `lib/core/router/app_router.dart`:
+
 ```dart
 GoRoute(
   path: RouteNames.myPage,
@@ -233,64 +463,251 @@ GoRoute(
 ),
 ```
 
-## 📦 依赖说明
+3. Navigate using:
 
-| 包名 | 用途 | 版本 |
-|------|------|------|
-| flutter_riverpod | 状态管理 | ^2.5.1 |
-| go_router | 路由管理 | ^14.1.0 |
-| dio | 网络请求 | ^5.4.0 |
-| shared_preferences | 本地存储 | ^2.2.2 |
-| flutter_screenutil | 屏幕适配 | ^5.9.0 |
-| jpush_flutter | 极光推送 | ^3.2.8 |
-| fluwx | 微信SDK | ^5.7.0 |
-| flutter_html | HTML渲染 | ^3.0.0-beta.2 |
-| smooth_page_indicator | 页面指示器 | ^1.1.0 |
-
-## 🎯 下一步开发
-
-### 添加新页面
-
-1. 在 `lib/features/` 创建新文件夹
-2. 创建 `xxx_page.dart` 和 `xxx_controller.dart`
-3. 在 `lib/core/router/` 注册路由
-4. 使用 `context.go(RouteNames.xxx)` 跳转
-
-### 添加新 API
-
-1. 在 `lib/core/constants/api_constants.dart` 添加 API 路径
-2. 在 Service 或 Provider 中调用：
 ```dart
-final response = await HttpService.instance.post<UserModel>(
-  ApiConstants.login,
-  data: {'username': username, 'password': password},
-  fromJsonT: (json) => UserModel.fromJson(json),
+context.go(RouteNames.myPage);
+// or
+context.push(RouteNames.myPage);
+```
+
+---
+
+## 📡 API Reference
+
+### HTTP Service
+
+The `HttpService` provides a wrapper around Dio:
+
+```dart
+// GET request
+final response = await HttpService.instance.get<List<User>>(
+  '/users',
+  fromJsonT: (json) => (json as List).map((e) => User.fromJson(e)).toList(),
+);
+
+// POST request
+final response = await HttpService.instance.post<User>(
+  '/users',
+  data: {'name': 'John', 'email': 'john@example.com'},
+  fromJsonT: (json) => User.fromJson(json),
+);
+
+// File upload
+final response = await HttpService.instance.uploadFile(
+  '/upload',
+  filePath: '/path/to/file.jpg',
 );
 ```
 
-### 状态管理
+### Storage Service
 
-使用 Riverpod：
+Local storage using SharedPreferences:
+
 ```dart
-// 定义 Provider
-final myProvider = StateNotifierProvider<MyNotifier, MyState>((ref) {
-  return MyNotifier();
-});
+// Save data
+await StorageService.instance.setString('key', 'value');
+await StorageService.instance.setBool('isLoggedIn', true);
+await StorageService.instance.setInt('userId', 123);
 
-// 在 Widget 中使用
-final state = ref.watch(myProvider);
-ref.read(myProvider.notifier).someMethod();
+// Read data
+final value = StorageService.instance.getString('key');
+final isLoggedIn = StorageService.instance.getBool('isLoggedIn');
+
+// Remove data
+await StorageService.instance.remove('key');
+
+// Clear all
+await StorageService.instance.clear();
 ```
 
-## 📄 许可证
+---
 
-MIT License
+## 🔧 Third-Party Services
 
-## 🤝 贡献
+### 1. JPush (极光推送)
 
-欢迎提交 Issue 和 Pull Request！
+**Android Setup:**
 
-## 📧 联系方式
+Edit `android/app/build.gradle`:
 
-- 邮箱：your-email@example.com
-- GitHub：https://github.com/reedtang666/flutter-easy-starter
+```gradle
+android {
+    defaultConfig {
+        manifestPlaceholders = [
+            JPUSH_APPKEY: "your_jpush_appkey",
+            JPUSH_CHANNEL: "developer-default",
+        ]
+    }
+}
+```
+
+**iOS Setup:**
+
+Edit `ios/Runner/Info.plist`:
+
+```xml
+<key>jiguang_appKey</key>
+<string>your_jpush_appkey</string>
+```
+
+**Enable in Code:**
+
+Uncomment relevant code in:
+- `lib/core/services/push_service.dart`
+- `lib/features/privacy/privacy_manager.dart`
+
+### 2. WeChat SDK
+
+**Android Setup:**
+
+Edit `android/app/build.gradle`:
+
+```gradle
+android {
+    defaultConfig {
+        manifestPlaceholders = [
+            WX_APP_ID: "your_wechat_appid",
+        ]
+    }
+}
+```
+
+**iOS Setup:**
+
+1. Configure URL Types in `ios/Runner/Info.plist`
+2. Set up Universal Link
+
+**Enable in Code:**
+
+Uncomment relevant code in:
+- `lib/core/services/wechat_service.dart`
+- `lib/features/privacy/privacy_manager.dart`
+
+---
+
+## 🐛 Troubleshooting
+
+### Build Issues
+
+**Issue:** `Gradle task assembleDebug failed`
+
+**Solution:**
+```bash
+flutter clean
+flutter pub get
+cd android && ./gradlew clean && cd ..
+flutter run
+```
+
+**Issue:** CocoaPods errors on iOS
+
+**Solution:**
+```bash
+cd ios
+pod deintegrate
+pod install
+cd ..
+flutter run
+```
+
+### Runtime Issues
+
+**Issue:** Images not loading
+
+**Solution:** Ensure assets are declared in `pubspec.yaml`:
+
+```yaml
+flutter:
+  assets:
+    - assets/images/
+    - assets/images/profiles/
+```
+
+**Issue:** Routes not working
+
+**Solution:** Check that route names match exactly between `route_names.dart` and `app_router.dart`.
+
+---
+
+## 📦 Dependencies
+
+### Core Dependencies
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| flutter_riverpod | ^2.5.1 | State management |
+| riverpod_annotation | ^2.3.5 | Code generation |
+| go_router | ^14.1.0 | Routing |
+| dio | ^5.4.0 | HTTP client |
+| flutter_screenutil | ^5.9.0 | Screen adaptation |
+
+### UI Dependencies
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| flutter_lucide | ^1.4.0 | Modern icons |
+| shimmer | ^3.0.0 | Skeleton screens |
+| smooth_page_indicator | ^1.1.0 | Page indicators |
+| flutter_slidable | ^3.1.0 | Swipe actions |
+| flutter_easyloading | ^3.0.5 | Loading indicators |
+
+### Third-Party Services
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| jpush_flutter | ^3.2.8 | Push notifications |
+| fluwx | ^5.7.0 | WeChat integration |
+| flutter_html | ^3.0.0-beta.2 | HTML rendering |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Commit Convention
+
+- `feat:` New feature
+- `fix:` Bug fix
+- `docs:` Documentation changes
+- `style:` Code style changes
+- `refactor:` Code refactoring
+- `test:` Test changes
+- `chore:` Build/dependency changes
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👤 Author
+
+**Reed Tang**
+
+- GitHub: [@reedtang666](https://github.com/reedtang666)
+- Email: your-email@example.com
+
+---
+
+## 🙏 Acknowledgments
+
+- [Flutter Team](https://flutter.dev) for the amazing framework
+- [Riverpod](https://riverpod.dev) for excellent state management
+- [Lucide](https://lucide.dev) for beautiful icons
+- All contributors who helped improve this project
+
+---
+
+<p align="center">
+  Made with ❤️ using Flutter
+</p>
