@@ -193,7 +193,7 @@ class _TravelDestinationDetailsPageState
                                         width: 40.w,
                                         height: 40.w,
                                         child: FrostedWidget(
-                                          color: Colors.grey,
+                                          backgroundColor: Colors.grey.withValues(alpha: 0.5),
                                           child: Text(
                                             '+4',
                                             style: TextStyle(

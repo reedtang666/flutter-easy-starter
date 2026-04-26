@@ -74,6 +74,8 @@ dependencies:
   flutter_spinkit: ^5.2.1
   lottie: ^3.1.0
   flutter_slidable: ^3.1.0
+  shimmer: ^3.0.0
+  flutter_lucide: ^1.4.0
 
   # 本地通知
   flutter_local_notifications: ^17.1.2

@@ -32,7 +32,7 @@ class _TravelBottomNavBarState extends State<TravelBottomNavBar> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(60.r),
         child: FrostedWidget(
-          color: AppColors.darkGrey.withOpacity(.8),
+          // color: AppColors.darkGrey.withOpacity(.8),
           child: Padding(
             padding: EdgeInsets.all(5.w),
             child: Stack(

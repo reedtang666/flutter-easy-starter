@@ -197,6 +197,28 @@ class AppShadows {
       spreadRadius: 0,
     ),
   ];
+
+  /// 紫色发光
+  static List<BoxShadow> purpleGlow({double opacity = 0.4}) {
+    return [
+      BoxShadow(
+        color: AppColors.primary.withValues(alpha: opacity),
+        blurRadius: 20,
+        spreadRadius: 2,
+      ),
+    ];
+  }
+
+  /// 金色发光（VIP专属）
+  static List<BoxShadow> goldGlow({double opacity = 0.5}) {
+    return [
+      BoxShadow(
+        color: const Color(0xFFFFD700).withValues(alpha: opacity),
+        blurRadius: 25,
+        spreadRadius: 3,
+      ),
+    ];
+  }
 }
 
 /// 动画时长
