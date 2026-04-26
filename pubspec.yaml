@@ -98,6 +98,7 @@ dev_dependencies:
   riverpod_generator: ^2.4.0
   build_runner: ^2.4.9
   custom_lint: ^0.6.4
+  flutter_launcher_icons: ^0.14.3
 
 flutter:
   uses-material-design: true
@@ -126,4 +127,12 @@ flutter:
   #         weight: 600
   #       - asset: assets/fonts/PlusJakartaSans-Bold.ttf
   #         weight: 700
+
+# 应用图标配置
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  adaptive_icon_background: "#1C1C1E"
+  adaptive_icon_foreground: "assets/images/app_icon.png"
 
