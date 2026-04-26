@@ -107,6 +107,13 @@
   <img src="screenshots/common/chat.png" width="200" alt="聊天页">
 </p>
 
+<p align="center">
+  <img src="screenshots/common/profile.png" width="200" alt="个人中心">
+  <img src="screenshots/common/vip.png" width="200" alt="VIP页">
+  <img src="screenshots/common/gift_shop.png" width="200" alt="礼物商店">
+  <img src="screenshots/common/my_photos.png" width="200" alt="我的相册">
+</p>
+
 > 💡 **提示**: 运行应用并截图填充此部分。建议截图的页面（按用户使用流程）：
 > - **启动页** - 带火箭动画的品牌启动屏幕
 > - **隐私政策** - 必须同意才能进入App的隐私合规页面 ⭐ **关键前置页面**

@@ -107,6 +107,13 @@
   <img src="screenshots/common/chat.png" width="200" alt="Chat">
 </p>
 
+<p align="center">
+  <img src="screenshots/common/profile.png" width="200" alt="Profile">
+  <img src="screenshots/common/vip.png" width="200" alt="VIP">
+  <img src="screenshots/common/gift_shop.png" width="200" alt="Gift Shop">
+  <img src="screenshots/common/my_photos.png" width="200" alt="My Photos">
+</p>
+
 > 💡 **Note**: Run the app and take screenshots to populate this section. Recommended pages to capture (in user flow order):
 > - **Splash** - Branded launch screen with rocket animation
 > - **Privacy Policy** - GDPR-compliant privacy consent (must accept to proceed) ⭐ **Critical Pre-entry Page**
