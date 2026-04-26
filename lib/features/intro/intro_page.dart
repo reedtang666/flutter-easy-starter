@@ -158,6 +158,24 @@ class _IntroPageState extends State<IntroPage>
           ),
         ),
 
+        // 按钮大全区块
+        SliverToBoxAdapter(
+          child: _buildSection(
+            title: '按钮大全',
+            subtitle: '多种样式的按钮组件',
+            child: _buildButtonDemos(),
+          ),
+        ),
+
+        // 开关选择器区块
+        SliverToBoxAdapter(
+          child: _buildSection(
+            title: '开关与选择器',
+            subtitle: '开关、单选、多选、分段控制',
+            child: _buildToggleDemos(),
+          ),
+        ),
+
         // 底部说明
         SliverToBoxAdapter(
           child: _buildFooterSection(),
@@ -1332,6 +1350,611 @@ class _IntroPageState extends State<IntroPage>
     });
   }
 
+  // ==================== 按钮大全演示 ====================
+  Widget _buildButtonDemos() {
+    return Column(
+      children: [
+        // 主要按钮样式
+        _buildButtonCategory(
+          title: '主要按钮',
+          child: Wrap(
+            spacing: 12.w,
+            runSpacing: 12.w,
+            children: [
+              _buildPrimaryButton('主要按钮', AppColors.primary),
+              _buildPrimaryButton('成功按钮', AppColors.green),
+              _buildPrimaryButton('警告按钮', AppColors.orange),
+              _buildPrimaryButton('危险按钮', AppColors.red),
+            ],
+          ),
+        ),
+        SizedBox(height: 20.w),
+
+        // 次要按钮样式
+        _buildButtonCategory(
+          title: '次要按钮',
+          child: Wrap(
+            spacing: 12.w,
+            runSpacing: 12.w,
+            children: [
+              _buildSecondaryButton('次要按钮'),
+              _buildSecondaryButton('描边按钮', outlined: true),
+              _buildGhostButton('幽灵按钮'),
+            ],
+          ),
+        ),
+        SizedBox(height: 20.w),
+
+        // 图标按钮
+        _buildButtonCategory(
+          title: '图标按钮',
+          child: Wrap(
+            spacing: 12.w,
+            runSpacing: 12.w,
+            children: [
+              _buildIconButton(LucideIcons.heart, AppColors.red),
+              _buildIconButton(LucideIcons.star, AppColors.orange),
+              _buildIconButton(LucideIcons.share, AppColors.blue),
+              _buildIconButton(LucideIcons.bookmark, AppColors.green),
+              _buildIconButtonWithText(LucideIcons.download, '下载', AppColors.primary),
+              _buildIconButtonWithText(LucideIcons.send, '发送', AppColors.blue),
+            ],
+          ),
+        ),
+        SizedBox(height: 20.w),
+
+        // 加载状态按钮
+        _buildButtonCategory(
+          title: '加载状态',
+          child: Wrap(
+            spacing: 12.w,
+            runSpacing: 12.w,
+            children: [
+              _buildLoadingButton('加载中...'),
+              _buildLoadingButton('提交中', small: true),
+            ],
+          ),
+        ),
+        SizedBox(height: 20.w),
+
+        // 渐变按钮
+        _buildButtonCategory(
+          title: '渐变按钮',
+          child: Wrap(
+            spacing: 12.w,
+            runSpacing: 12.w,
+            children: [
+              _buildGradientButton(
+                '紫色渐变',
+                [const Color(0xFF8B5CF6), const Color(0xFF6366F1)],
+              ),
+              _buildGradientButton(
+                '粉色渐变',
+                [const Color(0xFFFF2D55), const Color(0xFFFF6B6B)],
+              ),
+              _buildGradientButton(
+                '蓝色渐变',
+                [const Color(0xFF0A84FF), const Color(0xFF5AC8FA)],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildButtonCategory({required String title, required Widget child}) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(
+          color: AppColors.white.withValues(alpha: 0.05),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightGrey,
+            ),
+          ),
+          SizedBox(height: 12.w),
+          child,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPrimaryButton(String text, Color color) {
+    return GestureDetector(
+      onTap: () => HapticFeedback.lightImpact(),
+      child: AnimatedScale(
+        scale: 1.0,
+        duration: const Duration(milliseconds: 100),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.w),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(10.r),
+            boxShadow: [
+              BoxShadow(
+                color: color.withValues(alpha: 0.3),
+                blurRadius: 8,
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSecondaryButton(String text, {bool outlined = false}) {
+    return GestureDetector(
+      onTap: () => HapticFeedback.lightImpact(),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.w),
+        decoration: BoxDecoration(
+          color: outlined ? Colors.transparent : AppColors.surfaceVariant,
+          borderRadius: BorderRadius.circular(10.r),
+          border: outlined
+              ? Border.all(color: AppColors.white.withValues(alpha: 0.2))
+              : null,
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+            color: outlined ? Colors.white : AppColors.lightGrey,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGhostButton(String text) {
+    return GestureDetector(
+      onTap: () => HapticFeedback.lightImpact(),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.w),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+            color: AppColors.primary,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIconButton(IconData icon, Color color) {
+    return GestureDetector(
+      onTap: () => HapticFeedback.lightImpact(),
+      child: Container(
+        width: 44.w,
+        height: 44.w,
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Icon(icon, color: color, size: 20),
+      ),
+    );
+  }
+
+  Widget _buildIconButtonWithText(IconData icon, String text, Color color) {
+    return GestureDetector(
+      onTap: () => HapticFeedback.lightImpact(),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.w),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.15),
+          borderRadius: BorderRadius.circular(10.r),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: color, size: 18),
+            SizedBox(width: 8.w),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: color,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingButton(String text, {bool small = false}) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: small ? 16.w : 20.w,
+        vertical: small ? 10.w : 12.w,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withValues(alpha: 0.8),
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: small ? 14.w : 16.w,
+            height: small ? 14.w : 16.w,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+          ),
+          SizedBox(width: 8.w),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: small ? 13.sp : 14.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGradientButton(String text, List<Color> colors) {
+    return GestureDetector(
+      onTap: () => HapticFeedback.lightImpact(),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.w),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: colors),
+          borderRadius: BorderRadius.circular(10.r),
+          boxShadow: [
+            BoxShadow(
+              color: colors.first.withValues(alpha: 0.3),
+              blurRadius: 10,
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ==================== 开关选择器演示 ====================
+  Widget _buildToggleDemos() {
+    return Column(
+      children: [
+        // 开关 - 使用真正的状态管理
+        _SwitchDemo(),
+        SizedBox(height: 16.w),
+
+        // 分段选择器
+        _SegmentedControlDemo(),
+        SizedBox(height: 16.w),
+
+        // 单选按钮
+        _RadioGroupDemo(),
+        SizedBox(height: 16.w),
+
+        // 多选按钮
+        _CheckboxGroupDemo(),
+        SizedBox(height: 16.w),
+
+        // 步进器
+        _StepperDemo(),
+      ],
+    );
+  }
+
+  Widget _buildToggleCategory({required String title, required Widget child}) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(
+          color: AppColors.white.withValues(alpha: 0.05),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightGrey,
+            ),
+          ),
+          SizedBox(height: 16.w),
+          child,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCustomSwitch(bool value, Color activeColor) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      width: 52.w,
+      height: 32.w,
+      decoration: BoxDecoration(
+        color: value ? activeColor : AppColors.surfaceVariant,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: AnimatedAlign(
+        duration: const Duration(milliseconds: 200),
+        alignment: value ? Alignment.centerRight : Alignment.centerLeft,
+        child: Padding(
+          padding: EdgeInsets.all(3.w),
+          child: Container(
+            width: 26.w,
+            height: 26.w,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(13.r),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.2),
+                  blurRadius: 4,
+                  spreadRadius: 0,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSegmentedControl() {
+    final options = ['日', '周', '月', '年'];
+    return StatefulBuilder(
+      builder: (context, setState) {
+        int selectedIndex = 1;
+        return Container(
+          padding: EdgeInsets.all(4.w),
+          decoration: BoxDecoration(
+            color: AppColors.background,
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: options.asMap().entries.map((entry) {
+              final index = entry.key;
+              final label = entry.value;
+              final isSelected = index == selectedIndex;
+              return AnimatedButton(
+                onTap: () => setState(() => selectedIndex = index),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.w),
+                  decoration: BoxDecoration(
+                    color: isSelected ? AppColors.surface : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                      color: isSelected ? Colors.white : AppColors.lightGrey,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildRadioGroup() {
+    return StatefulBuilder(
+      builder: (context, setState) {
+        int selectedValue = 1;
+        return Row(
+          children: [
+            _buildRadioItem('选项一', 1, selectedValue, () => setState(() => selectedValue = 1)),
+            SizedBox(width: 20.w),
+            _buildRadioItem('选项二', 2, selectedValue, () => setState(() => selectedValue = 2)),
+            SizedBox(width: 20.w),
+            _buildRadioItem('选项三', 3, selectedValue, () => setState(() => selectedValue = 3)),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildRadioItem(String label, int value, int selectedValue, VoidCallback onTap) {
+    final isSelected = value == selectedValue;
+    return AnimatedButton(
+      onTap: onTap,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 22.w,
+            height: 22.w,
+            decoration: BoxDecoration(
+              color: isSelected ? AppColors.primary : Colors.transparent,
+              borderRadius: BorderRadius.circular(11.r),
+              border: Border.all(
+                color: isSelected ? AppColors.primary : AppColors.lightGrey,
+                width: 2,
+              ),
+            ),
+            child: isSelected
+                ? Icon(LucideIcons.check, color: Colors.white, size: 14)
+                : null,
+          ),
+          SizedBox(width: 8.w),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: isSelected ? Colors.white : AppColors.lightGrey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCheckboxGroup() {
+    return StatefulBuilder(
+      builder: (context, setState) {
+        final checkedItems = {1, 3};
+        return Wrap(
+          spacing: 16.w,
+          runSpacing: 12.w,
+          children: [
+            _buildCheckboxItem('选项 A', 1, checkedItems.contains(1), (v) {
+              setState(() => v ? checkedItems.add(1) : checkedItems.remove(1));
+            }),
+            _buildCheckboxItem('选项 B', 2, checkedItems.contains(2), (v) {
+              setState(() => v ? checkedItems.add(2) : checkedItems.remove(2));
+            }),
+            _buildCheckboxItem('选项 C', 3, checkedItems.contains(3), (v) {
+              setState(() => v ? checkedItems.add(3) : checkedItems.remove(3));
+            }),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildCheckboxItem(String label, int value, bool isChecked, Function(bool) onChanged) {
+    return AnimatedButton(
+      onTap: () => onChanged(!isChecked),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 22.w,
+            height: 22.w,
+            decoration: BoxDecoration(
+              color: isChecked ? AppColors.primary : Colors.transparent,
+              borderRadius: BorderRadius.circular(6.r),
+              border: Border.all(
+                color: isChecked ? AppColors.primary : AppColors.lightGrey,
+                width: 2,
+              ),
+            ),
+            child: isChecked
+                ? Icon(LucideIcons.check, color: Colors.white, size: 14)
+                : null,
+          ),
+          SizedBox(width: 8.w),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: isChecked ? Colors.white : AppColors.lightGrey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStepper() {
+    return StatefulBuilder(
+      builder: (context, setState) {
+        int count = 1;
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.w),
+          decoration: BoxDecoration(
+            color: AppColors.background,
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedButton(
+                onTap: count > 1 ? () => setState(() => count--) : null,
+                child: Container(
+                  width: 32.w,
+                  height: 32.w,
+                  decoration: BoxDecoration(
+                    color: count > 1 ? AppColors.surface : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Icon(
+                    LucideIcons.minus,
+                    color: count > 1 ? Colors.white : AppColors.lightGrey,
+                    size: 16,
+                  ),
+                ),
+              ),
+              Container(
+                width: 48.w,
+                alignment: Alignment.center,
+                child: Text(
+                  '$count',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              AnimatedButton(
+                onTap: () => setState(() => count++),
+                child: Container(
+                  width: 32.w,
+                  height: 32.w,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Icon(LucideIcons.plus, color: Colors.white, size: 16),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   // 底部说明区域
   Widget _buildFooterSection() {
     return Container(
@@ -1396,6 +2019,433 @@ class _IntroPageState extends State<IntroPage>
     if (mainPageState != null) {
       mainPageState.switchToTab(index);
     }
+  }
+}
+
+// ==================== 开关选择器状态组件 ====================
+
+class _SwitchDemo extends StatefulWidget {
+  @override
+  State<_SwitchDemo> createState() => _SwitchDemoState();
+}
+
+class _SwitchDemoState extends State<_SwitchDemo> {
+  final List<bool> _values = [true, false, true, true];
+  final List<Color> _colors = [AppColors.primary, AppColors.primary, AppColors.green, AppColors.red];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '开关 Switch',
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightGrey,
+            ),
+          ),
+          SizedBox(height: 16.w),
+          Row(
+            children: [
+              for (int i = 0; i < 4; i++) ...[
+                GestureDetector(
+                  onTap: () {
+                    HapticFeedback.lightImpact();
+                    setState(() => _values[i] = !_values[i]);
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: 52.w,
+                    height: 32.w,
+                    decoration: BoxDecoration(
+                      color: _values[i] ? _colors[i] : AppColors.surfaceVariant,
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    child: AnimatedAlign(
+                      duration: const Duration(milliseconds: 200),
+                      alignment: _values[i] ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(3.w),
+                        child: Container(
+                          width: 26.w,
+                          height: 26.w,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(13.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.2),
+                                blurRadius: 4,
+                                spreadRadius: 0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                if (i < 3) SizedBox(width: 16.w),
+              ],
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SegmentedControlDemo extends StatefulWidget {
+  @override
+  State<_SegmentedControlDemo> createState() => _SegmentedControlDemoState();
+}
+
+class _SegmentedControlDemoState extends State<_SegmentedControlDemo> {
+  int _selectedIndex = 1;
+  final List<String> _options = ['日', '周', '月', '年'];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '分段选择器 Segmented',
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightGrey,
+            ),
+          ),
+          SizedBox(height: 16.w),
+          Container(
+            padding: EdgeInsets.all(4.w),
+            decoration: BoxDecoration(
+              color: AppColors.background,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: _options.asMap().entries.map((entry) {
+                final index = entry.key;
+                final label = entry.value;
+                final isSelected = index == _selectedIndex;
+                return GestureDetector(
+                  onTap: () {
+                    HapticFeedback.lightImpact();
+                    setState(() => _selectedIndex = index);
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.w),
+                    decoration: BoxDecoration(
+                      color: isSelected ? AppColors.surface : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                        color: isSelected ? Colors.white : AppColors.lightGrey,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RadioGroupDemo extends StatefulWidget {
+  @override
+  State<_RadioGroupDemo> createState() => _RadioGroupDemoState();
+}
+
+class _RadioGroupDemoState extends State<_RadioGroupDemo> {
+  int _selectedValue = 1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '单选 Radio',
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightGrey,
+            ),
+          ),
+          SizedBox(height: 16.w),
+          Row(
+            children: [
+              _buildRadioItem('选项一', 1),
+              SizedBox(width: 20.w),
+              _buildRadioItem('选项二', 2),
+              SizedBox(width: 20.w),
+              _buildRadioItem('选项三', 3),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRadioItem(String label, int value) {
+    final isSelected = value == _selectedValue;
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.lightImpact();
+        setState(() => _selectedValue = value);
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 22.w,
+            height: 22.w,
+            decoration: BoxDecoration(
+              color: isSelected ? AppColors.primary : Colors.transparent,
+              borderRadius: BorderRadius.circular(11.r),
+              border: Border.all(
+                color: isSelected ? AppColors.primary : AppColors.lightGrey,
+                width: 2,
+              ),
+            ),
+            child: isSelected
+                ? Icon(LucideIcons.check, color: Colors.white, size: 14)
+                : null,
+          ),
+          SizedBox(width: 8.w),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: isSelected ? Colors.white : AppColors.lightGrey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CheckboxGroupDemo extends StatefulWidget {
+  @override
+  State<_CheckboxGroupDemo> createState() => _CheckboxGroupDemoState();
+}
+
+class _CheckboxGroupDemoState extends State<_CheckboxGroupDemo> {
+  final Set<int> _checkedItems = {1, 3};
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '多选 Checkbox',
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightGrey,
+            ),
+          ),
+          SizedBox(height: 16.w),
+          Wrap(
+            spacing: 16.w,
+            runSpacing: 12.w,
+            children: [
+              _buildCheckboxItem('选项 A', 1),
+              _buildCheckboxItem('选项 B', 2),
+              _buildCheckboxItem('选项 C', 3),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCheckboxItem(String label, int value) {
+    final isChecked = _checkedItems.contains(value);
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.lightImpact();
+        setState(() {
+          if (isChecked) {
+            _checkedItems.remove(value);
+          } else {
+            _checkedItems.add(value);
+          }
+        });
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 22.w,
+            height: 22.w,
+            decoration: BoxDecoration(
+              color: isChecked ? AppColors.primary : Colors.transparent,
+              borderRadius: BorderRadius.circular(6.r),
+              border: Border.all(
+                color: isChecked ? AppColors.primary : AppColors.lightGrey,
+                width: 2,
+              ),
+            ),
+            child: isChecked
+                ? Icon(LucideIcons.check, color: Colors.white, size: 14)
+                : null,
+          ),
+          SizedBox(width: 8.w),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: isChecked ? Colors.white : AppColors.lightGrey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StepperDemo extends StatefulWidget {
+  @override
+  State<_StepperDemo> createState() => _StepperDemoState();
+}
+
+class _StepperDemoState extends State<_StepperDemo> {
+  int _count = 1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '步进器 Stepper',
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightGrey,
+            ),
+          ),
+          SizedBox(height: 16.w),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.w),
+            decoration: BoxDecoration(
+              color: AppColors.background,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: _count > 1
+                      ? () {
+                          HapticFeedback.lightImpact();
+                          setState(() => _count--);
+                        }
+                      : null,
+                  child: Container(
+                    width: 32.w,
+                    height: 32.w,
+                    decoration: BoxDecoration(
+                      color: _count > 1 ? AppColors.surface : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: Icon(
+                      LucideIcons.minus,
+                      color: _count > 1 ? Colors.white : AppColors.lightGrey,
+                      size: 16,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 48.w,
+                  alignment: Alignment.center,
+                  child: Text(
+                    '$_count',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    HapticFeedback.lightImpact();
+                    setState(() => _count++);
+                  },
+                  child: Container(
+                    width: 32.w,
+                    height: 32.w,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: Icon(LucideIcons.plus, color: Colors.white, size: 16),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

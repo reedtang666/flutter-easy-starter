@@ -112,10 +112,13 @@ class _ToastMessageState extends State<ToastMessage>
                   Flexible(
                     child: Text(
                       widget.message,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
+                        decoration: TextDecoration.none,
                       ),
                     ),
                   ),
