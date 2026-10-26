@@ -100,6 +100,10 @@ dev_dependencies:
   custom_lint: ^0.6.4
   flutter_launcher_icons: ^0.14.3
 
+dependency_overrides:
+  # flutter_html 3.0.0 依赖 html 0.15.6 的内部 query_selector.matches 方法
+  html: 0.15.6
+
 flutter:
   uses-material-design: true
 
