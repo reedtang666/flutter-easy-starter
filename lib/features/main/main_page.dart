@@ -5,29 +5,46 @@ import 'package:flutter_easy_starter/features/message/message_page.dart';
 import 'package:flutter_easy_starter/features/profile/profile_page.dart';
 import 'package:flutter_easy_starter/features/travel/pages/travel_home_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
-/// 主框架页面 - 底部导航
+/// 主框架页面 - 底部导航（支持 GoRouter StatefulShellRoute.indexedStack）
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final StatefulNavigationShell? navigationShell;
+
+  const MainPage({
+    super.key,
+    this.navigationShell,
+  });
 
   @override
   State<MainPage> createState() => MainPageState();
 }
 
 class MainPageState extends State<MainPage> {
-  int _currentIndex = 0;
+  int _fallbackIndex = 0;
 
-  final List<Widget> _pages = [
+  static const List<Widget> _fallbackPages = [
     IntroPage(),
     TravelHomePage(),
     MessagePage(),
     ProfilePage(),
   ];
 
+  int get _currentIndex =>
+      widget.navigationShell?.currentIndex ?? _fallbackIndex;
+
   void switchToTab(int index) {
-    if (index >= 0 && index < _pages.length) {
+    final shell = widget.navigationShell;
+    if (shell != null) {
+      shell.goBranch(
+        index,
+        initialLocation: index == shell.currentIndex,
+      );
+      return;
+    }
+    if (index >= 0 && index < _fallbackPages.length) {
       setState(() {
-        _currentIndex = index;
+        _fallbackIndex = index;
       });
     }
   }
@@ -35,14 +52,15 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _pages,
-      ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: widget.navigationShell ??
+          IndexedStack(
+            index: _currentIndex,
+            children: _fallbackPages,
+          ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: Theme.of(context).colorScheme.surface,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.3),
@@ -53,7 +71,7 @@ class MainPageState extends State<MainPage> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -78,10 +96,10 @@ class MainPageState extends State<MainPage> {
     final isSelected = _currentIndex == index;
 
     return GestureDetector(
-      onTap: () => setState(() => _currentIndex = index),
+      onTap: () => switchToTab(index),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primary.withValues(alpha: 0.2) : Colors.transparent,
           borderRadius: BorderRadius.circular(20.r),
@@ -108,33 +126,6 @@ class MainPageState extends State<MainPage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-/// IndexedStack 实现
-class IndexedStack extends StatelessWidget {
-  final int index;
-  final List<Widget> children;
-
-  const IndexedStack({
-    super.key,
-    required this.index,
-    required this.children,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: children.asMap().entries.map((entry) {
-        return Offstage(
-          offstage: entry.key != index,
-          child: TickerMode(
-            enabled: entry.key == index,
-            child: entry.value,
-          ),
-        );
-      }).toList(),
     );
   }
 }

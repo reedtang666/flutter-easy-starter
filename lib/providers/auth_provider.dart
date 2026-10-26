@@ -1,8 +1,17 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter_easy_starter/core/constants/app_constants.dart';
 import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
+import 'package:flutter_easy_starter/core/services/http_service.dart';
 import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easy_starter/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+/// 供 GoRouter 路由守卫监听的全局登录态通知器
+final ValueNotifier<bool> authListenable = ValueNotifier<bool>(
+  StorageService.instance.getString(StorageKeys.token).isNotEmpty,
+);
 
 /// 认证状态
 class AuthState {
@@ -28,24 +37,57 @@ class AuthState {
       isLoading: isLoading ?? this.isLoading,
       isAuthenticated: isAuthenticated ?? this.isAuthenticated,
       user: user ?? this.user,
-      error: error ?? this.error,
+      error: error,
     );
   }
 }
 
-/// 认证状态 Notifier
-class AuthNotifier extends StateNotifier<AuthState> {
-  AuthNotifier() : super(const AuthState()) {
-    _init();
-  }
+/// 认证状态 Notifier（基于现代 Riverpod Notifier 范式）
+class AuthNotifier extends Notifier<AuthState> {
+  @override
+  AuthState build() {
+    // 绑定网络层 401 全局未授权回调
+    HttpService.instance.onUnauthorized = () {
+      logout();
+    };
 
-  /// 初始化：检查本地登录状态
-  Future<void> _init() async {
     final token = StorageService.instance.getString(StorageKeys.token);
     if (token.isNotEmpty) {
-      // 有token，尝试获取用户信息
-      await _getUserInfo();
+      final cachedUser = _loadCachedUser();
+      authListenable.value = true;
+      // 异步刷新最新用户信息
+      Future.microtask(_getUserInfo);
+      return AuthState(
+        isAuthenticated: true,
+        user: cachedUser,
+      );
     }
+
+    authListenable.value = false;
+    return const AuthState();
+  }
+
+  /// 从本地 JSON 缓存反序列化用户信息
+  UserModel? _loadCachedUser() {
+    final rawJson = StorageService.instance.getString(StorageKeys.userInfo);
+    if (rawJson.isEmpty) return null;
+    try {
+      final map = jsonDecode(rawJson);
+      if (map is Map<String, dynamic>) {
+        return UserModel.fromJson(map);
+      }
+    } catch (e) {
+      debugPrint('解析本地缓存用户信息失败: $e');
+    }
+    return null;
+  }
+
+  /// 持久化用户信息为标准 JSON 字符串
+  Future<void> _saveUserInfo(UserModel user) async {
+    await StorageService.instance.setString(
+      StorageKeys.userInfo,
+      jsonEncode(user.toJson()),
+    );
   }
 
   /// 账号密码登录
@@ -75,16 +117,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
           avatar: 'assets/images/avatar_default.png',
         );
 
-        await StorageService.instance.setString(
-          StorageKeys.userInfo,
-          user.toString(),
-        );
+        await _saveUserInfo(user);
 
         state = state.copyWith(
           isLoading: false,
           isAuthenticated: true,
           user: user,
         );
+        authListenable.value = true;
 
         return true;
       }
@@ -160,11 +200,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
         avatar: 'assets/images/avatar_default.png',
       );
 
+      await _saveUserInfo(user);
+
       state = state.copyWith(
         isLoading: false,
         isAuthenticated: true,
         user: user,
       );
+      authListenable.value = true;
 
       return true;
     } catch (e) {
@@ -197,11 +240,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
         avatar: 'assets/images/avatar_default.png',
       );
 
+      await _saveUserInfo(user);
+
       state = state.copyWith(
         isLoading: false,
         isAuthenticated: true,
         user: user,
       );
+      authListenable.value = true;
 
       return true;
     } catch (e) {
@@ -231,26 +277,33 @@ class AuthNotifier extends StateNotifier<AuthState> {
       );
 
       if (response.success && response.data != null) {
+        await _saveUserInfo(response.data!);
         state = state.copyWith(
           isAuthenticated: true,
           user: response.data,
         );
+        authListenable.value = true;
       }
       */
 
-      // 模拟获取用户信息
+      // 模拟获取用户信息（若本地已有缓存则优先保留本地修改过的用户信息）
       await Future.delayed(const Duration(milliseconds: 300));
-      final user = UserModel(
-        id: '1',
-        username: 'test',
-        nickname: '演示用户',
-        avatar: 'assets/images/avatar_default.png',
-      );
+      final cachedUser = _loadCachedUser();
+      final user = cachedUser ??
+          UserModel(
+            id: '1',
+            username: 'test',
+            nickname: '演示用户',
+            avatar: 'assets/images/avatar_default.png',
+          );
+
+      await _saveUserInfo(user);
 
       state = state.copyWith(
         isAuthenticated: true,
         user: user,
       );
+      authListenable.value = true;
     } catch (e) {
       // 获取失败，清除登录状态
       await logout();
@@ -270,6 +323,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       );
 
       if (response.success && response.data != null) {
+        await _saveUserInfo(response.data!);
         state = state.copyWith(
           isLoading: false,
           user: response.data,
@@ -284,8 +338,9 @@ class AuthNotifier extends StateNotifier<AuthState> {
       }
       */
 
-      // 模拟更新成功
+      // 模拟更新成功并持久化至本地
       await Future.delayed(const Duration(milliseconds: 500));
+      await _saveUserInfo(user);
       state = state.copyWith(
         isLoading: false,
         user: user,
@@ -312,6 +367,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       isAuthenticated: false,
       user: null,
     );
+    authListenable.value = false;
   }
 
   /// 清除错误
@@ -321,6 +377,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
 }
 
 /// 认证 Provider
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  return AuthNotifier();
-});
+final authProvider = NotifierProvider<AuthNotifier, AuthState>(
+  AuthNotifier.new,
+);

@@ -14,8 +14,9 @@ class DeviceUtils {
   static final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
   static PackageInfo? _packageInfo;
 
-  /// 初始化
+  /// 初始化（幂等，建议在用户同意隐私政策后调用）
   static Future<void> init() async {
+    if (_packageInfo != null) return;
     _packageInfo = await PackageInfo.fromPlatform();
   }
 
@@ -76,6 +77,7 @@ class DeviceUtils {
 
   /// 获取完整的设备信息
   static Future<DeviceInfo> getFullDeviceInfo() async {
+    await init();
     String deviceId = '';
     String model = '';
     String osVersion = '';

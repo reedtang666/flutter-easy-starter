@@ -3,7 +3,7 @@ import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
 import 'package:flutter_easy_starter/core/services/push_service.dart';
 import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easy_starter/core/services/wechat_service.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_easy_starter/core/utils/device_utils.dart';
 
 /// 隐私合规管理器
 ///
@@ -19,12 +19,25 @@ class PrivacyManager {
   bool _isJPushInitialized = false;
   bool _isWechatInitialized = false;
 
+  /// 是否已同意隐私政策
+  bool get isPrivacyAccepted =>
+      _isPrivacyAccepted ||
+      StorageService.instance.getBool(StorageKeys.privacyAccepted);
+
   /// 检查用户是否已同意隐私政策
   Future<bool> checkPrivacyAccepted() async {
     _isPrivacyAccepted = StorageService.instance.getBool(
       StorageKeys.privacyAccepted,
     );
     return _isPrivacyAccepted;
+  }
+
+  /// 二次冷启动时，若已同意隐私政策则执行初始化
+  Future<void> initIfAccepted() async {
+    final accepted = await checkPrivacyAccepted();
+    if (accepted) {
+      await _initAllSDKs();
+    }
   }
 
   /// 用户同意隐私政策
@@ -49,7 +62,10 @@ class PrivacyManager {
       return;
     }
 
-    debugPrint('✅ 隐私合规: 开始初始化第三方SDK');
+    debugPrint('✅ 隐私合规: 开始初始化设备信息与第三方SDK');
+
+    // 初始化设备信息（放在隐私同意后，避免应用市场合规检测判定抢跑）
+    await DeviceUtils.init();
 
     // 初始化极光推送
     await _initJPush();

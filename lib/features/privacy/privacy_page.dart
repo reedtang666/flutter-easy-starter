@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
+import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_easy_starter/features/privacy/privacy_content.dart';
+import 'package:flutter_easy_starter/features/privacy/privacy_manager.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// 隐私政策页
 ///
@@ -35,14 +36,9 @@ class _PrivacyPageState extends State<PrivacyPage> {
   }
 
   /// 检查进入来源
-  Future<void> _checkSource() async {
-    final prefs = await SharedPreferences.getInstance();
-    _hasAccepted = prefs.getBool(StorageKeys.privacyAccepted) ?? false;
-
-    // 如果已经同意过隐私政策，说明是从设置页进入的
-    setState(() {
-      _isFromSettings = _hasAccepted;
-    });
+  void _checkSource() {
+    _hasAccepted = StorageService.instance.getBool(StorageKeys.privacyAccepted);
+    _isFromSettings = _hasAccepted;
   }
 
   /// 拒绝隐私政策
@@ -85,8 +81,8 @@ class _PrivacyPageState extends State<PrivacyPage> {
     });
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(StorageKeys.privacyAccepted, true);
+      // 统一通过 PrivacyManager 记录同意状态并初始化设备信息及三方 SDK
+      await PrivacyManager.instance.onPrivacyAccepted();
 
       if (mounted) {
         // 同意后跳转到引导页

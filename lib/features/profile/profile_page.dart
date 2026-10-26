@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/constants/app_constants.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_easy_starter/core/theme/theme_provider.dart';
 import 'package:flutter_easy_starter/core/utils/device_utils.dart';
 import 'package:flutter_easy_starter/core/utils/dialog_utils.dart';
 import 'package:flutter_easy_starter/models/user_model.dart';
@@ -25,10 +26,12 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authProvider);
+    final themeMode = ref.watch(themeModeProvider);
+    final isDarkMode = themeMode == ThemeMode.dark;
     final user = authState.user;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('设置'),
         centerTitle: true,
@@ -87,6 +90,17 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
               child: _buildSection(
                 title: '偏好',
                 items: [
+                  _MenuItem(
+                    icon: isDarkMode ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
+                    title: '深色模式',
+                    subtitle: isDarkMode ? '已开启暗黑社交主题' : '已切换为浅色主题',
+                    trailing: _CustomSwitch(
+                      value: isDarkMode,
+                      activeColor: AppColors.primary,
+                      onChanged: (_) => ref.read(themeModeProvider.notifier).toggle(),
+                    ),
+                    onTap: () => ref.read(themeModeProvider.notifier).toggle(),
+                  ),
                   _MenuItem(
                     icon: Icons.notifications_outlined,
                     title: '消息通知',
@@ -240,11 +254,12 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   }
 
   Widget _buildUserHeader(BuildContext context, UserModel? user) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: EdgeInsets.all(AppSpacing.xxl),
       padding: EdgeInsets.all(AppSpacing.xxl),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
       ),
       child: Row(
@@ -290,7 +305,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                     color: AppColors.green,
                     borderRadius: BorderRadius.circular(AppRadius.full),
                     border: Border.all(
-                      color: AppColors.surface,
+                      color: colorScheme.surface,
                       width: 2.w,
                     ),
                   ),
@@ -307,7 +322,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                 Text(
                   user?.displayName ?? '未设置昵称',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColors.white,
+                    color: colorScheme.onSurface,
                   ),
                 ),
                 SizedBox(height: 4.w),
@@ -351,6 +366,8 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
     required String title,
     required List<_MenuItem> items,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final dividerColor = Theme.of(context).dividerTheme.color ?? AppColors.divider;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -375,7 +392,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
         Container(
           margin: EdgeInsets.symmetric(horizontal: AppSpacing.xxl),
           decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: colorScheme.surface,
             borderRadius: BorderRadius.circular(AppRadius.lg),
           ),
           child: Column(
@@ -393,8 +410,8 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       decoration: BoxDecoration(
                         border: isLast
                             ? null
-                            : const Border(
-                                bottom: BorderSide(color: AppColors.divider),
+                            : Border(
+                                bottom: BorderSide(color: dividerColor),
                               ),
                       ),
                       child: Row(
@@ -411,7 +428,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                               children: [
                                 Text(
                                   item.title,
-                                  style: TextStyle(color: AppColors.white),
+                                  style: TextStyle(color: colorScheme.onSurface),
                                 ),
                                 if (item.subtitle != null)
                                   Text(

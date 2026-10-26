@@ -4,6 +4,7 @@ import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
 import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
+import 'package:flutter_easy_starter/features/privacy/privacy_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -84,6 +85,10 @@ class _SplashPageState extends State<SplashPage>
       return;
     }
 
+    // 已同意隐私政策：执行二次冷启动的合规 SDK 与设备信息初始化
+    await PrivacyManager.instance.initIfAccepted();
+    if (!mounted) return;
+
     // 2. 检查登录状态
     final token = StorageService.instance.getString(StorageKeys.token);
     final isLoggedIn = token.isNotEmpty;
@@ -93,8 +98,11 @@ class _SplashPageState extends State<SplashPage>
       return;
     }
 
-    // 3. 检查是否首次启动（已登录情况下跳过引导页）
-    final isFirstLaunch = StorageService.instance.getBool(StorageKeys.isFirstLaunch);
+    // 3. 检查是否首次启动（默认首次启动为 true）
+    final isFirstLaunch = StorageService.instance.getBool(
+      StorageKeys.isFirstLaunch,
+      defaultValue: true,
+    );
     if (isFirstLaunch) {
       // 首次启动，进入引导页
       context.go(RouteNames.landing);

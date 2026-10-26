@@ -13,6 +13,70 @@ class AppTheme {
   AppTheme._();
 
   static ThemeData get dark => _darkTheme;
+  static ThemeData get light => _lightTheme;
+
+  static final ThemeData _lightTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.light,
+    colorScheme: const ColorScheme.light(
+      primary: AppColors.primary,
+      onPrimary: AppColors.white,
+      secondary: AppColors.pink,
+      onSecondary: AppColors.white,
+      surface: AppColors.white,
+      onSurface: Color(0xFF1C1C1E),
+      error: AppColors.error,
+      onError: AppColors.white,
+      outline: Color(0xFFE5E5EA),
+    ),
+    scaffoldBackgroundColor: const Color(0xFFF2F2F7),
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      centerTitle: true,
+      backgroundColor: Color(0xFFF2F2F7),
+      foregroundColor: Color(0xFF1C1C1E),
+      surfaceTintColor: Colors.transparent,
+      titleTextStyle: TextStyle(
+        fontFamily: AppTypography.fontFamily,
+        color: Color(0xFF1C1C1E),
+        fontSize: AppTypography.subtitle,
+        fontWeight: AppTypography.semiBold,
+        letterSpacing: -0.5,
+      ),
+      toolbarHeight: 56,
+    ),
+    cardTheme: CardThemeData(
+      elevation: 0,
+      color: AppColors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+      ),
+      margin: EdgeInsets.zero,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.md),
+        ),
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
+        textStyle: const TextStyle(
+          fontFamily: AppTypography.fontFamily,
+          fontSize: AppTypography.body,
+          fontWeight: AppTypography.semiBold,
+          letterSpacing: -0.2,
+        ),
+      ),
+    ),
+    dividerTheme: const DividerThemeData(
+      color: Color(0xFFE5E5EA),
+      thickness: 0.5,
+      space: 1,
+    ),
+  );
 
   static final ThemeData _darkTheme = ThemeData(
     useMaterial3: true,
@@ -29,7 +93,6 @@ class AppTheme {
       error: AppColors.error,
       onError: AppColors.white,
       outline: AppColors.border,
-      background: AppColors.background,
     ),
 
     // === 页面背景 ===

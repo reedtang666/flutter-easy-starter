@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_starter/core/constants/storage_keys.dart';
 import 'package:flutter_easy_starter/core/router/route_names.dart';
+import 'package:flutter_easy_starter/core/services/storage_service.dart';
 import 'package:flutter_easy_starter/core/theme/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// 引导页 - 展示框架核心卖点
 class LandingPage extends StatefulWidget {
@@ -62,14 +62,13 @@ class _LandingPageState extends State<LandingPage> {
 
   Future<void> _onStart() async {
     // 标记为非首次启动
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('is_first_launch', false);
+    await StorageService.instance.setBool(StorageKeys.isFirstLaunch, false);
 
     if (!mounted) return;
 
     // 检查登录状态，未登录则进入登录页
-    final token = prefs.getString(StorageKeys.token);
-    final isLoggedIn = token?.isNotEmpty ?? false;
+    final token = StorageService.instance.getString(StorageKeys.token);
+    final isLoggedIn = token.isNotEmpty;
 
     if (!isLoggedIn) {
       context.go(RouteNames.login);
