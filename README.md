@@ -39,7 +39,7 @@
 
 | Feature | Description | Status |
 |---------|-------------|--------|
-| **Dark Theme** | Elegant dark mode with purple accent | ✅ |
+| **Dual Theme (Dark/Light)** | Signature Dark Social mode + Light theme with persistent toggle | ✅ |
 | **Animations** | Micro-interactions, skeleton screens, shimmer effects | ✅ |
 | **Responsive** | Screen adaptation with flutter_screenutil | ✅ |
 | **Glassmorphism** | Frosted glass effects throughout the app | ✅ |
@@ -50,9 +50,10 @@
 | Feature | Description | Status |
 |---------|-------------|--------|
 | **Clean Architecture** | Feature-first, layered architecture | ✅ |
-| **Riverpod** | Type-safe state management | ✅ |
-| **Go Router** | Declarative routing with deep links | ✅ |
-| **Dio** | HTTP client with interceptors | ✅ |
+| **Riverpod (`Notifier`)** | Modern `Notifier` state management with JSON persistence | ✅ |
+| **Go Router (`StatefulShellRoute`)** | Persistent bottom-tab branches, deep links & reactive auth/privacy guards | ✅ |
+| **Dio + Auto Token Refresh** | `QueuedInterceptorsWrapper` silent token renewal, 401 auto-logout & file upload | ✅ |
+| **Privacy Compliance Guard** | Strict post-consent SDK & device info initialization for app store audits | ✅ |
 | **WebSocket** | Real-time communication with auto-reconnect | ✅ |
 | **Repository Pattern** | Abstracted data layer | ✅ |
 
@@ -199,20 +200,25 @@ Or use the **"演示登录"** (Demo Login) button for instant access.
 ### State Management with Riverpod
 
 ```dart
-// Define a provider
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  return AuthNotifier();
-});
+// Define a modern Notifier provider
+final authProvider = NotifierProvider<AuthNotifier, AuthState>(
+  AuthNotifier.new,
+);
 
 // Use in widget
 class MyWidget extends ConsumerWidget {
+  const MyWidget({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(authProvider);
     
     return ElevatedButton(
-      onPressed: () => ref.read(authProvider.notifier).login(),
-      child: Text('Login'),
+      onPressed: () => ref.read(authProvider.notifier).loginWithPassword(
+        username: 'test',
+        password: '123456',
+      ),
+      child: const Text('Login'),
     );
   }
 }
@@ -591,7 +597,7 @@ context.push(RouteNames.myPage);
 
 ### HTTP Service
 
-The `HttpService` provides a wrapper around Dio:
+The `HttpService` provides a production-ready wrapper around Dio with lazy initialization, `QueuedInterceptorsWrapper` silent token refresh on `401`, and file upload support:
 
 ```dart
 // GET request
@@ -607,10 +613,11 @@ final response = await HttpService.instance.post<User>(
   fromJsonT: (json) => User.fromJson(json),
 );
 
-// File upload
+// File upload with progress callback
 final response = await HttpService.instance.uploadFile(
   '/upload',
   filePath: '/path/to/file.jpg',
+  onSendProgress: (sent, total) => debugPrint('Progress: $sent / $total'),
 );
 ```
 

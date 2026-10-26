@@ -39,7 +39,7 @@
 
 | 功能 | 描述 | 状态 |
 |---------|-------------|--------|
-| **深色主题** | 优雅的深色模式，紫色强调色 | ✅ |
+| **双主题系统（亮/暗）** | 标志性暗黑社交风格 + 浅色主题，支持动态切换与本地持久化 | ✅ |
 | **动画系统** | 微交互、骨架屏、闪烁效果 | ✅ |
 | **响应式布局** | 使用 flutter_screenutil 屏幕适配 | ✅ |
 | **玻璃拟态** | 毛玻璃效果贯穿整个应用 | ✅ |
@@ -50,9 +50,10 @@
 | 功能 | 描述 | 状态 |
 |---------|-------------|--------|
 | **整洁架构** | 功能优先的分层架构 | ✅ |
-| **Riverpod** | 类型安全的状态管理 | ✅ |
-| **Go Router** | 声明式路由，支持深度链接 | ✅ |
-| **Dio** | 支持拦截器的 HTTP 客户端 | ✅ |
+| **Riverpod (`Notifier`)** | 现代 `Notifier` 状态管理范式 + 本地 JSON 状态恢复 | ✅ |
+| **Go Router (`StatefulShellRoute`)** | 底部多分支独立路由栈、深链接支持与全局隐私/登录态自动守卫 | ✅ |
+| **Dio + Token 无感刷新** | 基于 `QueuedInterceptorsWrapper` 的并发锁自动续期、401 自动登出与文件上传 | ✅ |
+| **隐私合规守卫** | 严格在同意隐私政策后才初始化设备信息与三方 SDK，满足国内应用市场审核要求 | ✅ |
 | **WebSocket** | 实时通信，自动重连、心跳检测 | ✅ |
 | **仓库模式** | 抽象的数据层 | ✅ |
 
@@ -199,20 +200,25 @@ flutter run
 ### Riverpod 状态管理
 
 ```dart
-// 定义 Provider
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  return AuthNotifier();
-});
+// 定义现代 Notifier Provider
+final authProvider = NotifierProvider<AuthNotifier, AuthState>(
+  AuthNotifier.new,
+);
 
 // 在组件中使用
 class MyWidget extends ConsumerWidget {
+  const MyWidget({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(authProvider);
     
     return ElevatedButton(
-      onPressed: () => ref.read(authProvider.notifier).login(),
-      child: Text('登录'),
+      onPressed: () => ref.read(authProvider.notifier).loginWithPassword(
+        username: 'test',
+        password: '123456',
+      ),
+      child: const Text('登录'),
     );
   }
 }
@@ -591,7 +597,7 @@ context.push(RouteNames.myPage);
 
 ### HTTP 服务
 
-`HttpService` 提供了 Dio 的封装：
+`HttpService` 提供了生产级 Dio 封装，内置安全懒加载、`QueuedInterceptorsWrapper` 401 Token 无感刷新以及文件上传支持：
 
 ```dart
 // GET 请求
@@ -607,10 +613,11 @@ final response = await HttpService.instance.post<User>(
   fromJsonT: (json) => User.fromJson(json),
 );
 
-// 文件上传
+// 文件上传（支持进度回调）
 final response = await HttpService.instance.uploadFile(
   '/upload',
   filePath: '/path/to/file.jpg',
+  onSendProgress: (sent, total) => debugPrint('上传进度: $sent / $total'),
 );
 ```
 
