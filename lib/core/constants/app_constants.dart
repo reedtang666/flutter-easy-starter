@@ -4,7 +4,7 @@ class AppConstants {
 
   // App 信息
   static const String appName = 'Flutter Easy Starter';
-  static const String appVersion = '1.0.0';
+  static const String appVersion = '1.1.0';
 
   // 设计稿尺寸（用于屏幕适配）
   static const double designWidth = 375;

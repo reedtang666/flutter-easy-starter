@@ -1,6 +1,8 @@
 # Flutter Easy Starter 🚀
 
 <p align="center">
+  <a href="https://github.com/reedtang666/flutter-easy-starter/actions/workflows/flutter_ci.yml"><img src="https://github.com/reedtang666/flutter-easy-starter/actions/workflows/flutter_ci.yml/badge.svg" alt="Flutter CI"></a>
+  <img src="https://img.shields.io/badge/Version-v1.1.0-orange.svg" alt="版本">
   <img src="https://img.shields.io/badge/Flutter-3.0+-blue.svg" alt="Flutter 版本">
   <img src="https://img.shields.io/badge/Dart-3.0+-blue.svg" alt="Dart 版本">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="许可证">

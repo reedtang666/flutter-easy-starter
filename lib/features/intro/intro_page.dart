@@ -480,7 +480,7 @@ class _IntroPageState extends State<IntroPage>
           ),
           SizedBox(width: 8.w),
           Text(
-            'v1.0.0 · Production Ready',
+            'v1.1.0 · Production Ready',
             style: TextStyle(
               fontSize: 13.sp,
               fontWeight: FontWeight.w600,

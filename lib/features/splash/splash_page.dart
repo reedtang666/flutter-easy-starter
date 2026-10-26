@@ -231,7 +231,7 @@ class _SplashPageState extends State<SplashPage>
 
                 // 版本号
                 Text(
-                  'v1.0.0',
+                  'v1.1.0',
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: AppColors.tertiaryGrey,
