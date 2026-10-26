@@ -51,8 +51,9 @@ class _MessagePageState extends ConsumerState<MessagePage> {
 
   @override
   Widget build(BuildContext context) {
+    final onSurface = Theme.of(context).colorScheme.onSurface;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -78,7 +79,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                     Text(
                       '消息',
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: onSurface,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
                       ),
@@ -156,6 +157,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
   }
 
   Widget _buildHeader() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.w),
       child: Row(
@@ -166,10 +168,10 @@ class _MessagePageState extends ConsumerState<MessagePage> {
               height: 44.w,
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.circular(22.r),
                 border: Border.all(
-                  color: AppColors.white.withValues(alpha: 0.05),
+                  color: colorScheme.outline.withValues(alpha: 0.3),
                 ),
               ),
               child: Row(
@@ -185,7 +187,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                       controller: _searchController,
                       autofocus: false,
                       style: TextStyle(
-                        color: AppColors.white,
+                        color: colorScheme.onSurface,
                         fontSize: 15.sp,
                         height: 1.2,
                       ),
@@ -410,7 +412,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
             Text(
               conversation.name,
               style: TextStyle(
-                color: AppColors.white,
+                color: Theme.of(context).colorScheme.onSurface,
                 fontSize: 12.sp,
               ),
               maxLines: 1,
@@ -558,7 +560,7 @@ class _MessagePageState extends ConsumerState<MessagePage> {
                           child: Text(
                             conversation.name,
                             style: TextStyle(
-                              color: AppColors.white,
+                              color: Theme.of(context).colorScheme.onSurface,
                               fontSize: 16.sp,
                               fontWeight: conversation.unreadCount > 0
                                   ? FontWeight.bold

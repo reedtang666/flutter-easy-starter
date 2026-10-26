@@ -57,7 +57,7 @@ class _IntroPageState extends State<IntroPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: _isLoading ? _buildSkeletonView() : _buildContentView(),
     );
   }
@@ -186,6 +186,7 @@ class _IntroPageState extends State<IntroPage>
 
   // Hero 区域 - 视觉焦点
   Widget _buildHeroSection() {
+    final bgColor = Theme.of(context).scaffoldBackgroundColor;
     return Container(
       padding: EdgeInsets.fromLTRB(24.w, 100.w, 24.w, 40.w),
       decoration: BoxDecoration(
@@ -194,7 +195,7 @@ class _IntroPageState extends State<IntroPage>
           end: Alignment.bottomCenter,
           colors: [
             AppColors.primary.withValues(alpha: 0.15),
-            AppColors.background,
+            bgColor,
           ],
         ),
       ),
@@ -373,17 +374,18 @@ class _IntroPageState extends State<IntroPage>
   }
 
   Widget _buildMainTitle() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return ShaderMask(
       shaderCallback: (bounds) {
-        return const LinearGradient(
-          colors: [
-            Colors.white,
-            Color(0xFFE0E0E0),
-          ],
+        return LinearGradient(
+          colors: isDark
+              ? const [Colors.white, Color(0xFFE0E0E0)]
+              : const [Color(0xFF1C1C1E), AppColors.primary],
         ).createShader(bounds);
       },
       child: Text.rich(
         TextSpan(
+          style: const TextStyle(color: Colors.white),
           children: [
             TextSpan(
               text: 'Flutter\n',
@@ -455,13 +457,14 @@ class _IntroPageState extends State<IntroPage>
   }
 
   Widget _buildVersionBadge() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(
-          color: AppColors.white.withValues(alpha: 0.1),
+          color: colorScheme.outline.withValues(alpha: 0.3),
         ),
       ),
       child: Row(
@@ -583,7 +586,7 @@ class _IntroPageState extends State<IntroPage>
             Text(
               label,
               style: TextStyle(
-                color: AppColors.white,
+                color: Theme.of(context).colorScheme.onSurface,
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w500,
               ),
@@ -600,6 +603,7 @@ class _IntroPageState extends State<IntroPage>
     required String subtitle,
     required Widget child,
   }) {
+    final onSurface = Theme.of(context).colorScheme.onSurface;
     return Padding(
       padding: EdgeInsets.fromLTRB(24.w, 32.w, 24.w, 0),
       child: Column(
@@ -626,7 +630,7 @@ class _IntroPageState extends State<IntroPage>
                     style: TextStyle(
                       fontSize: 22.sp,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: onSurface,
                     ),
                   ),
                   Text(
@@ -724,6 +728,7 @@ class _IntroPageState extends State<IntroPage>
   }
 
   Widget _buildFeatureCard(_FeatureItem feature) {
+    final colorScheme = Theme.of(context).colorScheme;
     return AnimatedButton(
       onTap: () {
         HapticFeedback.lightImpact();
@@ -735,17 +740,10 @@ class _IntroPageState extends State<IntroPage>
         margin: EdgeInsets.only(bottom: 12.w),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              AppColors.surface,
-              AppColors.surfaceVariant.withValues(alpha: 0.3),
-            ],
-          ),
+          color: colorScheme.surface,
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
-            color: AppColors.white.withValues(alpha: 0.05),
+            color: colorScheme.outline.withValues(alpha: 0.3),
           ),
         ),
         child: Row(
@@ -776,7 +774,7 @@ class _IntroPageState extends State<IntroPage>
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                   SizedBox(height: 4.w),
@@ -836,6 +834,7 @@ class _IntroPageState extends State<IntroPage>
   }
 
   Widget _buildPatternCard(_PatternDetail pattern) {
+    final colorScheme = Theme.of(context).colorScheme;
     return AnimatedButton(
       onTap: () {
         HapticFeedback.lightImpact();
@@ -846,17 +845,10 @@ class _IntroPageState extends State<IntroPage>
         margin: EdgeInsets.only(bottom: 12.w),
         padding: EdgeInsets.all(18.w),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              AppColors.surface,
-              AppColors.surfaceVariant.withValues(alpha: 0.2),
-            ],
-          ),
+          color: colorScheme.surface,
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
-            color: AppColors.white.withValues(alpha: 0.05),
+            color: colorScheme.outline.withValues(alpha: 0.3),
           ),
         ),
         child: Column(
@@ -886,7 +878,7 @@ class _IntroPageState extends State<IntroPage>
                         style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                          color: colorScheme.onSurface,
                         ),
                       ),
                       Text(
@@ -954,6 +946,7 @@ class _IntroPageState extends State<IntroPage>
 
   Widget _buildDemoCard(_DemoItem demo) {
     final isSelected = _selectedDemo == demo.index;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return AnimatedButton(
       onTap: () {
@@ -970,24 +963,22 @@ class _IntroPageState extends State<IntroPage>
         margin: EdgeInsets.only(bottom: 12.w),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isSelected
-                ? [
+          gradient: isSelected
+              ? LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
                     demo.gradient.first.withValues(alpha: 0.2),
                     demo.gradient.last.withValues(alpha: 0.05),
-                  ]
-                : [
-                    AppColors.surface,
-                    AppColors.surfaceVariant.withValues(alpha: 0.3),
                   ],
-          ),
+                )
+              : null,
+          color: isSelected ? null : colorScheme.surface,
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
             color: isSelected
                 ? demo.gradient.first
-                : AppColors.white.withValues(alpha: 0.05),
+                : colorScheme.outline.withValues(alpha: 0.3),
             width: isSelected ? 1.5 : 1,
           ),
           boxShadow: isSelected
@@ -1028,7 +1019,7 @@ class _IntroPageState extends State<IntroPage>
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                   SizedBox(height: 4.w),
@@ -1118,6 +1109,7 @@ class _IntroPageState extends State<IntroPage>
   }
 
   Widget _buildDialogCard(_DialogDemoItem dialog) {
+    final colorScheme = Theme.of(context).colorScheme;
     return AnimatedButton(
       onTap: () => dialog.onTap(context),
       scaleDown: 0.97,
@@ -1126,17 +1118,10 @@ class _IntroPageState extends State<IntroPage>
         margin: EdgeInsets.only(bottom: 10.w),
         padding: EdgeInsets.all(14.w),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              AppColors.surface,
-              AppColors.surfaceVariant.withValues(alpha: 0.2),
-            ],
-          ),
+          color: colorScheme.surface,
           borderRadius: BorderRadius.circular(14.r),
           border: Border.all(
-            color: AppColors.white.withValues(alpha: 0.05),
+            color: colorScheme.outline.withValues(alpha: 0.3),
           ),
         ),
         child: Row(
@@ -1164,7 +1149,7 @@ class _IntroPageState extends State<IntroPage>
                     style: TextStyle(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                   SizedBox(height: 2.w),
@@ -1449,14 +1434,15 @@ class _IntroPageState extends State<IntroPage>
   }
 
   Widget _buildButtonCategory({required String title, required Widget child}) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: AppColors.white.withValues(alpha: 0.05),
+          color: colorScheme.outline.withValues(alpha: 0.3),
         ),
       ),
       child: Column(
@@ -1510,15 +1496,18 @@ class _IntroPageState extends State<IntroPage>
   }
 
   Widget _buildSecondaryButton(String text, {bool outlined = false}) {
+    final colorScheme = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: () => HapticFeedback.lightImpact(),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.w),
         decoration: BoxDecoration(
-          color: outlined ? Colors.transparent : AppColors.surfaceVariant,
+          color: outlined
+              ? Colors.transparent
+              : AppColors.primary.withValues(alpha: 0.12),
           borderRadius: BorderRadius.circular(10.r),
           border: outlined
-              ? Border.all(color: AppColors.white.withValues(alpha: 0.2))
+              ? Border.all(color: colorScheme.outline)
               : null,
         ),
         child: Text(
@@ -1526,7 +1515,7 @@ class _IntroPageState extends State<IntroPage>
           style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w500,
-            color: outlined ? Colors.white : AppColors.lightGrey,
+            color: outlined ? colorScheme.onSurface : AppColors.primary,
           ),
         ),
       ),
@@ -1685,6 +1674,7 @@ class _IntroPageState extends State<IntroPage>
 
   // 底部说明区域
   Widget _buildFooterSection() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: EdgeInsets.fromLTRB(24.w, 32.w, 24.w, 48.w),
       child: Column(
@@ -1692,15 +1682,10 @@ class _IntroPageState extends State<IntroPage>
           Container(
             padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.surface,
-                  AppColors.surfaceVariant.withValues(alpha: 0.2),
-                ],
-              ),
+              color: colorScheme.surface,
               borderRadius: BorderRadius.circular(20.r),
               border: Border.all(
-                color: AppColors.white.withValues(alpha: 0.05),
+                color: colorScheme.outline.withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -1763,13 +1748,14 @@ class _SwitchDemoState extends State<_SwitchDemo> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1844,13 +1830,14 @@ class _SegmentedControlDemoState extends State<_SegmentedControlDemo> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1867,7 +1854,7 @@ class _SegmentedControlDemoState extends State<_SegmentedControlDemo> {
           Container(
             padding: EdgeInsets.all(4.w),
             decoration: BoxDecoration(
-              color: AppColors.background,
+              color: Theme.of(context).scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: Row(
@@ -1885,7 +1872,9 @@ class _SegmentedControlDemoState extends State<_SegmentedControlDemo> {
                     duration: const Duration(milliseconds: 200),
                     padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.w),
                     decoration: BoxDecoration(
-                      color: isSelected ? AppColors.surface : Colors.transparent,
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.surface
+                          : Colors.transparent,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Text(
@@ -1893,7 +1882,9 @@ class _SegmentedControlDemoState extends State<_SegmentedControlDemo> {
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                        color: isSelected ? Colors.white : AppColors.lightGrey,
+                        color: isSelected
+                            ? Theme.of(context).colorScheme.onSurface
+                            : AppColors.lightGrey,
                       ),
                     ),
                   ),
@@ -1917,13 +1908,14 @@ class _RadioGroupDemoState extends State<_RadioGroupDemo> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1982,7 +1974,9 @@ class _RadioGroupDemoState extends State<_RadioGroupDemo> {
             label,
             style: TextStyle(
               fontSize: 14.sp,
-              color: isSelected ? Colors.white : AppColors.lightGrey,
+              color: isSelected
+                  ? Theme.of(context).colorScheme.onSurface
+                  : AppColors.lightGrey,
             ),
           ),
         ],
@@ -2001,13 +1995,14 @@ class _CheckboxGroupDemoState extends State<_CheckboxGroupDemo> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -2072,7 +2067,9 @@ class _CheckboxGroupDemoState extends State<_CheckboxGroupDemo> {
             label,
             style: TextStyle(
               fontSize: 14.sp,
-              color: isChecked ? Colors.white : AppColors.lightGrey,
+              color: isChecked
+                  ? Theme.of(context).colorScheme.onSurface
+                  : AppColors.lightGrey,
             ),
           ),
         ],
@@ -2091,13 +2088,14 @@ class _StepperDemoState extends State<_StepperDemo> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: AppColors.white.withValues(alpha: 0.05)),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -2114,7 +2112,7 @@ class _StepperDemoState extends State<_StepperDemo> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.w),
             decoration: BoxDecoration(
-              color: AppColors.background,
+              color: Theme.of(context).scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: Row(
@@ -2131,12 +2129,16 @@ class _StepperDemoState extends State<_StepperDemo> {
                     width: 32.w,
                     height: 32.w,
                     decoration: BoxDecoration(
-                      color: _count > 1 ? AppColors.surface : Colors.transparent,
+                      color: _count > 1
+                          ? Theme.of(context).colorScheme.surface
+                          : Colors.transparent,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Icon(
                       LucideIcons.minus,
-                      color: _count > 1 ? Colors.white : AppColors.lightGrey,
+                      color: _count > 1
+                          ? Theme.of(context).colorScheme.onSurface
+                          : AppColors.lightGrey,
                       size: 16,
                     ),
                   ),
@@ -2149,7 +2151,7 @@ class _StepperDemoState extends State<_StepperDemo> {
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ),

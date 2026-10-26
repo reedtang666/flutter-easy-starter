@@ -16,6 +16,7 @@ class _ActivityTileListViewState extends State<ActivityTileListView> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return SizedBox(
       height: 56.w,
       child: ListView.builder(
@@ -47,11 +48,11 @@ class _ActivityTileListViewState extends State<ActivityTileListView> {
                         ],
                       )
                     : null,
-                color: isSelected ? null : AppColors.surface,
+                color: isSelected ? null : colorScheme.surface,
                 border: Border.all(
                   color: isSelected
                       ? AppColors.primary
-                      : AppColors.white.withValues(alpha: 0.05),
+                      : colorScheme.outline.withValues(alpha: 0.3),
                   width: isSelected ? 1.5.w : 1.w,
                 ),
                 borderRadius: BorderRadius.circular(26.r),
@@ -66,7 +67,7 @@ class _ActivityTileListViewState extends State<ActivityTileListView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: AppColors.background,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(22.r),
                     ),
                     height: 44.w,
@@ -85,7 +86,7 @@ class _ActivityTileListViewState extends State<ActivityTileListView> {
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
-                      color: isSelected ? AppColors.primary : AppColors.white,
+                      color: isSelected ? AppColors.primary : colorScheme.onSurface,
                     ),
                   ),
                 ],

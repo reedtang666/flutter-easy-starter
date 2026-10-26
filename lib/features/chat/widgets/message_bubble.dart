@@ -475,9 +475,6 @@ class MessageBubble extends StatelessWidget {
         statusIcon = Icons.error_outline;
         statusColor = AppColors.red;
         break;
-      default:
-        statusIcon = Icons.check;
-        statusColor = AppColors.lightGrey;
     }
 
     return Icon(

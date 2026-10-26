@@ -20,8 +20,9 @@ class TravelHomePage extends StatefulWidget {
 class _TravelHomePageState extends State<TravelHomePage> {
   @override
   Widget build(BuildContext context) {
+    final onSurface = Theme.of(context).colorScheme.onSurface;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: ListView(
         padding: EdgeInsets.only(top: 42.w, bottom: 24.w),
         children: [
@@ -36,7 +37,7 @@ class _TravelHomePageState extends State<TravelHomePage> {
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.white,
+                    color: onSurface,
                   ),
                 ),
                 SizedBox(height: 6.w),
@@ -67,7 +68,7 @@ class _TravelHomePageState extends State<TravelHomePage> {
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.white,
+                    color: onSurface,
                   ),
                 ),
                 AnimatedButton(

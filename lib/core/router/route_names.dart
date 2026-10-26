@@ -2,40 +2,26 @@
 class RouteNames {
   RouteNames._();
 
-  // 启动相关
+  // 启动与引导相关
   static const String splash = '/';
   static const String privacy = '/privacy';
-  static const String guide = '/guide';
+  static const String landing = '/landing';
 
   // 认证相关
   static const String login = '/login';
   static const String userInfo = '/user-info';
 
-  // 主页
-  static const String home = '/home';
-
-  // 任务 (已弃用)
-  static const String taskDetail = '/task/detail';
-
-  // 社交核心页面
+  // 主框架与底部 4 Tab
   static const String main = '/main';
   static const String discover = '/discover';
   static const String messages = '/messages';
+  static const String profile = '/profile';
+
+  // 社交与业务子页面
   static const String userDetail = '/user/:id';
   static const String chat = '/chat/:id';
   static const String giftShop = '/gift-shop';
   static const String giftDetail = '/gift/:id';
-  static const String landing = '/landing';
-
-  // 个人中心
-  static const String profile = '/profile';
-
-  // WebView
-  static const String webView = '/webview';
-
-  // 设置
-  static const String settings = '/settings';
-  static const String about = '/about';
 
   // VIP会员
   static const String vip = '/vip';

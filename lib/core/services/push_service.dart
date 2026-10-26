@@ -69,15 +69,15 @@ class PushService {
       //   );
       // }
 
-      // // 添加事件监听
+      // 添加事件监听
       // jpush.addEventHandler(
-      //   onReceiveNotification: _onReceiveNotification,
-      //   onOpenNotification: _onOpenNotification,
-      //   onReceiveMessage: _onReceiveMessage,
+      //   onReceiveNotification: onReceiveNotification,
+      //   onOpenNotification: onOpenNotification,
+      //   onReceiveMessage: onReceiveMessage,
       // );
 
       _isInitialized = true;
-      debugPrint('PushService: 初始化成功');
+      debugPrint('PushService: 初始化成功 ($appKey, $channel)');
     } catch (e) {
       debugPrint('PushService: 初始化失败 - $e');
       throw Exception('推送服务初始化失败: $e');
@@ -163,13 +163,13 @@ class PushService {
   }
 
   /// 接收通知回调（后台或前台）
-  void _onReceiveNotification(Map<String, dynamic> message) {
+  void onReceiveNotification(Map<String, dynamic> message) {
     debugPrint('PushService: 收到通知 - $message');
     // TODO: 处理通知，例如显示本地通知
   }
 
   /// 点击通知回调
-  void _onOpenNotification(Map<String, dynamic> message) {
+  void onOpenNotification(Map<String, dynamic> message) {
     debugPrint('PushService: 点击通知 - $message');
     // TODO: 根据通知内容跳转页面
     // 例如：
@@ -179,7 +179,7 @@ class PushService {
   }
 
   /// 接收自定义消息（透传消息）
-  void _onReceiveMessage(Map<String, dynamic> message) {
+  void onReceiveMessage(Map<String, dynamic> message) {
     debugPrint('PushService: 收到自定义消息 - $message');
     // TODO: 处理透传消息
   }

@@ -66,7 +66,9 @@ class _SplashPageState extends State<SplashPage>
     _pulseController.repeat(reverse: true);
 
     Future.delayed(const Duration(milliseconds: 300), () {
-      _logoController.forward();
+      if (mounted) {
+        _logoController.forward();
+      }
     });
 
     // 启动检查流程
@@ -141,11 +143,12 @@ class _SplashPageState extends State<SplashPage>
             ),
           ),
 
-          // 内容 - 完全居中
+          // 内容 - 完全居中（包裹 SingleChildScrollView 兼容分屏/折叠屏等小高度视口）
           Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
                 // Logo 动画
                 ScaleTransition(
                   scale: _logoAnimation,
@@ -237,8 +240,9 @@ class _SplashPageState extends State<SplashPage>
               ],
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      ],
+    ),
+  );
   }
 }
